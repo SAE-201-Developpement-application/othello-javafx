@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="540.0" maxWidth="960.0" minHeight="540.0" minWidth="960.0" prefHeight="540.0" prefWidth="960.0" styleClass="fondEcran" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fx:id="reglages" fitHeight="110.0" fitWidth="90.0" layoutX="1369.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true" styleClass="corbeille" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="30.0">
+         <image>
+            <Image url="@images/Reglages.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="corbeille" fitHeight="100.0" fitWidth="90.0" layoutX="1369.0" layoutY="682.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" styleClass="corbeille" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="20.0">
+         <image>
+            <Image url="@images/Corbeille.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="739.0" layoutX="362.0" layoutY="30.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" styleClass="corbeille">
+         <image>
+            <Image url="@images/Othello.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="500.0" layoutX="230.0" layoutY="131.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" styleClass="corbeille">
+         <image>
+            <Image url="@images/TexteModeJeu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="180.0" fitWidth="180.0" layoutX="230.0" layoutY="209.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" styleClass="corbeille">
+         <image>
+            <Image url="@images/ElipseGauche.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="249.0" fitWidth="178.0" layoutX="551.0" layoutY="209.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" styleClass="corbeille">
+         <image>
+            <Image url="@images/ElipseDroite.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="88.0" fitWidth="576.0" layoutX="199.0" layoutY="428.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" styleClass="corbeille">
+         <image>
+            <Image url="@images/PartieEnCours.png" />
+         </image>
+      </ImageView>
+      <Text fill="WHITE" layoutX="320.0" layoutY="457.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="contourNoir" text="Reprendre la partie en cours :" textAlignment="CENTER" wrappingWidth="334.4296875">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
+      <Text fx:id="infospartie" fill="WHITE" layoutX="320.0" layoutY="490.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="contourNoir" text="Nom | Date | Type" textAlignment="CENTER" wrappingWidth="334.4296875">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

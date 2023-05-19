@@ -1,0 +1,11 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+
+.fondEcran {
+	-fx-background-image: url("./images/Background.png");
+	-fx-background-size: 100% 100%;
+}
+
+.contourNoir {
+	-webkit-text-stroke: 2px;
+	-webkit-text-stroke-color: #d60
+}

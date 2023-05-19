@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="900.0" prefWidth="1600.0" styleClass="fondEcran" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fx:id="reglages" fitHeight="185.0" fitWidth="162.0" layoutX="1369.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true" styleClass="corbeille" AnchorPane.rightAnchor="69.0" AnchorPane.topAnchor="71.0">
+         <image>
+            <Image url="@images/Credits.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="corbeille" fitHeight="137.0" fitWidth="519.0" layoutX="1000.0" layoutY="712.4342498779297" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" styleClass="corbeille" AnchorPane.bottomAnchor="62.75433349609375" AnchorPane.rightAnchor="81.0">
+         <image>
+            <Image url="@images/ValiderParametres.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="175.0" fitWidth="180.0" layoutX="1132.0" layoutY="297.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" styleClass="corbeille" AnchorPane.bottomAnchor="428.0" AnchorPane.leftAnchor="1132.0" AnchorPane.rightAnchor="500.0" AnchorPane.topAnchor="297.0">
+         <image>
+            <Image url="@images/ImagePosition.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="158.0" fitWidth="235.0" layoutX="1059.0" layoutY="528.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" styleClass="corbeille" AnchorPane.bottomAnchor="300.0" AnchorPane.rightAnchor="580.0">
+         <image>
+            <Image url="@images/ImagePionsEnlevables.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="190.0" fitWidth="161.0" layoutX="50.0" layoutY="69.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" styleClass="corbeille" AnchorPane.bottomAnchor="641.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="69.0">
+         <image>
+            <Image url="@images/MenuPrincipal.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="127.0" fitWidth="400.0" layoutX="764.0" layoutY="71.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" styleClass="corbeille">
+         <image>
+            <Image url="@images/TitreParametres.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="106.0" fitWidth="104.0" layoutX="278.0" layoutY="723.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" styleClass="corbeille" AnchorPane.bottomAnchor="75.0">
+         <image>
+            <Image url="@images/Musique.png" />
+         </image>
+      </ImageView>
+      <Text fill="WHITE" layoutX="265.0" layoutY="396.53125" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="2.0" text="Voir les positions possibles" textAlignment="CENTER" wrappingWidth="701.5762939453125" AnchorPane.topAnchor="365.751953125">
+         <font>
+            <Font name="Arial" size="34.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="265.0" layoutY="622.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="2.0" text="Voir les pions enlevables" textAlignment="CENTER" wrappingWidth="701.5762939453125" AnchorPane.bottomAnchor="360.0">
+         <font>
+            <Font name="Arial" size="34.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="112.0" fitWidth="120.0" layoutX="528.0" layoutY="753.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" styleClass="corbeille" AnchorPane.bottomAnchor="75.0">
+         <image>
+            <Image url="@images/Son.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
