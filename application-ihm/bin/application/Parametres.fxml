@@ -9,47 +9,52 @@
 
 <AnchorPane maxHeight="540.0" maxWidth="960.0" minHeight="540.0" minWidth="960.0" prefHeight="540.0" prefWidth="960.0" styleClass="fondEcran" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fx:id="reglages" fitHeight="110.0" fitWidth="90.0" layoutX="1369.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true" styleClass="corbeille" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="30.0">
+      <ImageView fx:id="parametres_credits" fitHeight="110.0" fitWidth="90.0" layoutX="1369.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="30.0">
          <image>
-            <Image url="@images/Reglages.png" />
+            <Image url="@images/Parametres/Credits.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="corbeille" fitHeight="100.0" fitWidth="90.0" layoutX="1369.0" layoutY="682.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" styleClass="corbeille" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="20.0">
+      <ImageView fx:id="parametres_valider" fitHeight="100.0" fitWidth="290.0" layoutX="654.0" layoutY="420.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="30.0">
          <image>
-            <Image url="@images/Corbeille.png" />
+            <Image url="@images/Parametres/ValiderParametres.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="53.0" fitWidth="739.0" layoutX="362.0" layoutY="30.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" styleClass="corbeille">
+      <ImageView fx:id="parametres_menuprincipal" fitHeight="110.0" fitWidth="90.0" layoutX="680.0" layoutY="86.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="30.0">
          <image>
-            <Image url="@images/Othello.png" />
+            <Image url="@images/MenuPrincipal.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="53.0" fitWidth="500.0" layoutX="230.0" layoutY="131.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" styleClass="corbeille">
+      <ImageView fx:id="parametres_positions" fitHeight="110.0" fitWidth="113.0" layoutX="566.0" layoutY="168.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@images/TexteModeJeu.png" />
+            <Image url="@images/Parametres/ImagePosition.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="180.0" fitWidth="180.0" layoutX="230.0" layoutY="209.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" styleClass="corbeille">
+      <ImageView fx:id="parametres_pions" fitHeight="110.0" fitWidth="113.0" layoutX="565.0" layoutY="327.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@images/ElipseGauche.png" />
+            <Image url="@images/Parametres/ImagePionsEnlevables.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="249.0" fitWidth="178.0" layoutX="551.0" layoutY="209.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" styleClass="corbeille">
+      <ImageView fx:id="parametres_son" fitHeight="70.0" fitWidth="69.0" layoutX="235.0" layoutY="440.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@images/ElipseDroite.png" />
+            <Image url="@images/Parametres/Son.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="88.0" fitWidth="576.0" layoutX="199.0" layoutY="428.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" styleClass="corbeille">
+      <ImageView fx:id="parametres_musique" fitHeight="63.0" fitWidth="69.0" layoutX="114.0" layoutY="443.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@images/PartieEnCours.png" />
+            <Image url="@images/Parametres/Musique.png" />
          </image>
       </ImageView>
-      <Text fill="WHITE" layoutX="320.0" layoutY="457.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="contourNoir" text="Reprendre la partie en cours :" textAlignment="CENTER" wrappingWidth="334.4296875">
+      <ImageView fitHeight="84.0" fitWidth="228.0" layoutX="356.0" layoutY="50.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="30.0">
+         <image>
+            <Image url="@images/Parametres/TitreParametres.png" />
+         </image>
+      </ImageView>
+      <Text fill="WHITE" layoutX="210.0" layoutY="231.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="contourNoir" text="Voir les positions possibles" textAlignment="CENTER" wrappingWidth="334.4296875">
          <font>
             <Font size="22.0" />
          </font>
       </Text>
-      <Text fx:id="infospartie" fill="WHITE" layoutX="320.0" layoutY="490.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="contourNoir" text="Nom | Date | Type" textAlignment="CENTER" wrappingWidth="334.4296875">
+      <Text fill="WHITE" layoutX="235.0" layoutY="372.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="contourNoir" text="Voir les pions enlevables" textAlignment="CENTER" wrappingWidth="300.4296875">
          <font>
             <Font size="22.0" />
          </font>
