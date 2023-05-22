@@ -44,15 +44,15 @@
             <Image url="@images/MenuPrincipal/PartieEnCours.png" />
          </image>
       </ImageView>
-      <Text fill="WHITE" layoutX="320.0" layoutY="457.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="contourNoir" text="Reprendre la partie en cours :" textAlignment="CENTER" wrappingWidth="334.4296875">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </Text>
       <Text fx:id="menuprincipal_infospartie" fill="WHITE" layoutX="320.0" layoutY="490.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="contourNoir" text="Nom | Date | Type" textAlignment="CENTER" wrappingWidth="334.4296875">
          <font>
             <Font size="22.0" />
          </font>
       </Text>
+      <ImageView fitHeight="20.0" fitWidth="414.0" layoutX="350.0" layoutY="440.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" styleClass="corbeille">
+         <image>
+            <Image url="@images/MenuPrincipal/TexteReprendrePartie.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

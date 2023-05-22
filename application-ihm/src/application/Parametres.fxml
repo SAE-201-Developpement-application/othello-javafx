@@ -44,20 +44,20 @@
             <Image url="@images/Parametres/Musique.png" />
          </image>
       </ImageView>
+      <ImageView fitHeight="42.0" fitWidth="290.0" layoutX="218.0" layoutY="212.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/Parametres/TextePositionsPossibles.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="22.0" fitWidth="281.0" layoutX="244.0" layoutY="353.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/Parametres/TextePionsEnlevables.png" />
+         </image>
+      </ImageView>
       <ImageView fitHeight="84.0" fitWidth="228.0" layoutX="356.0" layoutY="50.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="30.0">
          <image>
             <Image url="@images/Parametres/TitreParametres.png" />
          </image>
       </ImageView>
-      <Text fill="WHITE" layoutX="210.0" layoutY="231.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="contourNoir" text="Voir les positions possibles" textAlignment="CENTER" wrappingWidth="334.4296875">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </Text>
-      <Text fill="WHITE" layoutX="235.0" layoutY="372.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="contourNoir" text="Voir les pions enlevables" textAlignment="CENTER" wrappingWidth="300.4296875">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </Text>
    </children>
 </AnchorPane>
