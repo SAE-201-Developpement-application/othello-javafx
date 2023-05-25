@@ -1,0 +1,32 @@
+/*
+ * Controlleur.java                      				            25 mai 2023
+ * IUT de Rodez, pas de copyright ni de "copyleft"
+ */
+package application.controlleurs;
+
+import javafx.fxml.FXML;
+import javafx.scene.text.Text;
+
+/**
+ * Contrôle via FXML les interactions avec la vue : les pages FXML
+ * 
+ * @author Tom Douaud
+ * @author Loïc Faugières
+ * @author Simon Guiraud
+ */
+public class ControlleurParametres {
+
+	@FXML
+	private Text menuprincipal_infospartie;
+	
+	@FXML
+	private void clickParametres() {		
+		menuprincipal_infospartie.setText("test");
+	}
+	
+	@FXML
+	private void generer() {
+		
+	}
+
+}

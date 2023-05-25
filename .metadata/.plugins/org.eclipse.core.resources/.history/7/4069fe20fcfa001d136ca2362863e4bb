@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="540.0" maxWidth="960.0" minHeight="540.0" minWidth="960.0" prefHeight="540.0" prefWidth="960.0" styleClass="fondEcran" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ControlleurMenuPrincipal">
+   <children>
+      <ImageView fx:id="niveau_continuer" fitHeight="110.0" fitWidth="90.0" layoutX="1369.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="20.0">
+         <image>
+            <Image url="@images/NiveauOrdinateur/Continuer.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="niveau_menuprincipal" fitHeight="110.0" fitWidth="90.0" layoutX="680.0" layoutY="86.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="30.0">
+         <image>
+            <Image url="@images/MenuPrincipal.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="niveau_facile" fitHeight="211.0" fitWidth="214.0" layoutX="238.0" layoutY="247.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/NiveauOrdinateur/Facile.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="niveau_difficile" fitHeight="211.0" fitWidth="280.0" layoutX="519.0" layoutY="247.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/NiveauOrdinateur/Difficile.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="429.0" layoutX="266.0" layoutY="77.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="77.0">
+         <image>
+            <Image url="@images/NiveauOrdinateur/TitreNiveauDifficulte.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

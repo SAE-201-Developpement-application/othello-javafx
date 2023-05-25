@@ -7,8 +7,10 @@
 		</list>
 	</section>
 	<section name="PreferencesImportWizard">
-		<item key="" value="F:\info1\programmation\barrios\workspaceTP2\prefB.epf"/>
+		<item key="" value="F:\info1\programmation\preferencesJava.epf"/>
+		<item key="" value="F:\info1\programmation\preferencesJava.epf"/>
 		<list key="WizardPreferencesExportPage1.STORE_DESTINATION_NAMES_ID">
+			<item value="F:\info1\programmation\preferencesJava.epf"/>
 			<item value="F:\info1\programmation\barrios\workspaceTP2\prefB.epf"/>
 		</list>
 	</section>

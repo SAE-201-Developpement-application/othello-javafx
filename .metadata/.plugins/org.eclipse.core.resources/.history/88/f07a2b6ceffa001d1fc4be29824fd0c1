@@ -1,0 +1,37 @@
+/*
+ * Controlleur.java                      				            25 mai 2023
+ * IUT de Rodez, pas de copyright ni de "copyleft"
+ */
+package application;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import java.util.Random;
+
+/**
+ * Contrôle via FXML des interactions avec la vue : les les boutons
+ * @author Tom Douaud
+ * @author Loïc Faugières
+ * @author Simon Guiraud
+ */
+public class Controlleur {
+
+	@FXML
+	private Label resultat;
+	
+	@FXML
+	private void effacer() {		
+		resultat.setText("?");
+	}
+	
+	@FXML
+	private void generer() {
+		Random random = new Random();
+	    MotDePasse motDePasseGenere;
+	    
+	    motDePasseGenere = new MotDePasse(random.nextInt(5), random.nextInt(5),
+										  random.nextInt(5), random.nextInt(5));
+		resultat.setText(motDePasseGenere.getMot());
+	}
+
+}
