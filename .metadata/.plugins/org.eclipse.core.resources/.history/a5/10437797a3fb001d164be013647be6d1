@@ -1,0 +1,14 @@
+/*
+ * 
+ */
+package application.modeles;
+
+/**
+ * 
+ * @author Tom DOUAUD
+ * @author Loïc FAUGIERES
+ * @author Simon GUIRAUD
+ */
+public class ModelePrincipal {
+	// TODO coder
+}

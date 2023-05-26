@@ -43,6 +43,15 @@ public class Othello extends Application {
 	
 	/**
 	 * Permet de modifier la scène de la fenêtre principale
+	 * pour qu'elle devienne celle du menu principal
+	 */
+	public static void activerMenuPrincipal() {
+		fenetrePrincipale.setScene(scenePrincipale);
+		fenetrePrincipale.setTitle("Othello - Menu principal");
+	}
+	
+	/**
+	 * Permet de modifier la scène de la fenêtre principale
 	 * pour qu'elle devienne celle des paramètres
 	 */
 	public static void activerParametres() {
@@ -57,15 +66,6 @@ public class Othello extends Application {
 	public static void activerNiveauOrdinateur() {
 		fenetrePrincipale.setScene(sceneNiveauOrdinateur);
 		fenetrePrincipale.setTitle("Othello - Niveau des ordinateurs");
-	}
-	
-	/**
-	 * Permet de modifier la scène de la fenêtre principale
-	 * pour qu'elle devienne celle du menu principal
-	 */
-	public static void activerMenuPrincipal() {
-		fenetrePrincipale.setScene(scenePrincipale);
-		fenetrePrincipale.setTitle("Othello - Menu principal");
 	}
 	
 	@Override

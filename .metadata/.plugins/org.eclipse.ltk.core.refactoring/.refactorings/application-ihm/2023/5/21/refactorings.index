@@ -14,3 +14,9 @@
 1685018933887	Move file
 1685019653821	Copy compilation unit
 1685082533500	Move compilation unit
+1685083836794	Rename package 'application.controlleurs'
+1685083853406	Rename type 'ControlleurMenuPrincipal'
+1685083863515	Rename type 'ControlleurNiveauOrdinateur'
+1685083876733	Rename type 'ControlleurParametres'
+1685091316997	Move compilation unit
+1685091330699	Rename type 'ModeleMenuPrincipal'

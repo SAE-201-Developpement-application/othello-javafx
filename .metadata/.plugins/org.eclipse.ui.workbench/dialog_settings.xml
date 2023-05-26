@@ -8,7 +8,6 @@
 	</section>
 	<section name="PreferencesImportWizard">
 		<item key="" value="F:\info1\programmation\preferencesJava.epf"/>
-		<item key="" value="F:\info1\programmation\preferencesJava.epf"/>
 		<list key="WizardPreferencesExportPage1.STORE_DESTINATION_NAMES_ID">
 			<item value="F:\info1\programmation\preferencesJava.epf"/>
 			<item value="F:\info1\programmation\barrios\workspaceTP2\prefB.epf"/>
@@ -19,5 +18,10 @@
 		<list key="NewWizardSelectionPage.STORE_EXPANDED_CATEGORIES_ID">
 			<item value="org.eclipse.fx.ide"/>
 		</list>
+	</section>
+	<section name="EditorSelectionDialog">
+		<item key="EditorSelectionDialog.STORE_ID_FILE_EXTENSION" value=".fxml"/>
+		<item key="EditorSelectionDialog.STORE_ID_INTERNAL_EXTERNAL" value="true"/>
+		<item key="EditorSelectionDialog.STORE_ID_DESCR" value="C:\Program Files (x86)\Oracle\JavaFX Scene Builder 2.0\JavaFX Scene Builder 2.0.exe"/>
 	</section>
 </section>

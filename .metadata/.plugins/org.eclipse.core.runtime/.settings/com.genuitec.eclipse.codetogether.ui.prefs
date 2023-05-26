@@ -1,7 +1,7 @@
 codetogether.first.time.usage.page.shown=true
 codetogether.main.view.displayed=true
 default.auth=auto
-default.cursor=JOIN_CURSOR_ASK
+default.cursor=JOIN_CURSOR_PERSONAL
 default.drive=all
 default.edit=all
 default.run=all
