@@ -12,42 +12,42 @@
    <children>
       <ImageView fitHeight="110.0" fitWidth="90.0" layoutX="1369.0" layoutY="71.0" onMouseClicked="#gererClicParametres" pickOnBounds="true" preserveRatio="true" styleClass="corbeille" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="30.0">
          <image>
-            <Image url="@../images/MenuPrincipal/BoutonParametres.png" />
+            <Image url="@images/MenuPrincipal/BoutonParametres.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="100.0" fitWidth="90.0" layoutX="1369.0" layoutY="682.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" styleClass="corbeille" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="20.0">
          <image>
-            <Image url="@../images/MenuPrincipal/Corbeille.png" />
+            <Image url="@images/MenuPrincipal/Corbeille.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="53.0" fitWidth="739.0" layoutX="362.0" layoutY="30.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" styleClass="corbeille">
          <image>
-            <Image url="@../images/MenuPrincipal/Othello.png" />
+            <Image url="@images/MenuPrincipal/Othello.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="53.0" fitWidth="500.0" layoutX="230.0" layoutY="131.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" styleClass="corbeille">
          <image>
-            <Image url="@../images/MenuPrincipal/TexteModeJeu.png" />
+            <Image url="@images/MenuPrincipal/TexteModeJeu.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="180.0" fitWidth="180.0" layoutX="230.0" layoutY="209.0" nodeOrientation="INHERIT" onMouseClicked="#gererClicPartieOrdinateur" pickOnBounds="true" preserveRatio="true" styleClass="corbeille">
          <image>
-            <Image url="@../images/MenuPrincipal/ElipseGauche.png" />
+            <Image url="@images/MenuPrincipal/ElipseGauche.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="249.0" fitWidth="178.0" layoutX="551.0" layoutY="209.0" nodeOrientation="INHERIT" onMouseClicked="#gererClicPartieJoueur" pickOnBounds="true" preserveRatio="true" styleClass="corbeille">
          <image>
-            <Image url="@../images/MenuPrincipal/ElipseDroite.png" />
+            <Image url="@images/MenuPrincipal/ElipseDroite.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="88.0" fitWidth="576.0" layoutX="199.0" layoutY="428.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" styleClass="corbeille">
          <image>
-            <Image url="@../images/MenuPrincipal/PartieEnCours.png" />
+            <Image url="@images/MenuPrincipal/PartieEnCours.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="20.0" fitWidth="414.0" layoutX="350.0" layoutY="440.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" styleClass="corbeille">
          <image>
-            <Image url="@../images/MenuPrincipal/ReprendrePartie.png" />
+            <Image url="@images/MenuPrincipal/ReprendrePartie.png" />
          </image>
       </ImageView>
       <Text fx:id="menuPrincipalInfosPartie" fill="WHITE" layoutX="320.0" layoutY="490.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="contourNoir" text="Nom | Date | Type" textAlignment="CENTER" wrappingWidth="334.4296875">
