@@ -21,6 +21,12 @@ public class ControleurMenuPrincipal {
 	private Text menuPrincipalInfosPartie;
 	
 	@FXML
+	private void gererClicFermer() {		
+		// ferme la vue courante
+		// TODO : chercher comment faire
+	}
+	
+	@FXML
 	private void gererClicParametres() {		
 		// échanger la vue courante avec celle des paramètres
 		Othello.activerParametres(); 

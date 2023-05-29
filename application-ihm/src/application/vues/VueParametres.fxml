@@ -24,14 +24,24 @@
             <Image url="@images/MenuPrincipal.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="110.0" fitWidth="113.0" layoutX="566.0" layoutY="168.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="iconePositionsPossibles" fitHeight="110.0" fitWidth="113.0" layoutX="566.0" layoutY="168.0" onMouseClicked="#gererClicPositionsPossibles" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/Parametres/ImagePosition.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="110.0" fitWidth="113.0" layoutX="565.0" layoutY="327.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="iconePositionsPossiblesActivee" fitHeight="120.0" fitWidth="121.0" layoutX="561.0" layoutY="163.0" onMouseClicked="#gererClicPositionsPossibles" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
-            <Image url="@images/Parametres/ImagePionsEnlevables.png" />
+            <Image url="@images/Parametres/ImagePositionActivee.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="iconePionsEnlevables" fitHeight="110.0" fitWidth="113.0" layoutX="565.0" layoutY="327.0" onMouseClicked="#gererClicPionsEnlevables" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/Parametres/ImagePions.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="iconePionsEnlevablesActivee" fitHeight="86.0" fitWidth="126.0" layoutX="559.0" layoutY="321.0" onMouseClicked="#gererClicPionsEnlevables" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@images/Parametres/ImagePionsActivee.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="70.0" fitWidth="69.0" layoutX="235.0" layoutY="440.0" pickOnBounds="true" preserveRatio="true">
