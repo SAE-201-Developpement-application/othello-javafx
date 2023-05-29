@@ -17,11 +17,11 @@ import javafx.scene.Scene;
 
 /**
  * Classe principale de l'application permettant d'afficher des fenêtres au contenu
- * différent (ce sont les vues qui changent)
+ * différent (ce sont les vues qui changent).
  * 
- * @author Tom Douaud
- * @author Loïc Faugières
- * @author Simon Guiraud
+ * @author Tom DOUAUD
+ * @author Loïc FAUGIERES
+ * @author Simon GUIRAUD
  */
 public class Othello extends Application {
 	

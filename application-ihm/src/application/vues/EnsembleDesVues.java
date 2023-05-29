@@ -1,6 +1,6 @@
 /*
- * Gére la correspondance entre le code d'une vue (un entier) et le nom
- * du fichier fxml décrivant cette vue 05/23
+ * EnsembleDesVues.java												   mai 2023
+ * IUT de Rodez, pas de copyright ni de "copyleft"
  */
 package application.vues;
 
@@ -8,9 +8,10 @@ package application.vues;
  * Classe outil qui établit la correspondance entre un code de vue (sous la
  * forme d'un entier) et le nom du fichier fxml contenant la vue associée
  * à ce code.
- * @author C. Servières
- * @version 1.0
- *
+ * 
+ * @author Tom DOUAUD
+ * @author Loïc FAUGIERES
+ * @author Simon GUIRAUD
  */
 public class EnsembleDesVues {
 	

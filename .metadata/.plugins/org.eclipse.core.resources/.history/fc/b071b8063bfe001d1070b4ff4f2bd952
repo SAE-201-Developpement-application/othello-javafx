@@ -1,6 +1,5 @@
 /*
- * EchangeurDeVues.java										           mai 2023
- * IUT de Rodez, pas de copyright ni de "copyleft"
+ * Gère l'échange entre les vues affichées par la scène de l'application 05/23
  */
 package application.vues;
 
@@ -13,15 +12,15 @@ import javafx.scene.Scene;
 import javafx.fxml.FXMLLoader;
 
 /**
- * Classe outil permettant de gérer le changement de la vue affichée
- * par la scene de l'application.
+ * Classe outil permettant de gérer le changement de la vue affichée par la
+ * scene de l'application.
  *
  * Afin d'optimiser, un cache est mis en place : l'objectif est que le code
  * fxml soit chargé une seule fois, donc lors du 1er chargement de cette vue.
  * Pour ce faire, une HashMap (table de hachage) fait la correspondance entre
  * le code de la vue (une constante de type entier définie dans la classe
  * EnsembleDesVues) et l'élément racine de la vue (de type Parent qui est la classe
- * Parente de toutes les classes conteneurs comme HBox, VBox, BorderPane ...).
+ * Parente de toutes les classes conteneurs comme HBox, VBox, BorderPane ...)
  * 
  * @author Tom DOUAUD
  * @author Loïc FAUGIERES

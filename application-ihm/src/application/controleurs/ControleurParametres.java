@@ -9,11 +9,11 @@ import application.Othello;
 import javafx.fxml.FXML;
 
 /**
- * Contrôle via FXML les interactions avec la vue : les pages FXML
+ * Contrôle via FXML les interactions avec la vue : les pages FXML.
  * 
- * @author Tom Douaud
- * @author Loïc Faugières
- * @author Simon Guiraud
+ * @author Tom DOUAUD
+ * @author Loïc FAUGIERES
+ * @author Simon GUIRAUD
  */
 public class ControleurParametres {
 
