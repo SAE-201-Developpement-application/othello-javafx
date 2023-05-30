@@ -84,7 +84,6 @@ public class Othello extends Application {
 	 * pour qu'elle devienne celle du choix des pseudos joueur contre joueur
 	 */
 	public static void activerChoixPseudosContreJoueur() {
-		// TODO faire la vue choix des pseudos contre joueur
 		fenetrePrincipale.setScene(sceneChoixPseudosContreJoueur);
 		fenetrePrincipale.setTitle("Othello - Choix des pseudos");
 	}
@@ -141,6 +140,15 @@ public class Othello extends Application {
 			FXMLLoader chargeurFXMLNiveauOrdinateur = new FXMLLoader();
 			chargeurFXMLNiveauOrdinateur.setLocation(EnsembleDesVues.class.getResource("VueNiveauOrdinateur.fxml"));
 			conteneur = chargeurFXMLNiveauOrdinateur.load();
+			sceneNiveauOrdinateur = new Scene(conteneur, 975, 579);
+			
+			/*
+			 * Chargement de la vue du niveau de l'ordinateur et
+			 * création de la scène associée à cette vue
+			 */
+			FXMLLoader chargeurFXMLChoixPseudosContreJoueur = new FXMLLoader();
+			chargeurFXMLChoixPseudosContreJoueur.setLocation(EnsembleDesVues.class.getResource("VueChoixPseudosContreJoueur.fxml"));
+			conteneur = chargeurFXMLChoixPseudosContreJoueur.load();
 			sceneNiveauOrdinateur = new Scene(conteneur, 975, 579);
 			
 			// on définit le titre, la hauteur et la largeur de la fenêtre principale

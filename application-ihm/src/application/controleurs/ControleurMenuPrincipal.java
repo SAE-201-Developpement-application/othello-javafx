@@ -10,6 +10,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.application.Platform;
 
 /**
  * Contrôle via FXML les interactions avec la vue : les pages FXML.
@@ -32,25 +33,26 @@ public class ControleurMenuPrincipal {
 		// ferme la vue courante
 		// TODO : chercher comment faire
 		
-		final String MESSAGE_EN_COURS_DEV =
-		"""
-		Cette fonctionnalité est toujours en cours de développement.
+		Platform.exit();
 		
-		Elle ne sera probablement jamais développée sauf si Loïc reçoit 
-		une somme assez conséquente (paypal.me/loicfaugieres1) pour le motiver.
-		""";
-		
-		/* Création d'une boîte d'alerte de type attention. */
-		Alert boiteAlerte = new Alert(Alert.AlertType.WARNING,
-									  MESSAGE_EN_COURS_DEV);
-		
-		Stage stage = (Stage) boiteAlerte.getDialogPane().getScene().getWindow();
-		stage.getIcons().add(new Image("application/vues/images/Othello.png"));
-		// TODO changer icône
-		
-		boiteAlerte.setTitle("Othello - Fermer");
-		boiteAlerte.setHeaderText("Fonctionnalité en cours de développement...");
-		boiteAlerte.showAndWait();
+//		final String MESSAGE_EN_COURS_DEV =
+//		"""
+//		Cette fonctionnalité est toujours en cours de développement.
+//		
+//		Elle ne sera probablement jamais développée sauf si Loïc reçoit 
+//		une somme assez conséquente (paypal.me/loicfaugieres1) pour le motiver.
+//		""";
+//		
+//		/* Création d'une boîte d'alerte de type attention. */
+//		Alert boiteAlerte = new Alert(Alert.AlertType.WARNING,
+//									  MESSAGE_EN_COURS_DEV);
+//		
+//		Stage stage = (Stage) boiteAlerte.getDialogPane().getScene().getWindow();
+//		stage.getIcons().add(new Image("application/vues/images/InConstruction.png"));
+//		
+//		boiteAlerte.setTitle("Othello - Fermer");
+//		boiteAlerte.setHeaderText("Fonctionnalité en cours de développement...");
+//		boiteAlerte.showAndWait();
 	}
 	
 	@FXML
@@ -67,7 +69,7 @@ public class ControleurMenuPrincipal {
 	
 	@FXML
 	private void gererClicPartieJoueur() {
-		infosPartie.setText("TODO"); // je préferait l'ancien texte de placeholder
+		Othello.activerChoixPseudosContreJoueur();
 	}
 	
 	@FXML
@@ -78,11 +80,33 @@ public class ControleurMenuPrincipal {
 	@FXML
 	private void gererClicCorbeille() {
 		infosPartie.setText("Aucune partie sauvegardée");
-		// active la corbeille pour supprimer la partie sauvegardée dans ModeleSauvegardes
+		// TODO  active la corbeille pour supprimer la partie sauvegardée dans ModeleSauvegardes
 	}
 	
 	@FXML
 	private void gererClicReprendrePartie() {
+		final String MESSAGE_EN_COURS_DEV =
+		"""
+		Cette fonctionnalité est toujours en cours de développement.
+				
+		Elle ne sera probablement jamais développée sauf si Loïc reçoit 
+		une somme assez conséquente (paypal.me/loicfaugieres1) pour le motiver.
+		""";
+		
+		Alert boiteAlerte = new Alert(Alert.AlertType.CONFIRMATION,
+		  MESSAGE_EN_COURS_DEV);
+
+		Stage stage = (Stage) boiteAlerte.getDialogPane().getScene().getWindow();
+		stage.getIcons().add(new Image("application/vues/images/EnConstruction.png"));
+
+		boiteAlerte.setTitle("Othello - Fermer");
+		boiteAlerte.setHeaderText("Fonctionnalité en cours de développement...");
+		
+		if (true) { // TODO vérifier qu'il y a bien une partie
+			boiteAlerte.showAndWait();
+		} else {
+			infosPartie.setText("Aucune partie sauvegardée");
+		}
 		// va chercher la partie sauvegardée dans le fichier ModeleSauvegardes
 	}
 

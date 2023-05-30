@@ -17,25 +17,35 @@ import javafx.fxml.FXML;
  */
 public class ControleurNiveauOrdinateur {
 	
+	boolean facileActif = false;
+	boolean difficileActif = false;
+
 	@FXML
 	private void gererClicRetourMenuPrincipal() {		
-		// échanger la vue courante avec celle des paramètres
+		// échanger la vue courante avec celle des paramètres TODO c'est quoi ce commentaire xtf ?
 		Othello.activerMenuPrincipal(); 
+	}
+	
+	@FXML
+	private void gererClicFacile() {
+		if (!facileActif || difficileActif) {
+			facileActif = true;
+			difficileActif = false;
+		}
+		// TODO echanger l'image pour la mettre en plus gros avec un if si c'est juste au dessus c'est activé
+	}
+	
+	@FXML
+	private void gererClicDifficile() {
+		if (!difficileActif || facileActif) {
+			difficileActif = true;
+			facileActif = false;
+		}
+		// TODO echanger l'image pour la mettre en plus gros avec un if si c'est juste au dessus c'est activé
 	}
 	
 	@FXML
 	private void gererClicContinuer() {
 		
 	}
-	
-	@FXML
-	private void gererClicFacile() {
-		
-	}
-	
-	@FXML
-	private void gererClicDifficile() {
-		
-	}
-
 }
