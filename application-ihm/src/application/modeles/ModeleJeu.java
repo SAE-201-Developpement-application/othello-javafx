@@ -14,5 +14,5 @@ package application.modeles;
  * @author Simon GUIRAUD
  */
 public class ModeleJeu {
-	// TODO coder
+	// TODO codez
 }

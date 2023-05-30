@@ -22,5 +22,20 @@ public class ControleurNiveauOrdinateur {
 		// échanger la vue courante avec celle des paramètres
 		Othello.activerMenuPrincipal(); 
 	}
+	
+	@FXML
+	private void gererClicContinuer() {
+		
+	}
+	
+	@FXML
+	private void gererClicFacile() {
+		
+	}
+	
+	@FXML
+	private void gererClicDifficile() {
+		
+	}
 
 }

@@ -17,6 +17,11 @@ import javafx.scene.text.Text;
  */
 public class ControleurMenuPrincipal {
 
+	
+	/* 
+	 * Le texte sur le bouton de sauvegarde 
+	 * pour les informations de la partie sauvegardée 
+	 */
 	@FXML
 	private Text menuPrincipalInfosPartie;
 	
@@ -40,12 +45,22 @@ public class ControleurMenuPrincipal {
 	
 	@FXML
 	private void gererClicPartieJoueur() {
-		menuPrincipalInfosPartie.setText("TODO");
+		menuPrincipalInfosPartie.setText("TODO"); // je préferait l'ancien texte de placeholder
 	}
 	
 	@FXML
 	private void generer() {
 		
+	}
+	
+	@FXML
+	private void gererCorbeille() {
+		// active la corbeille pour supprimer la partie sauvegardée dans ModeleSauvegardes
+	}
+	
+	@FXML
+	private void gererClicReprendrePartie() {
+		// va chercher la partie sauvegardée dans le fichier ModeleSauvegardes
 	}
 
 }

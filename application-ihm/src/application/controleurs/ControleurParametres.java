@@ -55,5 +55,17 @@ public class ControleurParametres {
 											   .isVisible() == true
 											   ? false : true);
 	}
+	
+	@FXML
+	private void gererClicCredits() {
+		
+		// TODO lancer une alerte avec les crédits de l'app
+		
+	}
+	
+	@FXML
+	private void gererClicValiderParametres() {
+		
+	}
 
 }

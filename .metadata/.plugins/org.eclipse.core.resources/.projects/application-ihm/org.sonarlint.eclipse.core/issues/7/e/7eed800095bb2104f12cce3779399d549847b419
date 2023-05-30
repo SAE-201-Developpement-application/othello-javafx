@@ -1,0 +1,31 @@
+
+·
+java:S1186C"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ξ­µ8­Εά†1HψRCRITICALZ
+CODE_SMELL
+Y
+java:S11258"(Remove the unnecessary boolean literals.(­ΉΜΐώÿÿÿÿHέRMINORZ
+CODE_SMELL
+T
+java:S1125+"(Remove the unnecessary boolean literals.(Ή­²ΆHΛRMINORZ
+CODE_SMELL
+R
+java:S1125-"'Remove the unnecessary boolean literal.(ΑρHΥRMINORZ
+CODE_SMELL
+Y
+java:S1125."(Remove the unnecessary boolean literals.(­ΉΜΐώÿÿÿÿHΡRMINORZ
+CODE_SMELL
+R
+java:S11257"'Remove the unnecessary boolean literal.(ΑρHαRMINORZ
+CODE_SMELL
+T
+java:S11255"(Remove the unnecessary boolean literals.(Ή­²ΆHΧRMINORZ
+CODE_SMELL
+S
+java:S11255"'Remove the unnecessary boolean literal.(Ή­²ΆHΫRMINORZ
+CODE_SMELL
+S
+java:S1125+"'Remove the unnecessary boolean literal.(Ή­²ΆHΟRMINORZ
+CODE_SMELL
+i
+java:S1135>"2Complete the task associated to this TODO comment.(Γδ•ÿÿÿÿÿ8›ªρά†1H΅RINFOZ
+CODE_SMELL

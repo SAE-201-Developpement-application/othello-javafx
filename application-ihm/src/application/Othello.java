@@ -34,6 +34,16 @@ public class Othello extends Application {
 	/** Scène permettant de gérer le niveau de l'ordinateur */
 	private static Scene sceneNiveauOrdinateur;
 	
+	/** Scène permettant de gérer les pseudos en mode joueur contre joueur */
+	private static Scene sceneChoixPseudosContreJoueur;
+	
+	/** Scène permettant de gérer le pseudo en mode joueur contre IA */
+	private static Scene sceneChoixPseudosContreIA;
+	
+	/** Scène permettant de gérer le Jeu principal */
+	private static Scene sceneJeu;
+	
+	
 	/**
 	 * Fenêtre principale de l'application
 	 * La scène qui lui est associée sera modifiée en fonction
@@ -66,6 +76,36 @@ public class Othello extends Application {
 	public static void activerNiveauOrdinateur() {
 		fenetrePrincipale.setScene(sceneNiveauOrdinateur);
 		fenetrePrincipale.setTitle("Othello - Niveau des ordinateurs");
+	}
+	
+	/**
+	 * Permet de modifier la scène de la fenêtre principale
+	 * pour qu'elle devienne celle du choix des pseudos joueur contre joueur
+	 */
+	public static void activerChoixPseudosContreJoueur() {
+		// TODO faire la vue choix des pseudos contre joueur
+		fenetrePrincipale.setScene(sceneChoixPseudosContreJoueur);
+		fenetrePrincipale.setTitle("Othello - Choix des pseudos");
+	}
+	
+	/**
+	 * Permet de modifier la scène de la fenêtre principale
+	 * pour qu'elle devienne celle du choix du pseudo joueur contre IA
+	 */
+	public static void activerChoixPseudoContreIA() {
+		// TODO faire la vue choix du pseudos contre IA
+		fenetrePrincipale.setScene(sceneChoixPseudosContreIA);
+		fenetrePrincipale.setTitle("Othello - Choix du pseudo");
+	}
+	
+	/**
+	 * Permet de modifier la scène de la fenêtre principale
+	 * pour qu'elle devienne celle du Jeu principal
+	 */
+	public static void activerJeu() {
+		// TODO faire la vue du Jeu (ca promet d'etre fun ca)
+		fenetrePrincipale.setScene(sceneJeu);
+		fenetrePrincipale.setTitle("Othello - En partie");
 	}
 	
 	@Override

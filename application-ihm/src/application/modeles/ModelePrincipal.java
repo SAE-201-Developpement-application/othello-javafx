@@ -16,4 +16,32 @@ package application.modeles;
  */
 public class ModelePrincipal {
 	// TODO coder
+	
+	/* Type de partie : 1 contre un ordinateur, 2 contre un autre joueur et 0 par défaut*/
+	private int typePartie = 0;
+	
+	/* Pseudo du premier joueur*/
+	private String nomJoueur1;
+	
+	/* Pseudo du deuxieme joueur, si il existe*/
+	private String nomJoueur2;
+	
+	private int difficulteOrdinateur;
+	
+	private boolean partieCommencee;
+	
+	private boolean etatSauvegarde;
+	
+	private boolean musique;
+	
+	private boolean son;
+	
+	private boolean voirPositionsPossibles;
+	
+	private boolean voirPionsEnlevables;	
+	
+	public void validerParametres() {
+		
+	}
+	
 }

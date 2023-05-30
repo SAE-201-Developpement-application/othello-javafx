@@ -55,4 +55,6 @@
 		<item key="patterns" value="*"/>
 		<item key="renameSubpackages" value="false"/>
 	</section>
+	<section name="RenameInformationPopup">
+	</section>
 </section>
