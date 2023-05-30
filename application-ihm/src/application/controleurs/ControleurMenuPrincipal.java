@@ -6,7 +6,10 @@ package application.controleurs;
 
 import application.Othello;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.image.Image;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 /**
  * Contrôle via FXML les interactions avec la vue : les pages FXML.
@@ -17,18 +20,37 @@ import javafx.scene.text.Text;
  */
 public class ControleurMenuPrincipal {
 
-	
 	/* 
 	 * Le texte sur le bouton de sauvegarde 
 	 * pour les informations de la partie sauvegardée 
 	 */
 	@FXML
-	private Text menuPrincipalInfosPartie;
+	private Text infosPartie;
 	
 	@FXML
 	private void gererClicFermer() {		
 		// ferme la vue courante
 		// TODO : chercher comment faire
+		
+		final String MESSAGE_EN_COURS_DEV =
+		"""
+		Cette fonctionnalité est toujours en cours de développement.
+		
+		Elle ne sera probablement jamais développée sauf si Loïc reçoit 
+		une somme assez conséquente (paypal.me/loicfaugieres1) pour le motiver.
+		""";
+		
+		/* Création d'une boîte d'alerte de type attention. */
+		Alert boiteAlerte = new Alert(Alert.AlertType.WARNING,
+									  MESSAGE_EN_COURS_DEV);
+		
+		Stage stage = (Stage) boiteAlerte.getDialogPane().getScene().getWindow();
+		stage.getIcons().add(new Image("application/vues/images/Othello.png"));
+		// TODO changer icône
+		
+		boiteAlerte.setTitle("Othello - Fermer");
+		boiteAlerte.setHeaderText("Fonctionnalité en cours de développement...");
+		boiteAlerte.showAndWait();
 	}
 	
 	@FXML
@@ -45,7 +67,7 @@ public class ControleurMenuPrincipal {
 	
 	@FXML
 	private void gererClicPartieJoueur() {
-		menuPrincipalInfosPartie.setText("TODO"); // je préferait l'ancien texte de placeholder
+		infosPartie.setText("TODO"); // je préferait l'ancien texte de placeholder
 	}
 	
 	@FXML
@@ -54,7 +76,8 @@ public class ControleurMenuPrincipal {
 	}
 	
 	@FXML
-	private void gererCorbeille() {
+	private void gererClicCorbeille() {
+		infosPartie.setText("Aucune partie sauvegardée");
 		// active la corbeille pour supprimer la partie sauvegardée dans ModeleSauvegardes
 	}
 	

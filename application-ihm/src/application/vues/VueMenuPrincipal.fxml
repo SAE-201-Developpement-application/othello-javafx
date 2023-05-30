@@ -20,7 +20,7 @@
             <Image url="@images/MenuPrincipal/BoutonParametres.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="100.0" fitWidth="90.0" layoutX="1369.0" layoutY="682.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="20.0">
+      <ImageView fitHeight="100.0" fitWidth="90.0" layoutX="1369.0" layoutY="682.0" nodeOrientation="INHERIT" onMouseClicked="#gererClicCorbeille" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="20.0">
          <image>
             <Image url="@images/MenuPrincipal/Corbeille.png" />
          </image>
@@ -55,7 +55,7 @@
             <Image url="@images/MenuPrincipal/ReprendrePartie.png" />
          </image>
       </ImageView>
-      <Text fx:id="menuPrincipalInfosPartie" fill="WHITE" layoutX="320.0" layoutY="490.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="contourNoir" text="Nom | Date | Type" textAlignment="CENTER" wrappingWidth="334.4296875">
+      <Text fx:id="infosPartie" fill="WHITE" layoutX="320.0" layoutY="490.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="contourNoir" text="Nom | Date | Type" textAlignment="CENTER" wrappingWidth="334.4296875">
          <font>
             <Font size="22.0" />
          </font>
