@@ -21,15 +21,19 @@ public class EnsembleDesVues {
 	/** Code de la vue des paramètres */
 	public static final int VUE_PARAMETRES = 1;
 		
-	/** Code de la vue du niveau */
+	/** Code de la vue du niveau de difficultée de l'ordinateur */
 	public static final int VUE_NIVEAU = 2;
+	
+	/** Code de la vue des pseudos joueur contre joueur */
+	public static final int VUE_CHOIX_PSEUDOS_CONTRE_JOUEUR = 3;
+	
 		
 	/** Tableau contenant les noms des fichiers fxml des différentes vues
 	 * de l'application. Il y a une correspondance entre l'indice de la case
 	 * du tableau et le code de la vue défini en tant que constante
 	 */
 	private static final String[] NOM_DES_VUES =
-		{"VueMenuPrincipal.fxml", "VueNiveauOrdinateur.fxml", "VueParametres.fxml"};
+		{"VueMenuPrincipal.fxml", "VueNiveauOrdinateur.fxml", "VueParametres.fxml", "VueChoixPseudosContreJoueur.fxml"};
 		
 		
 		

@@ -149,7 +149,7 @@ public class Othello extends Application {
 			FXMLLoader chargeurFXMLChoixPseudosContreJoueur = new FXMLLoader();
 			chargeurFXMLChoixPseudosContreJoueur.setLocation(EnsembleDesVues.class.getResource("VueChoixPseudosContreJoueur.fxml"));
 			conteneur = chargeurFXMLChoixPseudosContreJoueur.load();
-			sceneNiveauOrdinateur = new Scene(conteneur, 975, 579);
+			sceneChoixPseudosContreJoueur = new Scene(conteneur, 975, 579);
 			
 			// on définit le titre, la hauteur et la largeur de la fenêtre principale
 			primaryStage.setTitle("Othello - Menu principal");

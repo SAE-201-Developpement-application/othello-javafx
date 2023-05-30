@@ -69,6 +69,7 @@ public class ControleurMenuPrincipal {
 	
 	@FXML
 	private void gererClicPartieJoueur() {
+		System.out.println("SU");
 		Othello.activerChoixPseudosContreJoueur();
 	}
 	
