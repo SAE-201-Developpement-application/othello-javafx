@@ -13,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 
 
 /**
@@ -146,6 +147,8 @@ public class Othello extends Application {
 			primaryStage.setTitle("Othello - Menu principal");
 			primaryStage.setHeight(579);
 			primaryStage.setWidth(975);
+			
+			primaryStage.getIcons().add(new Image("application/vues/images/Othello.png"));
 
 			/*
 			 * on associe la scène principale à la fenêtre principale
@@ -155,6 +158,7 @@ public class Othello extends Application {
 			 */
 			primaryStage.setScene(scenePrincipale);
 			fenetrePrincipale = primaryStage;
+			fenetrePrincipale.setResizable(false);
 			primaryStage.show();
 
 		} catch (IOException e) {
