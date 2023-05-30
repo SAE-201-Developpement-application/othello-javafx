@@ -51,7 +51,7 @@
       </ImageView>
       <ImageView fx:id="iconeSonDesactivee" fitHeight="70.0" fitWidth="69.0" layoutX="235.0" layoutY="440.0" onMouseClicked="#gererClicSon" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@images/Parametres/Son.png" />
+            <Image url="@images/Parametres/SonDesactive.png" />
          </image>
       </ImageView>
       <ImageView fx:id="iconeMusique" fitHeight="63.0" fitWidth="69.0" layoutX="114.0" layoutY="443.0" onMouseClicked="#gererClicMusique" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -61,7 +61,7 @@
       </ImageView>
       <ImageView fx:id="iconeMusiqueDesactivee" fitHeight="63.0" fitWidth="69.0" layoutX="114.0" layoutY="443.0" onMouseClicked="#gererClicMusique" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../Sauvegardes%20fichiers/SAE_Ancien/application-ihm/src/application/vues/images/Parametres/MusiqueDesactivee.png" />
+            <Image url="@images/Parametres/MusiqueDesactivee.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="42.0" fitWidth="290.0" layoutX="218.0" layoutY="212.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">

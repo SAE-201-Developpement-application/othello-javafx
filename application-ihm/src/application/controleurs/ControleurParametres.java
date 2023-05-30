@@ -5,9 +5,12 @@
 package application.controleurs;
 
 import application.Othello;
-
+import application.vues.EnsembleDesVues;
 import javafx.fxml.FXML;
+import javafx.stage.Stage;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.control.Alert;
 
 /**
  * Contrôle via FXML les interactions avec la vue : les pages FXML.
@@ -90,7 +93,29 @@ public class ControleurParametres {
 	@FXML
 	private void gererClicCredits() {
 		
-		// TODO lancer une alerte avec les crédits de l'app
+		final String MESSAGE_BOITE =
+		"""
+		Tom DOUAUD
+		Loïc FAUGIERES
+		Simon GUIRAUD
+		
+		Étudiants en BUT Informatique 1 (promotion 2022-2023) à l'IUT de Rodez.
+		
+		Application réalisée dans le cadre de la SAÉ 2.01
+		Développement d'une application.
+		""";
+		
+		/* Création d'une boîte d'alerte de type information. */
+		Alert boiteAlerte = new Alert(Alert.AlertType.INFORMATION,
+						 			  MESSAGE_BOITE);
+		
+		Stage stage = (Stage) boiteAlerte.getDialogPane().getScene().getWindow();
+		stage.getIcons().add(new Image("application/vues/images/Parametres/IconeCredits.png"));
+		// TODO changer icône
+		
+		boiteAlerte.setTitle("Othello - Crédits");
+		boiteAlerte.setHeaderText("Crédits :");
+		boiteAlerte.showAndWait();
 		
 	}
 	
