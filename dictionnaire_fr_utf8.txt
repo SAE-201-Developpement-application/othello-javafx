@@ -22751,3 +22751,8 @@ copyleft
 fenêtres
 visibilités
 paramètre
+pseudos
+sauvegardée
+fonctionnalité
+conséquente
+fenêtre
