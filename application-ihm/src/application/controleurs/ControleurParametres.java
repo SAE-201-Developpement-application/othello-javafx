@@ -31,6 +31,18 @@ public class ControleurParametres {
 	private ImageView iconePionsEnlevablesActivee;
 	
 	@FXML
+	private ImageView iconeMusique;
+	
+	@FXML
+	private ImageView iconeMusiqueDesactivee;
+	
+	@FXML
+	private ImageView iconeSon;
+	
+	@FXML
+	private ImageView iconeSonDesactivee;
+	
+	@FXML
 	private void gererClicRetourMenuPrincipal() {		
 		// échanger la vue courante avec celle des paramètres
 		Othello.activerMenuPrincipal(); 
