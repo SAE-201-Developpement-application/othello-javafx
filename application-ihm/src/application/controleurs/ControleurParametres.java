@@ -48,24 +48,43 @@ public class ControleurParametres {
 		Othello.activerMenuPrincipal(); 
 	}
 	
+	/**
+	 * Échanger les visibilités de l'image 1 et 2.
+	 * 
+	 * @param image1 Première image à échanger
+	 * @param image2 Seconde image à échanger
+	 */
+	private void echangerVisibilite(ImageView image1, ImageView image2) {
+		image1.setVisible(image1.isVisible() == true ? false : true);
+		image2.setVisible(image2.isVisible() == true ? false : true);
+	}
+	
 	@FXML
 	private void gererClicPositionsPossibles() {
-		// ajouter un contour vert pour confirmer l'action
-		iconePositionsPossibles.setVisible(iconePositionsPossibles.isVisible()
-										   == true ? false : true);
-		iconePositionsPossiblesActivee.setVisible(iconePositionsPossiblesActivee
-												  .isVisible() == true
-												  ? false : true);
+		// Ajouter ou retirer un contour vert pour confirmer l'action
+		// et l'état du paramètre
+		echangerVisibilite(iconePositionsPossibles, iconePositionsPossiblesActivee);
 	}
 	
 	@FXML
 	private void gererClicPionsEnlevables() {
-		// ajouter un contour vert pour confirmer l'action
-		iconePionsEnlevables.setVisible(iconePionsEnlevables.isVisible()
-										== true ? false : true);
-		iconePionsEnlevablesActivee.setVisible(iconePionsEnlevablesActivee
-											   .isVisible() == true
-											   ? false : true);
+		// Ajouter ou retirer un contour vert pour confirmer l'action
+		// et l'état du paramètre
+		echangerVisibilite(iconePionsEnlevables, iconePionsEnlevablesActivee);
+	}
+	
+	@FXML
+	private void gererClicMusique() {
+		// Ajouter ou retirer une croix rouge pour confirmer l'action
+		// et l'état du paramètre
+		echangerVisibilite(iconeMusique, iconeMusiqueDesactivee);
+	}
+	
+	@FXML
+	private void gererClicSon() {
+		// Ajouter ou retirer une croix rouge pour confirmer l'action
+		// et l'état du paramètre
+		echangerVisibilite(iconeSon, iconeSonDesactivee);
 	}
 	
 	@FXML

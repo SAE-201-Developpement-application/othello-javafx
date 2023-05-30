@@ -22749,3 +22749,5 @@ sauvegardes
 rodez
 copyleft
 fenêtres
+visibilités
+paramètre

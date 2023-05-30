@@ -9,12 +9,12 @@
 
 <AnchorPane maxHeight="540.0" maxWidth="960.0" minHeight="540.0" minWidth="960.0" prefHeight="540.0" prefWidth="960.0" styleClass="fondEcran" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.ControleurParametres">
    <children>
-      <ImageView fitHeight="110.0" fitWidth="90.0" layoutX="1369.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="30.0">
+      <ImageView fitHeight="110.0" fitWidth="90.0" layoutX="1369.0" layoutY="71.0" onMouseClicked="#gererClicCredits" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="30.0">
          <image>
             <Image url="@images/Parametres/Credits.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="100.0" fitWidth="290.0" layoutX="654.0" layoutY="420.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="30.0">
+      <ImageView fitHeight="100.0" fitWidth="290.0" layoutX="654.0" layoutY="420.0" nodeOrientation="INHERIT" onMouseClicked="#gererClicValiderParametres" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="30.0">
          <image>
             <Image url="@images/Parametres/ValiderParametres.png" />
          </image>
@@ -44,14 +44,24 @@
             <Image url="@images/Parametres/ImagePionsActivee.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="70.0" fitWidth="69.0" layoutX="235.0" layoutY="440.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="iconeSon" fitHeight="70.0" fitWidth="69.0" layoutX="235.0" layoutY="440.0" onMouseClicked="#gererClicSon" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@images/Parametres/Son.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="63.0" fitWidth="69.0" layoutX="114.0" layoutY="443.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="iconeSonDesactivee" fitHeight="70.0" fitWidth="69.0" layoutX="235.0" layoutY="440.0" onMouseClicked="#gererClicSon" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/Parametres/Son.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="iconeMusique" fitHeight="63.0" fitWidth="69.0" layoutX="114.0" layoutY="443.0" onMouseClicked="#gererClicMusique" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@images/Parametres/Musique.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="iconeMusiqueDesactivee" fitHeight="63.0" fitWidth="69.0" layoutX="114.0" layoutY="443.0" onMouseClicked="#gererClicMusique" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../Sauvegardes%20fichiers/SAE_Ancien/application-ihm/src/application/vues/images/Parametres/MusiqueDesactivee.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="42.0" fitWidth="290.0" layoutX="218.0" layoutY="212.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
