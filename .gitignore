@@ -1,2 +1,6 @@
-*.class
-/bin/
+# Ignorer le dossier bin avec les .class
+bin/
+
+# Ignorer toutes les metadata et classpath
+.metadata
+.classpath
