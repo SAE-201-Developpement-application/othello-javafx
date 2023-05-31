@@ -23,25 +23,84 @@ public class ModelePrincipal {
 	/* Pseudo du premier joueur*/
 	private String nomJoueur1;
 	
-	/* Pseudo du deuxieme joueur, si il existe*/
+	/* Pseudo du deuxième joueur, si il existe*/
 	private String nomJoueur2;
 	
-	private int difficulteOrdinateur;
+	private boolean partieFacile = true;
 	
-	private boolean partieCommencee;
+	private boolean partieCommencee = false;
 	
-	private boolean etatSauvegarde;
+	private boolean sauvegardeVide = false;
 	
-	private boolean musique;
+	/* Paramètres désactivés par défaut */
+	private boolean musique = false;
+	private boolean son = false;
+	private boolean voirPionsEnlevables = false;
 	
-	private boolean son;
+	/* Paramètre activé par défaut */
+	private boolean voirPositionsPossibles = true;
 	
-	private boolean voirPositionsPossibles;
+	public void validerParametres(boolean statutMusique, boolean statutSon,
+								  boolean statutVoirPositionsPossibles,
+								  boolean statutVoirPionsEnlevables) {
+		setMusique(statutMusique);
+		setSon(statutSon);
+		setVoirPositionsPossibles(statutVoirPositionsPossibles);
+		setVoirPionsEnlevables(statutVoirPionsEnlevables);
+	}
 	
-	private boolean voirPionsEnlevables;	
+	private void setMusique(boolean statut) {
+		musique = statut;
+	}
 	
-	public void validerParametres() {
-		
+	private void setSon(boolean statut) {
+		son = statut;
+	}
+	
+	private void setVoirPositionsPossibles(boolean statut) {
+		voirPositionsPossibles = statut;
+	}
+	
+	private void setVoirPionsEnlevables(boolean statut) {
+		voirPionsEnlevables = statut;
+	}
+	
+	/**
+	 * @param statutMusique Le nouveau statut d'activation de la musique.
+	 * @param statutSon Le nouveau statut d'activation du son.
+	 * @param statutVoirPositionsPossibles Le nouveau statut du paramètre de
+	 * 									   vision des positions possibles.
+	 * @param statutVoirPionsEnlevables Le nouveau statut du paramètres de
+	 * 									vision des pions enlevables.
+	 */
+	public void setParametres(boolean statutMusique, boolean statutSon,
+							  boolean statutVoirPositionsPossibles,
+							  boolean statutVoirPionsEnlevables) {
+		setMusique(statutMusique);
+		setSon(statutSon);
+		setVoirPositionsPossibles(statutVoirPionsEnlevables);
+		setVoirPionsEnlevables(statutVoirPionsEnlevables);
+	}
+	
+	/**
+	 * Vérification de la différence entre les paramètres passés en
+	 * paramètres et les attributs de this correspondants.
+	 * 
+	 * @param musique Booléen à comparer avec l'attribut musique de this.
+	 * @param son Booléen à comparer avec l'attribut son de this.
+	 * @param voirPositionsPossibles Booléen à comparer avec l'attribut
+	 * 								 voirPositionsPossibles de this.
+	 * @param voirPionsEnlevables Booléen à comparer avec l'attribut
+	 * 							  voirPionsEnlevables de this.
+	 * @return true si un des attributs de this est différent de l'attribut
+	 * 		   passé en paramètre correspondant.
+	 */
+	public boolean parametresModifies(boolean musique, boolean son,
+										boolean voirPositionsPossibles,
+										boolean voirPionsEnlevables) {
+		return musique != this.musique || son != this.son
+			|| voirPositionsPossibles != this.voirPositionsPossibles
+			|| voirPionsEnlevables != this.voirPionsEnlevables;
 	}
 	
 }

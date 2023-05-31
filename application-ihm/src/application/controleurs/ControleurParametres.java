@@ -4,8 +4,7 @@
  */
 package application.controleurs;
 
-import application.Othello;
-import application.vues.EnsembleDesVues;
+import application.vues.GestionVues;
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
@@ -22,7 +21,7 @@ import java.util.Optional;
  * @author Loïc FAUGIERES
  * @author Simon GUIRAUD
  */
-public class ControleurParametres {
+public class ControleurParametres extends ControleurPrincipal {
 
 	@FXML
 	private ImageView iconePositionsPossibles;
@@ -51,7 +50,7 @@ public class ControleurParametres {
 	@FXML
 	private void gererClicRetourMenuPrincipal() {		
 		// échanger la vue courante avec celle des paramètres
-		Othello.activerMenuPrincipal(); 
+		GestionVues.activerMenuPrincipal(); 
 	}
 	
 	/**
@@ -124,29 +123,30 @@ public class ControleurParametres {
 	@FXML
 	private void gererClicValiderParametres() {
 		
-		final String MESSAGE_VALIDATION_PARAMETRES =
-				"""
-				Voulez-vous appliquer les nouveaux paramètres ?
-				""";
+		boolean musique = iconeMusique.isVisible();
+		boolean son = iconeSon.isVisible();
+		boolean voirPositionsPossibles = iconePositionsPossiblesActivee
+									     .isVisible();
+		boolean voirPionsEnlevables = iconePionsEnlevablesActivee
+									  .isVisible();
 		
-		final String MESSAGE_ANNULATION_VALIDATION =
-				"""
-				Les modifications on été annulées.
-				""";
+		final String VALIDATION_PARAMETRES
+		= "Voulez-vous appliquer les nouveaux paramètres ?";
 		
-		final String MESSAGE_AUCUNE_MODIFICATION =
-				"""
-				Il n'y a eu aucune modification des paramètres
-				""";
+		final String ANNULATION_VALIDATION
+		= "Les modifications ont été annulées.";
+		
+		final String AUCUNE_MODIFICATION
+		= "Il n'y a eu aucune modification des paramètres.";
 				
-		Alert boiteAlerte = new Alert(Alert.AlertType.CONFIRMATION,
-							MESSAGE_VALIDATION_PARAMETRES);
+		Alert boiteAlerte = new Alert(Alert.AlertType.WARNING,
+									  VALIDATION_PARAMETRES);
 		
 		Alert boiteAnnulation = new Alert(Alert.AlertType.INFORMATION,
-								MESSAGE_ANNULATION_VALIDATION);
+										  ANNULATION_VALIDATION);
 		
 		Alert boiteAucuneModification = new Alert(Alert.AlertType.ERROR,
-										MESSAGE_AUCUNE_MODIFICATION);
+											      AUCUNE_MODIFICATION);
 		
 		ButtonType boutonConfirmer = new ButtonType("Appliquer");
         ButtonType boutonAnnuler = new ButtonType("Annuler");
@@ -154,13 +154,15 @@ public class ControleurParametres {
         boiteAlerte.getButtonTypes().setAll(boutonConfirmer, boutonAnnuler);
 
 		Stage stage = (Stage) boiteAlerte.getDialogPane().getScene().getWindow();
-		stage.getIcons().add(new Image("application/vues/images/Parametres/ValidationParametres.png"));
+		stage.getIcons()
+		.add(new Image("application/vues/images/Parametres/ValidationParametres.png"));
 
 		boiteAlerte.setTitle("Othello - Paramètres");
 		boiteAlerte.setHeaderText("Validation des paramètres");
 		
 		Stage stage2 = (Stage) boiteAnnulation.getDialogPane().getScene().getWindow();
-		stage2.getIcons().add(new Image("application/vues/images/Parametres/Attention.png"));
+		stage2.getIcons()
+		.add(new Image("application/vues/images/Parametres/Attention.png"));
 
 		boiteAnnulation.setTitle("Othello - Annulation paramètres");
 		boiteAnnulation.setHeaderText("Annulation paramètres");
@@ -170,17 +172,20 @@ public class ControleurParametres {
 
 		boiteAucuneModification.setTitle("Othello - Aucune modification");
 		boiteAucuneModification.setHeaderText("Aucune modification");
-				
-		if (true) { // si les paramètres on changées avec les booléens TODO
+			
+		if (modelePrincipal.parametresModifies(musique, son,
+												 voirPositionsPossibles,
+												 voirPionsEnlevables)) {
 	        Optional<ButtonType> resultat = boiteAlerte.showAndWait();
 	        
 	        if (resultat.get() == boutonConfirmer) {
-	        	// TODO appliquer les nouveaux parametres pour la partie + contour css au bouton pour montrer que c'est OK
-	        	
+	        	modelePrincipal.setParametres(musique, son,
+	        								  voirPositionsPossibles,
+	        								  voirPionsEnlevables);
 	        } else if (resultat.get() == boutonAnnuler) {
 	        	boiteAnnulation.showAndWait();
+	        	// TODO : remettre sur l'IHM les boutons dans leur état original en fonction du modèle...
 	        }
-	        
 		} else {
 			boiteAucuneModification.showAndWait();
 		}
