@@ -22756,3 +22756,14 @@ sauvegardée
 fonctionnalité
 conséquente
 fenêtre
+changées
+booléens
+clics
+héritée
+attributs
+booléen
+désactivés
+activés
+activé
+pions
+enlevables

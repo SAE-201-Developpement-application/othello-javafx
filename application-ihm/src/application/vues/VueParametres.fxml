@@ -24,12 +24,12 @@
             <Image url="@images/MenuPrincipal.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="iconePositionsPossibles" fitHeight="110.0" fitWidth="113.0" layoutX="566.0" layoutY="168.0" onMouseClicked="#gererClicPositionsPossibles" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="iconePositionsPossibles" fitHeight="110.0" fitWidth="113.0" layoutX="566.0" layoutY="168.0" onMouseClicked="#gererClicPositionsPossibles" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@images/Parametres/ImagePosition.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="iconePositionsPossiblesActivee" fitHeight="120.0" fitWidth="121.0" layoutX="561.0" layoutY="163.0" onMouseClicked="#gererClicPositionsPossibles" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="iconePositionsPossiblesActivee" fitHeight="120.0" fitWidth="121.0" layoutX="561.0" layoutY="163.0" onMouseClicked="#gererClicPositionsPossibles" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/Parametres/ImagePositionActivee.png" />
          </image>
