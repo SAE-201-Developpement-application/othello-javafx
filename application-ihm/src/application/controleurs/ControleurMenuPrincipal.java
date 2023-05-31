@@ -1,16 +1,17 @@
 /*
- * Controlleur.java                      				            25 mai 2023
+ * ControleurMenuPrincipal.java                				            25 mai 2023
  * IUT de Rodez, pas de copyright ni de "copyleft"
  */
 package application.controleurs;
 
-import application.Othello;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.application.Platform;
+
+import application.vues.GestionVues;
 
 /**
  * Contrôle via FXML les interactions avec la vue : les pages FXML.
@@ -19,7 +20,7 @@ import javafx.application.Platform;
  * @author Loïc FAUGIERES
  * @author Simon GUIRAUD
  */
-public class ControleurMenuPrincipal {
+public class ControleurMenuPrincipal extends ControleurPrincipal {
 
 	/* 
 	 * Le texte sur le bouton de sauvegarde 
@@ -29,10 +30,7 @@ public class ControleurMenuPrincipal {
 	private Text infosPartie;
 	
 	@FXML
-	private void gererClicFermer() {		
-		// ferme la vue courante
-		// TODO : chercher comment faire
-		
+	private void gererClicFermer() {
 		Platform.exit();
 		
 //		final String MESSAGE_EN_COURS_DEV =
@@ -58,19 +56,18 @@ public class ControleurMenuPrincipal {
 	@FXML
 	private void gererClicParametres() {		
 		// échanger la vue courante avec celle des paramètres
-		Othello.activerParametres(); 
+		GestionVues.activerParametres(); 
 	}
 	
 	@FXML
 	private void gererClicPartieOrdinateur() {
 		// échanger la vue courante avec celle du niveau de l'ordinateur
-		Othello.activerNiveauOrdinateur(); 
+		GestionVues.activerNiveauOrdinateur(); 
 	}
 	
 	@FXML
 	private void gererClicPartieJoueur() {
-		System.out.println("SU");
-		Othello.activerChoixPseudosContreJoueur();
+		GestionVues.activerChoixPseudosContreJoueur();
 	}
 	
 	@FXML
@@ -80,12 +77,14 @@ public class ControleurMenuPrincipal {
 	
 	@FXML
 	private void gererClicCorbeille() {
+		
 		infosPartie.setText("Aucune partie sauvegardée");
 		// TODO  active la corbeille pour supprimer la partie sauvegardée dans ModeleSauvegardes
 	}
 	
 	@FXML
 	private void gererClicReprendrePartie() {
+		
 		final String MESSAGE_EN_COURS_DEV =
 		"""
 		Cette fonctionnalité est toujours en cours de développement.

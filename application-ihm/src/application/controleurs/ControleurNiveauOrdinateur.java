@@ -4,8 +4,7 @@
  */
 package application.controleurs;
 
-import application.Othello;
-
+import application.vues.GestionVues;
 import javafx.fxml.FXML;
 
 /**
@@ -15,7 +14,7 @@ import javafx.fxml.FXML;
  * @author Loïc FAUGIERES
  * @author Simon GUIRAUD
  */
-public class ControleurNiveauOrdinateur {
+public class ControleurNiveauOrdinateur extends ControleurPrincipal {
 	
 	boolean facileActif = false;
 	boolean difficileActif = false;
@@ -23,7 +22,7 @@ public class ControleurNiveauOrdinateur {
 	@FXML
 	private void gererClicRetourMenuPrincipal() {		
 		// échanger la vue courante avec celle des paramètres TODO c'est quoi ce commentaire xtf ?
-		Othello.activerMenuPrincipal(); 
+		GestionVues.activerMenuPrincipal(); 
 	}
 	
 	@FXML

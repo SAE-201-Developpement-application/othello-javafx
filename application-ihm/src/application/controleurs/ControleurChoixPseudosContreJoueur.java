@@ -4,14 +4,15 @@
  */
 package application.controleurs;
 
-import application.Othello;
-import application.vues.EnsembleDesVues;
+import application.vues.GestionVues;
+
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+
 import java.util.Optional;
 
 
@@ -22,12 +23,12 @@ import java.util.Optional;
  * @author Loïc FAUGIERES
  * @author Simon GUIRAUD
  */
-public class ControleurChoixPseudosContreJoueur {
+public class ControleurChoixPseudosContreJoueur extends ControleurPrincipal {
 
 	@FXML
 	private void gererClicRetourMenuPrincipal() {		
 		// échanger la vue courante avec celle des paramètres
-		Othello.activerMenuPrincipal(); 
+		GestionVues.activerMenuPrincipal(); 
 	}
 	
 	@FXML
