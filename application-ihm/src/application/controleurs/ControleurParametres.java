@@ -224,7 +224,7 @@ public class ControleurParametres extends ControleurPrincipal {
 		boiteAnnulation.setHeaderText("Annulation paramètres");
 		
 		Stage stage3 = (Stage) boiteAucuneModification.getDialogPane().getScene().getWindow();
-		stage3.getIcons().add(new Image("application/vues/images/Parametres/Annulation.png"));
+		stage3.getIcons().add(new Image("application/vues/images/Annulation.png"));
 
 		boiteAucuneModification.setTitle("Othello - Aucune modification");
 		boiteAucuneModification.setHeaderText("Aucune modification");

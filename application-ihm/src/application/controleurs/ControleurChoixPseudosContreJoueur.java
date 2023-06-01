@@ -28,11 +28,25 @@ import java.util.Optional;
 public class ControleurChoixPseudosContreJoueur extends ControleurPrincipal {
 	
 	
-	private final String REGLES_PSEUDO 
-	= "Veuillez entrer un nom contenant 2 à 16 caractères.";
+	
 	
 	@FXML
 	private TextField pseudoJoueur;
+	
+	@FXML
+	private TextField pseudoJoueur2;
+	
+	@FXML
+	private ImageView cocheJoueur1;
+	
+	@FXML
+	private ImageView cocheJoueur2;
+	
+	@FXML
+	private ImageView croixJoueur1;
+	
+	@FXML
+	private ImageView croixJoueur2;
 
 	@FXML
 	private void gererClicRetourMenuPrincipal() {		
@@ -42,22 +56,56 @@ public class ControleurChoixPseudosContreJoueur extends ControleurPrincipal {
 	
 	@FXML
 	private void gererMiseAJourNomJoueur1() {	// TODO mettre le déclencheur sur FX builder, je sait plus lequel c'est
+		
 		String nomJoueur1 = pseudoJoueur.getText();
-		if(nomJoueur1.length() > 1 && nomJoueur1.length() <= 16) {
+		
+		if (nomJoueur1.isEmpty()) {
+			croixJoueur1.setVisible(false);
+			cocheJoueur1.setVisible(false);
+		} else if (nomJoueur1.length() > 1 && nomJoueur1.length() <= 16) {
+			croixJoueur1.setVisible(false);
+			cocheJoueur1.setVisible(true);
 			modelePrincipal.setNomJoueur1(nomJoueur1);
 		} else {
-			Alert boitePseudoIncompatible = new Alert(Alert.AlertType.ERROR,
-											      REGLES_PSEUDO);
+			cocheJoueur1.setVisible(false);
+			croixJoueur1.setVisible(true);
+			
 		}
 	}
 	
 	@FXML
 	private void gererMiseAJourNomJoueur2() {	// TODO mettre le déclencheur sur FX builder, je sait plus lequel c'est
-		// TODO gérer la maj
+	
+		String nomJoueur2 = pseudoJoueur2.getText();
+		
+		if (nomJoueur2.isEmpty()) {
+			croixJoueur2.setVisible(false);
+			cocheJoueur2.setVisible(false);
+		} else if (nomJoueur2.length() > 1 && nomJoueur2.length() <= 16) {
+			croixJoueur2.setVisible(false);
+			cocheJoueur2.setVisible(true);
+			modelePrincipal.setNomJoueur1(nomJoueur2);
+		} else {
+			cocheJoueur2.setVisible(false);
+			croixJoueur2.setVisible(true);
+			
+		}
 	}
 	
 	@FXML
-	private void gererClicJouer() {		
-		// TODO activer vue Jeu
+	private void gererClicJouer() {
+		final String REGLES_PSEUDO 
+	    = "Veuillez entrer un pseudonyme contenant 2 à 16 caractères.";
+			
+		Alert boitePseudoIncompatible = new Alert(Alert.AlertType.ERROR);
+		
+		Stage stage = (Stage) boitePseudoIncompatible.getDialogPane().getScene().getWindow();
+		stage.getIcons().add(new Image("application/vues/images/Annulation.png"));
+		
+		boitePseudoIncompatible.setTitle("Othello - Pseudonyme invalide");
+		boitePseudoIncompatible.setHeaderText(REGLES_PSEUDO);
+		boitePseudoIncompatible.showAndWait();						      
+											      
+		
 	}
 }
