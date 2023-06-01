@@ -76,7 +76,6 @@ public class GestionVues extends Othello {
 	 * pour qu'elle devienne celle du Jeu principal
 	 */
 	public static void activerJeu() {
-		// TODO faire la vue du Jeu (ca promet d'etre fun ca)
 		fenetrePrincipale.setScene(scenes[5]);
 		fenetrePrincipale.setTitle("Othello - En partie");
 	}

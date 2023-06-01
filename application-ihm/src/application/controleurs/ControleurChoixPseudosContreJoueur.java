@@ -94,17 +94,19 @@ public class ControleurChoixPseudosContreJoueur extends ControleurPrincipal {
 	
 	@FXML
 	private void gererClicJouer() {
-		final String REGLES_PSEUDO 
-	    = "Veuillez entrer un pseudonyme contenant 2 à 16 caractères.";
-			
-		Alert boitePseudoIncompatible = new Alert(Alert.AlertType.ERROR);
-		
-		Stage stage = (Stage) boitePseudoIncompatible.getDialogPane().getScene().getWindow();
-		stage.getIcons().add(new Image("application/vues/images/Annulation.png"));
-		
-		boitePseudoIncompatible.setTitle("Othello - Pseudonyme invalide");
-		boitePseudoIncompatible.setHeaderText(REGLES_PSEUDO);
-		boitePseudoIncompatible.showAndWait();						      
+// PAS BESOIN POUR l'instant
+//		final String REGLES_PSEUDO 
+//	    = "Veuillez entrer un pseudonyme contenant 2 à 16 caractères.";
+//			
+//		Alert boitePseudoIncompatible = new Alert(Alert.AlertType.ERROR);
+//		
+//		Stage stage = (Stage) boitePseudoIncompatible.getDialogPane().getScene().getWindow();
+//		stage.getIcons().add(new Image("application/vues/images/Annulation.png"));
+//		
+//		boitePseudoIncompatible.setTitle("Othello - Pseudonyme invalide");
+//		boitePseudoIncompatible.setHeaderText(REGLES_PSEUDO);
+//		boitePseudoIncompatible.showAndWait();
+		GestionVues.activerJeu();
 											      
 		
 	}
