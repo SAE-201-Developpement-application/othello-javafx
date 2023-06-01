@@ -1,5 +1,5 @@
 /*
- * ControleurChoixPseudoContreIA.java                      				            01 juin 2023
+ * ControleurChoixPseudosContreJoueur .java                      				            25 mai 2023
  * IUT de Rodez, pas de copyright ni de "copyleft"
  */
 package application.controleurs;
@@ -25,14 +25,14 @@ import java.util.Optional;
  * @author Loïc FAUGIERES
  * @author Simon GUIRAUD
  */
-public class ControleurChoixPseudosContreJoueur extends ControleurPrincipal {
+public class ControleurChoixPseudoContreIA extends ControleurPrincipal {
 	
 	
 	private final String REGLES_PSEUDO 
 	= "Veuillez entrer un nom contenant 2 à 16 caractères.";
 	
 	@FXML
-	private TextField PseudoJoueur;
+	private TextField pseudoJoueur;
 
 	@FXML
 	private void gererClicRetourMenuPrincipal() {		
@@ -41,14 +41,19 @@ public class ControleurChoixPseudosContreJoueur extends ControleurPrincipal {
 	}
 	
 	@FXML
-	private void gererMiseAJourNomJoueur() {	
-		String nomJoueur1 = PseudoJoueur.getText();
+	private void gererMiseAJourNomJoueur1() {	// TODO mettre le déclencheur sur FX builder, je sait plus lequel c'est
+		String nomJoueur1 = pseudoJoueur.getText();
 		if(nomJoueur1.length() > 1 && nomJoueur1.length() <= 16) {
 			modelePrincipal.setNomJoueur1(nomJoueur1);
 		} else {
 			Alert boitePseudoIncompatible = new Alert(Alert.AlertType.ERROR,
 											      REGLES_PSEUDO);
 		}
+	}
+	
+	@FXML
+	private void gererMiseAJourNomJoueur2() {	// TODO mettre le déclencheur sur FX builder, je sait plus lequel c'est
+		// TODO gérer la maj
 	}
 	
 	@FXML

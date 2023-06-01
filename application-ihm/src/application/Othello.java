@@ -31,17 +31,17 @@ public class Othello extends Application {
 	private static Scene sceneParametres;
 	private static Scene sceneNiveauOrdinateur;
 	private static Scene sceneChoixPseudosContreJoueur;
-	//private static Scene sceneChoixPseudosContreIA;
+	private static Scene sceneChoixPseudosContreIA;
 	//private static Scene sceneJeu;	
 	
 	public static Scene[] scenes = {
 		scenePrincipale, sceneParametres, sceneNiveauOrdinateur,
-		sceneChoixPseudosContreJoueur//, sceneChoixPseudosContreIA, sceneJeu
+		sceneChoixPseudosContreJoueur, sceneChoixPseudosContreIA, //sceneJeu
 	};
 	
 	private static String[] ressources = {
 		"VueMenuPrincipal.fxml", "VueParametres.fxml", "VueNiveauOrdinateur.fxml",
-		"VueChoixPseudosContreJoueur.fxml"
+		"VueChoixPseudosContreJoueur.fxml", "VueChoixPseudoContreAI.fxml"
 	};
 	
 	/**
