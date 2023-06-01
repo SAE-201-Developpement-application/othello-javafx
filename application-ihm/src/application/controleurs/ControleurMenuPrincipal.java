@@ -48,7 +48,7 @@ public class ControleurMenuPrincipal extends ControleurPrincipal {
 //		Stage stage = (Stage) boiteAlerte.getDialogPane().getScene().getWindow();
 //		stage.getIcons().add(new Image("application/vues/images/InConstruction.png"));
 //		
-//		boiteAlerte.setTitle("Othello - Fermer");
+//		boiteAlerte.setTitle("Othello - En cours de développement");
 //		boiteAlerte.setHeaderText("Fonctionnalité en cours de développement...");
 //		boiteAlerte.showAndWait();
 	}
@@ -99,10 +99,11 @@ public class ControleurMenuPrincipal extends ControleurPrincipal {
 		Stage stage = (Stage) boiteAlerte.getDialogPane().getScene().getWindow();
 		stage.getIcons().add(new Image("application/vues/images/EnConstruction.png"));
 
-		boiteAlerte.setTitle("Othello - Fermer");
+		boiteAlerte.setTitle("Othello - En cours de développement");
 		boiteAlerte.setHeaderText("Fonctionnalité en cours de développement...");
 		
-		if (true) { // TODO vérifier qu'il y a bien une partie
+		// Si une partie sauvegardée existe
+		if (modelePrincipal.getSauvegardeExiste()) {
 			boiteAlerte.showAndWait();
 		} else {
 			infosPartie.setText("Aucune partie sauvegardée");

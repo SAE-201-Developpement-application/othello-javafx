@@ -1,9 +1,10 @@
 /*
- * Controlleur.java                      				            25 mai 2023
+ * ControleurParametres.java                      				            25 mai 2023
  * IUT de Rodez, pas de copyright ni de "copyleft"
  */
 package application.controleurs;
 
+import application.modeles.ModelePrincipal;
 import application.vues.GestionVues;
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
@@ -24,18 +25,6 @@ import java.util.Optional;
 public class ControleurParametres extends ControleurPrincipal {
 
 	@FXML
-	private ImageView iconePositionsPossibles;
-	
-	@FXML
-	private ImageView iconePositionsPossiblesActivee;
-	
-	@FXML
-	private ImageView iconePionsEnlevables;
-	
-	@FXML
-	private ImageView iconePionsEnlevablesActivee;
-	
-	@FXML
 	private ImageView iconeMusique;
 	
 	@FXML
@@ -48,9 +37,76 @@ public class ControleurParametres extends ControleurPrincipal {
 	private ImageView iconeSonDesactivee;
 	
 	@FXML
-	private void gererClicRetourMenuPrincipal() {		
+	private ImageView iconePositionsPossibles;
+	
+	@FXML
+	private ImageView iconePositionsPossiblesActivee;
+	
+	@FXML
+	private ImageView iconePionsEnlevables;
+	
+	@FXML
+	private ImageView iconePionsEnlevablesActivee;
+	
+	@FXML
+	private void gererClicRetourMenuPrincipal() {
 		// échanger la vue courante avec celle des paramètres
-		GestionVues.activerMenuPrincipal(); 
+		boolean musique = iconeMusique.isVisible();
+		boolean son = iconeSon.isVisible();
+		boolean voirPositionsPossibles = iconePositionsPossiblesActivee
+									     .isVisible();
+		boolean voirPionsEnlevables = iconePionsEnlevablesActivee
+									  .isVisible();
+		
+		if (modelePrincipal
+			.parametresModifies(musique, son,
+								voirPositionsPossibles,
+								voirPionsEnlevables)) {
+			
+			final String MODIFICATION_NON_ENREGISTRE
+			= "Il y a des modifications non enregistrées, êtes-vous sûr de vouloir"
+			  + " quitter et perdre vos modifications actuelles ?";
+			
+			Alert boiteModificationNonEnregistre
+			= new Alert(Alert.AlertType.WARNING, MODIFICATION_NON_ENREGISTRE);
+												   
+			ButtonType boutonQuitter = new ButtonType("Quitter sans sauvegarder");
+        	ButtonType boutonRetourParametres = new ButtonType("Retour aux paramètres");
+        	
+        	boiteModificationNonEnregistre.getButtonTypes()
+        								  .setAll(boutonQuitter, boutonRetourParametres);
+											
+			Stage stage3 = (Stage) boiteModificationNonEnregistre
+								   .getDialogPane().getScene().getWindow();
+			stage3.getIcons().add(new Image("application/vues/images/Parametres/ValidationParametres.png"));
+	
+			boiteModificationNonEnregistre.setTitle("Othello - Modifications non enregistrées");
+			boiteModificationNonEnregistre.setHeaderText("Modifications non enregistrées");
+			
+			Optional<ButtonType> resultat = boiteModificationNonEnregistre.showAndWait();
+	        
+	        if (resultat.get() == boutonQuitter) {
+	        	if (musique != modelePrincipal.getMusique()) {
+	        		echangerVisibilite(iconeMusique, iconeMusiqueDesactivee);
+	        	}
+	        	if (son != modelePrincipal.getSon()) {
+	        		echangerVisibilite(iconeSon, iconeSonDesactivee);
+	        	}
+	        	if (voirPositionsPossibles
+	        		!= modelePrincipal.getVoirPositionsPossibles()) {
+	        		echangerVisibilite(iconePositionsPossibles,
+	        						   iconePositionsPossiblesActivee);
+	        	}
+	        	if (voirPionsEnlevables
+	        		!= modelePrincipal.getVoirPionsEnlevables()) {
+	        		echangerVisibilite(iconePionsEnlevables,
+	        						   iconePionsEnlevablesActivee);
+	        	}
+				GestionVues.activerMenuPrincipal();
+			}
+		} else {
+			GestionVues.activerMenuPrincipal();
+		} 	
 	}
 	
 	/**
@@ -65,20 +121,6 @@ public class ControleurParametres extends ControleurPrincipal {
 	}
 	
 	@FXML
-	private void gererClicPositionsPossibles() {
-		// Ajouter ou retirer un contour vert pour confirmer l'action
-		// et l'état du paramètre
-		echangerVisibilite(iconePositionsPossibles, iconePositionsPossiblesActivee);
-	}
-	
-	@FXML
-	private void gererClicPionsEnlevables() {
-		// Ajouter ou retirer un contour vert pour confirmer l'action
-		// et l'état du paramètre
-		echangerVisibilite(iconePionsEnlevables, iconePionsEnlevablesActivee);
-	}
-	
-	@FXML
 	private void gererClicMusique() {
 		// Ajouter ou retirer une croix rouge pour confirmer l'action
 		// et l'état du paramètre
@@ -90,6 +132,20 @@ public class ControleurParametres extends ControleurPrincipal {
 		// Ajouter ou retirer une croix rouge pour confirmer l'action
 		// et l'état du paramètre
 		echangerVisibilite(iconeSon, iconeSonDesactivee);
+	}
+	
+	@FXML
+	private void gererClicPositionsPossibles() {
+		// Ajouter ou retirer un contour vert pour confirmer l'action
+		// et l'état du paramètre
+		echangerVisibilite(iconePositionsPossibles, iconePositionsPossiblesActivee);
+	}
+	
+	@FXML
+	private void gererClicPionsEnlevables() {
+		// Ajouter ou retirer un contour vert pour confirmer l'action
+		// et l'état du paramètre
+		echangerVisibilite(iconePionsEnlevables, iconePionsEnlevablesActivee);
 	}
 	
 	@FXML
@@ -174,8 +230,8 @@ public class ControleurParametres extends ControleurPrincipal {
 		boiteAucuneModification.setHeaderText("Aucune modification");
 			
 		if (modelePrincipal.parametresModifies(musique, son,
-												 voirPositionsPossibles,
-												 voirPionsEnlevables)) {
+											   voirPositionsPossibles,
+											   voirPionsEnlevables)) {
 	        Optional<ButtonType> resultat = boiteAlerte.showAndWait();
 	        
 	        if (resultat.get() == boutonConfirmer) {
@@ -184,7 +240,23 @@ public class ControleurParametres extends ControleurPrincipal {
 	        								  voirPionsEnlevables);
 	        } else if (resultat.get() == boutonAnnuler) {
 	        	boiteAnnulation.showAndWait();
-	        	// TODO : remettre sur l'IHM les boutons dans leur état original en fonction du modèle...
+	        	
+	        	if (musique != modelePrincipal.getMusique()) {
+	        		echangerVisibilite(iconeMusique, iconeMusiqueDesactivee);
+	        	}
+	        	if (son != modelePrincipal.getSon()) {
+	        		echangerVisibilite(iconeSon, iconeSonDesactivee);
+	        	}
+	        	if (voirPositionsPossibles
+	        		!= modelePrincipal.getVoirPositionsPossibles()) {
+	        		echangerVisibilite(iconePositionsPossibles,
+	        						   iconePositionsPossiblesActivee);
+	        	}
+	        	if (voirPionsEnlevables
+	        		!= modelePrincipal.getVoirPionsEnlevables()) {
+	        		echangerVisibilite(iconePionsEnlevables,
+	        						   iconePionsEnlevablesActivee);
+	        	}
 	        }
 		} else {
 			boiteAucuneModification.showAndWait();

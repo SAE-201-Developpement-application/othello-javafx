@@ -30,7 +30,8 @@ public class ModelePrincipal {
 	
 	private boolean partieCommencee = false;
 	
-	private boolean sauvegardeVide = false;
+	/** Paramètre indiquant si une sauvegarde existe */
+	private boolean sauvegardeExiste = false;
 	
 	/* Paramètres désactivés par défaut */
 	private boolean musique = false;
@@ -39,48 +40,6 @@ public class ModelePrincipal {
 	
 	/* Paramètre activé par défaut */
 	private boolean voirPositionsPossibles = true;
-	
-	public void validerParametres(boolean statutMusique, boolean statutSon,
-								  boolean statutVoirPositionsPossibles,
-								  boolean statutVoirPionsEnlevables) {
-		setMusique(statutMusique);
-		setSon(statutSon);
-		setVoirPositionsPossibles(statutVoirPositionsPossibles);
-		setVoirPionsEnlevables(statutVoirPionsEnlevables);
-	}
-	
-	private void setMusique(boolean statut) {
-		musique = statut;
-	}
-	
-	private void setSon(boolean statut) {
-		son = statut;
-	}
-	
-	private void setVoirPositionsPossibles(boolean statut) {
-		voirPositionsPossibles = statut;
-	}
-	
-	private void setVoirPionsEnlevables(boolean statut) {
-		voirPionsEnlevables = statut;
-	}
-	
-	/**
-	 * @param statutMusique Le nouveau statut d'activation de la musique.
-	 * @param statutSon Le nouveau statut d'activation du son.
-	 * @param statutVoirPositionsPossibles Le nouveau statut du paramètre de
-	 * 									   vision des positions possibles.
-	 * @param statutVoirPionsEnlevables Le nouveau statut du paramètres de
-	 * 									vision des pions enlevables.
-	 */
-	public void setParametres(boolean statutMusique, boolean statutSon,
-							  boolean statutVoirPositionsPossibles,
-							  boolean statutVoirPionsEnlevables) {
-		setMusique(statutMusique);
-		setSon(statutSon);
-		setVoirPositionsPossibles(statutVoirPionsEnlevables);
-		setVoirPionsEnlevables(statutVoirPionsEnlevables);
-	}
 	
 	/**
 	 * Vérification de la différence entre les paramètres passés en
@@ -101,6 +60,95 @@ public class ModelePrincipal {
 		return musique != this.musique || son != this.son
 			|| voirPositionsPossibles != this.voirPositionsPossibles
 			|| voirPionsEnlevables != this.voirPionsEnlevables;
+	}
+	
+	/** @return Nom du premier joueur. */
+	public String getNomJoueur1() {
+		return nomJoueur1;
+	}
+	
+	/** @return Nom du second joueur. */
+	public String getNomJoueur2() {
+		return nomJoueur2;
+	}
+	
+	/** @return Si il y a une sauvegarde d'une partie de jeu. */
+	public boolean getSauvegardeExiste() {
+		return sauvegardeExiste;
+	}
+	
+	/** @return Paramètre musique de this. */
+	public boolean getMusique() {
+		return musique;
+	}
+	
+	/** @return Paramètre son de this. */
+	public boolean getSon() {
+		return son;
+	}
+	
+	/** @return Paramètre voirPositionsPossibles de this. */
+	public boolean getVoirPositionsPossibles() {
+		return voirPositionsPossibles;
+	}
+	
+	/** @return Paramètre voirPionsEnlevables de this. */
+	public boolean getVoirPionsEnlevables() {
+		return voirPionsEnlevables;
+	}
+	
+	/** Modificateur de nomJoueur1 */
+	public void setNomJoueur1(String nom) {
+		nomJoueur1 = nom;
+	}
+	
+	/** Modificateur de nomJoueur2 */
+	public void setNomJoueur2(String nom) {
+		nomJoueur2 = nom;
+	}
+	
+	/** Modificateur de musique */
+	private void setMusique(boolean statut) {
+		musique = statut;
+	}
+	
+	/** Modificateur de son */
+	private void setSon(boolean statut) {
+		son = statut;
+	}
+	
+	/** Modificateur de voirPositionsPossibles */
+	private void setVoirPositionsPossibles(boolean statut) {
+		voirPositionsPossibles = statut;
+	}
+	
+	/** Modificateur de voirPionsEnlevables */
+	private void setVoirPionsEnlevables(boolean statut) {
+		voirPionsEnlevables = statut;
+	}
+	
+	/**
+	 * @param statutMusique Le nouveau statut d'activation de la musique.
+	 * @param statutSon Le nouveau statut d'activation du son.
+	 * @param statutVoirPositionsPossibles Le nouveau statut du paramètre de
+	 * 									   vision des positions possibles.
+	 * @param statutVoirPionsEnlevables Le nouveau statut du paramètres de
+	 * 									vision des pions enlevables.
+	 */
+	public void setParametres(boolean statutMusique, boolean statutSon,
+							  boolean statutVoirPositionsPossibles,
+							  boolean statutVoirPionsEnlevables) {
+		setMusique(statutMusique);
+		setSon(statutSon);
+		setVoirPositionsPossibles(statutVoirPositionsPossibles);
+		setVoirPionsEnlevables(statutVoirPionsEnlevables);
+		
+		System.out.printf("\nModelePrincipal > Nouveau statut des paramètres :\n"
+						  + "- musique = %b\n- son = %b\n"
+						  + "- voirPositionsPossibles = %b\n"
+						  + "- voirPionsEnlevables = %b\n",
+						  musique, son, voirPositionsPossibles,
+						  voirPionsEnlevables);
 	}
 	
 }

@@ -8,7 +8,9 @@ import application.modeles.*;
 import application.vues.*;
 
 /**
- * TODO : javadoc
+ * Contrôleur principal de l'application Othello.
+ * Celui-ci instancie les modèles et permet aux contrôleurs enfants 
+ * d'y avoir accès.
  * 
  * @author Loïc FAUGIERES
  */
