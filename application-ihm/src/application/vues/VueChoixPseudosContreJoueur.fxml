@@ -54,24 +54,30 @@
             <Image url="@images/ChoixPseudosContreJoueur/VeuillezRenseignerVosPseudonymes.png" />
          </image>
       </ImageView>
-      <TextField fx:id="pseudoJoueur" layoutX="244.0" layoutY="283.0" onKeyTyped="#gererMiseAJourNomJoueur1" prefHeight="37.0" prefWidth="470.0" promptText="Exemple :  Galimatiasplayer" />
-      <TextField fx:id="pseudoJoueur2" layoutX="242.0" layoutY="422.0" onKeyTyped="#gererMiseAJourNomJoueur2" prefHeight="37.0" prefWidth="470.0" promptText="Exemple :  SyberSim" />
-      <ImageView fx:id="croixJoueur1" fitHeight="26.0" fitWidth="26.0" layoutX="675.0" layoutY="292.0" visible="false">
+      <TextField fx:id="pseudoJoueur" layoutX="245.0" layoutY="279.0" onKeyTyped="#gererMiseAJourNomJoueur1" prefHeight="43.0" prefWidth="459.0" promptText="Exemple :  Galimatiasplayer">
+         <font>
+            <Font size="20.0" />
+         </font></TextField>
+      <TextField fx:id="pseudoJoueur2" layoutX="245.0" layoutY="419.0" onKeyTyped="#gererMiseAJourNomJoueur2" prefHeight="44.0" prefWidth="459.0" promptText="Exemple :  SyberSim">
+         <font>
+            <Font size="20.0" />
+         </font></TextField>
+      <ImageView fx:id="croixJoueur1" fitHeight="26.0" fitWidth="26.0" layoutX="670.0" layoutY="288.0" visible="false">
          <image>
             <Image url="@images/ChoixPseudosContreJoueur/CroixRouge.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="croixJoueur2" fitHeight="26.0" fitWidth="26.0" layoutX="675.0" layoutY="425.0" visible="false">
+      <ImageView fx:id="croixJoueur2" fitHeight="26.0" fitWidth="26.0" layoutX="670.0" layoutY="427.0" visible="false">
          <image>
             <Image url="@images/ChoixPseudosContreJoueur/CroixRouge.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="cocheJoueur1" fitHeight="26.0" fitWidth="26.0" layoutX="675.0" layoutY="292.0" visible="false">
+      <ImageView fx:id="cocheJoueur1" fitHeight="26.0" fitWidth="26.0" layoutX="670.0" layoutY="288.0" visible="false">
          <image>
             <Image url="@images/ChoixPseudosContreJoueur/Check.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="cocheJoueur2" fitHeight="26.0" fitWidth="26.0" layoutX="675.0" layoutY="425.0" visible="false">
+      <ImageView fx:id="cocheJoueur2" fitHeight="26.0" fitWidth="26.0" layoutX="670.0" layoutY="427.0" visible="false">
          <image>
             <Image url="@images/ChoixPseudosContreJoueur/Check.png" />
          </image>

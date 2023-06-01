@@ -33,6 +33,12 @@ public class ControleurChoixPseudoContreIA extends ControleurPrincipal {
 	
 	@FXML
 	private TextField pseudoJoueur;
+	
+	@FXML
+	private ImageView cocheJoueur;
+	
+	@FXML
+	private ImageView croixJoueur;
 
 	@FXML
 	private void gererClicRetourMenuPrincipal() {		
@@ -41,23 +47,45 @@ public class ControleurChoixPseudoContreIA extends ControleurPrincipal {
 	}
 	
 	@FXML
-	private void gererMiseAJourNomJoueur1() {	// TODO mettre le déclencheur sur FX builder, je sait plus lequel c'est
-		String nomJoueur1 = pseudoJoueur.getText();
-		if(nomJoueur1.length() > 1 && nomJoueur1.length() <= 16) {
-			modelePrincipal.setNomJoueur1(nomJoueur1);
+	private void gererMiseAJourNomJoueur() {
+		
+		String nomJoueur = pseudoJoueur.getText();
+		
+		if (nomJoueur.isEmpty()) {
+			croixJoueur.setVisible(false);
+			cocheJoueur.setVisible(false);
+		} else if (nomJoueur.length() > 1 && nomJoueur.length() <= 16) {
+			croixJoueur.setVisible(false);
+			cocheJoueur.setVisible(true);
+			modelePrincipal.setNomJoueur(nomJoueur);
+		} else {
+			cocheJoueur.setVisible(false);
+			croixJoueur.setVisible(true);
+			
+		}
+		
+		if(nomJoueur.length() > 1 && nomJoueur.length() <= 16) {
+			modelePrincipal.setNomJoueur1(nomJoueur);
 		} else {
 			Alert boitePseudoIncompatible = new Alert(Alert.AlertType.ERROR,
 											      REGLES_PSEUDO);
 		}
 	}
 	
-	@FXML
-	private void gererMiseAJourNomJoueur2() {	// TODO mettre le déclencheur sur FX builder, je sait plus lequel c'est
-		// TODO gérer la maj
-	}
 	
 	@FXML
-	private void gererClicJouer() {		
+	private void gererClicJouer() {	
+		final String REGLES_PSEUDO 
+	    = "Veuillez entrer un pseudonyme contenant 2 à 16 caractères.";
+			
+		Alert boitePseudoIncompatible = new Alert(Alert.AlertType.ERROR);
+		
+		Stage stage = (Stage) boitePseudoIncompatible.getDialogPane().getScene().getWindow();
+		stage.getIcons().add(new Image("application/vues/images/Annulation.png"));
+		
+		boitePseudoIncompatible.setTitle("Othello - Pseudonyme invalide");
+		boitePseudoIncompatible.setHeaderText(REGLES_PSEUDO);
+		boitePseudoIncompatible.showAndWait();
 		// TODO activer vue Jeu
 	}
 }

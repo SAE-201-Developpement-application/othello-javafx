@@ -20,6 +20,9 @@ public class ModelePrincipal {
 	/* Type de partie : 1 contre un ordinateur, 2 contre un autre joueur et 0 par défaut*/
 	private int typePartie = 0;
 	
+	/* Pseudo du joueur par défaut (mode contre IA)*/
+	private String nomJoueur;
+	
 	/* Pseudo du premier joueur*/
 	private String nomJoueur1;
 	
@@ -62,6 +65,11 @@ public class ModelePrincipal {
 			|| voirPionsEnlevables != this.voirPionsEnlevables;
 	}
 	
+	/** @return Nom du joueur par défaut (mode contre IA). */
+	public String getNomJoueur() {
+		return nomJoueur;
+	}
+	
 	/** @return Nom du premier joueur. */
 	public String getNomJoueur1() {
 		return nomJoueur1;
@@ -95,6 +103,11 @@ public class ModelePrincipal {
 	/** @return Paramètre voirPionsEnlevables de this. */
 	public boolean getVoirPionsEnlevables() {
 		return voirPionsEnlevables;
+	}
+	
+	/** Modificateur de nomJoueur */
+	public void setNomJoueur(String nom) {
+		nomJoueur = nom;
 	}
 	
 	/** Modificateur de nomJoueur1 */
