@@ -67,7 +67,6 @@ public class GestionVues extends Othello {
 	 * pour qu'elle devienne celle du choix du pseudo joueur contre IA
 	 */
 	public static void activerChoixPseudoContreIA() {
-		// TODO faire la vue choix du pseudos contre IA
 		fenetrePrincipale.setScene(scenes[4]);
 		fenetrePrincipale.setTitle("Othello - Choix du pseudo");
 	}

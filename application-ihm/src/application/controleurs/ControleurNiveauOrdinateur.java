@@ -21,7 +21,7 @@ public class ControleurNiveauOrdinateur extends ControleurPrincipal {
 
 	@FXML
 	private void gererClicRetourMenuPrincipal() {		
-		// échanger la vue courante avec celle des paramètres TODO c'est quoi ce commentaire xtf ?
+		// échanger la vue courante avec celle des paramètres TODO c'est quoi ce commentaire wtf je comprends pas ?
 		GestionVues.activerMenuPrincipal(); 
 	}
 	
@@ -45,6 +45,7 @@ public class ControleurNiveauOrdinateur extends ControleurPrincipal {
 	
 	@FXML
 	private void gererClicContinuer() {
+		GestionVues.activerChoixPseudoContreIA();
 		
 	}
 }

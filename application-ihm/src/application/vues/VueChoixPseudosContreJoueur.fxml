@@ -1,29 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="540.0" maxWidth="960.0" minHeight="540.0" minWidth="960.0" prefHeight="540.0" prefWidth="960.0" styleClass="fondEcran" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.ControleurChoixPseudosContreJoueur">
+<AnchorPane maxHeight="540.0" maxWidth="960.0" minHeight="540.0" minWidth="960.0" prefHeight="540.0" prefWidth="960.0" styleClass="fondEcran" stylesheets="@application.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.ControleurChoixPseudosContreJoueur">
    <children>
-      <ImageView fitHeight="116.0" fitWidth="84.0" layoutX="30.0" layoutY="30.0" onMouseClicked="#gererClicRetourMenuPrincipal">
+      <ImageView fitHeight="116.0" fitWidth="84.0" layoutX="30.0" layoutY="30.0" onMouseClicked="#gererClicRetourMenuPrincipal" preserveRatio="true">
          <image>
             <Image url="@images/MenuPrincipal.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="58.0" fitWidth="504.0" layoutX="228.0" layoutY="279.0">
+      <ImageView fitHeight="58.0" fitWidth="504.0" layoutX="232.0" layoutY="276.0" preserveRatio="true">
          <image>
             <Image url="@images/ChoixPseudosContreJoueur/ZoneEntree.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="88.0" fitWidth="84.0" layoutX="848.0" layoutY="422.0" onMouseClicked="#gererClicJouer">
+      <ImageView fitHeight="96.0" fitWidth="99.0" layoutX="848.0" layoutY="414.0" onMouseClicked="#gererClicJouer" preserveRatio="true">
          <image>
             <Image url="@images/ChoixPseudosContreJoueur/Jouer.png" />
          </image>
@@ -33,7 +29,7 @@
             <Font size="22.0" />
          </font>
       </Text>
-      <ImageView fitHeight="58.0" fitWidth="504.0" layoutX="228.0" layoutY="412.0">
+      <ImageView fitHeight="58.0" fitWidth="504.0" layoutX="232.0" layoutY="416.0" preserveRatio="true">
          <image>
             <Image url="@images/ChoixPseudosContreJoueur/ZoneEntree.png" />
          </image>
@@ -43,23 +39,23 @@
             <Font size="22.0" />
          </font>
       </Text>
-      <ImageView fitHeight="26.0" fitWidth="153.0" layoutX="403.0" layoutY="234.0">
+      <ImageView fitHeight="26.0" fitWidth="153.0" layoutX="405.0" layoutY="234.0" preserveRatio="true">
          <image>
             <Image url="@images/ChoixPseudosContreJoueur/Joueur1.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="26.0" fitWidth="153.0" layoutX="404.0" layoutY="375.0">
+      <ImageView fitHeight="26.0" fitWidth="153.0" layoutX="407.0" layoutY="374.0" preserveRatio="true">
          <image>
             <Image url="@images/ChoixPseudosContreJoueur/Joueur2%20.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="88.0" fitWidth="441.0" layoutX="260.0" layoutY="102.0">
+      <ImageView fitHeight="88.0" fitWidth="441.0" layoutX="277.0" layoutY="102.0" preserveRatio="true">
          <image>
             <Image url="@images/ChoixPseudosContreJoueur/VeuillezRenseignerVosPseudonymes.png" />
          </image>
       </ImageView>
-      <TextField fx:id="pseudoJoueur" layoutX="242.0" layoutY="286.0" onKeyTyped="#gererMiseAJourNomJoueur1" prefHeight="37.0" prefWidth="470.0" promptText="Exemple :  Galimatiasplayer" />
-      <TextField fx:id="pseudoJoueur2" layoutX="242.0" layoutY="419.0" onKeyTyped="#gererMiseAJourNomJoueur2" prefHeight="37.0" prefWidth="470.0" promptText="Exemple :  SyberSim" />
+      <TextField fx:id="pseudoJoueur" layoutX="244.0" layoutY="283.0" onKeyTyped="#gererMiseAJourNomJoueur1" prefHeight="37.0" prefWidth="470.0" promptText="Exemple :  Galimatiasplayer" />
+      <TextField fx:id="pseudoJoueur2" layoutX="242.0" layoutY="422.0" onKeyTyped="#gererMiseAJourNomJoueur2" prefHeight="37.0" prefWidth="470.0" promptText="Exemple :  SyberSim" />
       <ImageView fx:id="croixJoueur1" fitHeight="26.0" fitWidth="26.0" layoutX="675.0" layoutY="292.0" visible="false">
          <image>
             <Image url="@images/ChoixPseudosContreJoueur/CroixRouge.png" />
