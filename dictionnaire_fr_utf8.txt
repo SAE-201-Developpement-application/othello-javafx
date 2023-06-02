@@ -22769,3 +22769,6 @@ pions
 enlevables
 instancie
 modificateur
+cliquée
+écouteur
+clic

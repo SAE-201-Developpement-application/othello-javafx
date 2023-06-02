@@ -6,19 +6,17 @@ package application.controleurs;
 
 import application.vues.GestionVues;
 import javafx.scene.input.MouseEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.text.Text;
-import javafx.scene.control.TextField;
+//import javafx.scene.control.ButtonType;
+//import javafx.scene.text.Text;
+//import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-
-import java.util.Optional;
-
 
 /**
  * Contrôle via FXML les interactions avec la vue : les pages FXML.
@@ -83,47 +81,69 @@ public class ControleurJeu extends ControleurPrincipal {
 		boiteAlerte.showAndWait();
 	}
 	
-	@FXML
-	private void gererClicCase(MouseEvent e) {
+	private int[] getCoordonneesCase(String idCase) {
+		int[] resultat = new int[2];
 		
-		System.out.println("CLIC");
-		Node caseCliquee = (Node) e.getTarget();
+		String coordonneesCase = idCase.substring(4, 6);
 		
-		int indexCaseCliquee;
+		int indexColonneX = Integer.parseInt(coordonneesCase.substring(0, 1));
+		int indexLigneY = Integer.parseInt(coordonneesCase.substring(1));
 		
-		System.out.println(GridPane.getColumnIndex(caseCliquee) + " = X");
-		
-//		int Y = GridPane.getRowIndex(caseCliquee);
-//		int X = GridPane.getColumnIndex(caseCliquee);
-		
-//		String idCase = e.getSource().toString().substring(17, 19);
-//		
-//		int X = Integer.parseInt(idCase.substring(0, 1));
-//		int Y = Integer.parseInt(idCase.substring(1));
-		
-//		System.out.println("X = " + X);
-//		System.out.println("Y = " + Y + "\n");
-		
-//		for (Node nodeCourante : plateau.getChildren()) {
-//			int indexLigneY = GridPane.getRowIndex(nodeCourante);
-//			int indexColonneX = GridPane.getColumnIndex(nodeCourante);
-//			
-//			if (indexLigneY == Y && indexColonneX == X) {
-//				//plateau.getChildren().get(indexCase).remove();
-//				caseCliquee = nodeCourante;
-//				//indexCaseCliquee = plateau.get
-//				System.out.println("Case trouvée : X = " + X + " Y = " + Y);
-//			}
-//		}
-//		
-//		if (caseCliquee != null) {
-//			plateau.getChildren().remove(caseCliquee);
-//		}
-		
+		resultat[0] = indexColonneX;
+		resultat[1] = indexLigneY;
+		return resultat;
 	}
 	
-	/*private void creerPlateau() {
+	private void ajouterPion(ImageView image) {
+		plateau.getChildren().add(image);
+	}
+	
+	private void retirerPion(Node caseNode) {
+		plateau.getChildren().remove(caseNode);
+	}
+	
+	@FXML
+	private void gererClicCase(MouseEvent event) {
 		
-	}*/
+		Node caseCliquee = (Node) event.getTarget();
+		
+		// Récupération de l'identifiant de l'image cliquée
+		String idCase = caseCliquee.toString().substring(13, 19);
+		
+		int[] coordonnees = getCoordonneesCase(idCase);
+		int coordonneeX = coordonnees[0];
+		int coordonneeY = coordonnees[1];
+
+		System.out.println("ControleurJeu >> Case cliquée :"
+						   + "\nID = "+ idCase
+						   + "\nX = " + coordonneeX
+						   + "\nY = " + coordonneeY + "\n");
+		
+		// Si image cliquée == image/fond invisible
+		if (idCase.startsWith("case")) {
+			ImageView pionBlanc
+			= new ImageView("application/vues/images/Jeu/Blanc.png");
+			
+			pionBlanc.setFitWidth(65);
+			pionBlanc.setFitHeight(65);
+			pionBlanc.setId("pion" + coordonneeX + coordonneeY);
+			
+			// Ajout d'un écouteur de clic au pion affiché
+			pionBlanc.addEventFilter(MouseEvent.MOUSE_CLICKED,
+									 new EventHandler<MouseEvent>() {
+			    @Override
+			    public void handle(MouseEvent mouseEvent) {
+			        gererClicCase(mouseEvent);
+			    }
+			});
+			
+			GridPane.setColumnIndex(pionBlanc, coordonneeX);
+			GridPane.setRowIndex(pionBlanc, coordonneeY);
+			
+			ajouterPion(pionBlanc);			
+		} else {
+			retirerPion(caseCliquee);
+		}
+	}
 	
 }
