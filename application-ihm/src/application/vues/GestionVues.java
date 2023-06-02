@@ -75,7 +75,8 @@ public class GestionVues extends Othello {
 	 * Permet de modifier la scène de la fenêtre principale
 	 * pour qu'elle devienne celle du Jeu principal
 	 */
-	public static void activerJeu() {
+	public static void activerJeu() {	
+		// TODO  mettre des arguments des pseudo du modeleJeu
 		fenetrePrincipale.setScene(scenes[5]);
 		fenetrePrincipale.setTitle("Othello - En partie");
 	}

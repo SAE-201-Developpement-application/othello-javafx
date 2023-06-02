@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.image.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="540.0" maxWidth="960.0" minHeight="540.0" minWidth="960.0" prefHeight="540.0" prefWidth="960.0" styleClass="fondEcran" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.ControleurParametres">
+<AnchorPane maxHeight="540.0" maxWidth="960.0" minHeight="540.0" minWidth="960.0" prefHeight="540.0" prefWidth="960.0" styleClass="fondEcran" stylesheets="@application.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.ControleurParametres">
    <children>
       <ImageView fitHeight="110.0" fitWidth="90.0" layoutX="1369.0" layoutY="71.0" onMouseClicked="#gererClicCredits" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="30.0">
          <image>
@@ -77,6 +74,11 @@
       <ImageView fitHeight="84.0" fitWidth="228.0" layoutX="356.0" layoutY="50.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="30.0">
          <image>
             <Image url="@images/Parametres/TitreParametres.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="parametresSauvegardes" fitHeight="22.0" fitWidth="271.0" layoutX="685.0" layoutY="410.0" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@images/Parametres/ParamètresSauvegardes.png" />
          </image>
       </ImageView>
    </children>

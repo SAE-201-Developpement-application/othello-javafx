@@ -48,6 +48,9 @@ public class ControleurParametres extends ControleurPrincipal {
 	@FXML
 	private ImageView iconePionsEnlevablesActivee;
 	
+	@FXML
+	private ImageView parametresSauvegardes;
+	
 	// échanger la vue courante avec celle du menu principal
 	@FXML
 	private void gererClicRetourMenuPrincipal() {
@@ -103,9 +106,11 @@ public class ControleurParametres extends ControleurPrincipal {
 	        						   iconePionsEnlevablesActivee);
 	        	}
 				GestionVues.activerMenuPrincipal();
+				parametresSauvegardes.setVisible(false);
 			}
 		} else {
 			GestionVues.activerMenuPrincipal();
+			parametresSauvegardes.setVisible(false);
 		} 	
 	}
 	
@@ -238,6 +243,7 @@ public class ControleurParametres extends ControleurPrincipal {
 	        	modelePrincipal.setParametres(musique, son,
 	        								  voirPositionsPossibles,
 	        								  voirPionsEnlevables);
+	        	parametresSauvegardes.setVisible(true);
 	        } else if (resultat.get() == boutonAnnuler) {
 	        	boiteAnnulation.showAndWait();
 	        	

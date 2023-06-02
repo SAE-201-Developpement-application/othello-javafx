@@ -6,6 +6,7 @@ package application.controleurs;
 
 import application.vues.GestionVues;
 
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
@@ -75,14 +76,12 @@ public class ControleurChoixPseudoContreIA extends ControleurPrincipal {
 	private void gererClicJouer() {	
 				
 		if (nomOKJoueur1) {
-			if (modelePrincipal.isPartieFacile()) {
-				modelePrincipal.setNomJoueur2("Bot Facile");
-			} else {
-				modelePrincipal.setNomJoueur2("Bot Difficile");
-			}
+			modelePrincipal.setNomJoueur2(modelePrincipal.isPartieFacile()
+			                              ? "Bot Facile" : "Bot Difficile");
 			
 			modelePrincipal.setPartieCommencee(true);
 			modelePrincipal.setTypePartie(1);
+
 			GestionVues.activerJeu();
 		} else {
 			Alert boitePseudoIncompatible = new Alert(Alert.AlertType.ERROR);

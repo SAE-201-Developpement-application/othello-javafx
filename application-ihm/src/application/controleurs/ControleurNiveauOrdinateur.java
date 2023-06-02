@@ -6,7 +6,10 @@ package application.controleurs;
 
 import application.vues.GestionVues;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 /**
  * Contrôle via FXML les interactions avec la vue : les pages FXML.
@@ -19,6 +22,9 @@ public class ControleurNiveauOrdinateur extends ControleurPrincipal {
 	
 	boolean facileActif = false;
 	boolean difficileActif = false;
+	
+	final String CHOISIR_DIFFICULTEE = 
+	"Pour continuer, veuillez choisir une difficultée";
 	
 	@FXML
 	private ImageView DifficileOff;
@@ -34,49 +40,71 @@ public class ControleurNiveauOrdinateur extends ControleurPrincipal {
 
 	@FXML
 	private void gererClicRetourMenuPrincipal() {		
-		// échanger la vue courante avec celle des paramètres TODO c'est quoi ce commentaire wtf je comprends pas ?
+		// échanger la vue courante avec celle du menu principal
+		facileActif = false;
+		difficileActif = false;
 		GestionVues.activerMenuPrincipal(); 
 	}
 	
 	@FXML
 	private void gererClicFacile() {
+		
+		
 		if (!facileActif || difficileActif) {
-			echangerVisibilite(FacileOff, FacileOn);
-			echangerVisibilite(DifficileOn, DifficileOff);
 			facileActif = true;
 			difficileActif = false;
+		} 
+		
+		if (facileActif) {
+			FacileOn.setVisible(true);
+			FacileOff.setVisible(false);
+			DifficileOff.setVisible(true);
+			DifficileOn.setVisible(false);
 		} else {
-			echangerVisibilite(DifficileOn, DifficileOff);
+			FacileOn.setVisible(false);
+			FacileOff.setVisible(true);
 		}
+		System.out.println("difficle : " + difficileActif + "facile " + facileActif);
+
 	}
 	
 	@FXML
-	private void gererClicDifficile() {
+	private void gererClicDifficile() { // TODO refractor le code, tres probable que la moitiée des if ser a rien
+		
+		
 		if (!difficileActif || facileActif) {
-			echangerVisibilite(DifficileOff, DifficileOn);
-			echangerVisibilite(FacileOn, FacileOff);
 			difficileActif = true;
 			facileActif = false;
 		} else {
-			echangerVisibilite(FacileOn, FacileOff);
 		}
-	}
-	
-	/**
-	 * Échanger les visibilités de l'image 1 et 2.
-	 * 
-	 * @param image1 Première image à échanger
-	 * @param image2 Seconde image à échanger
-	 */
-	private void echangerVisibilite(ImageView image1, ImageView image2) {
-		image1.setVisible(image1.isVisible() == true ? false : true);
-		image2.setVisible(image2.isVisible() == true ? false : true);
+		
+		if (difficileActif) {
+			DifficileOn.setVisible(true);
+			DifficileOff.setVisible(false);
+			FacileOn.setVisible(false);
+			FacileOff.setVisible(true);
+		} else {
+			DifficileOn.setVisible(false);
+			DifficileOff.setVisible(true);
+		}
+		
+		System.out.println("difficle : " + difficileActif + "facile " + facileActif);
 	}
 	
 	@FXML
 	private void gererClicContinuer() {
-		// TODO bien faire cette page lol
-		GestionVues.activerChoixPseudoContreIA();
 		
+		if (facileActif || difficileActif) {
+			GestionVues.activerChoixPseudoContreIA();
+		} else {
+			Alert difficulteeNonChoisie = new Alert(Alert.AlertType.ERROR, CHOISIR_DIFFICULTEE);
+			
+			Stage stage = (Stage) difficulteeNonChoisie.getDialogPane().getScene().getWindow();
+			stage.getIcons().add(new Image("application/vues/images/Annulation.png"));
+			
+			difficulteeNonChoisie.setTitle("Othello - Difficultée non choisie");
+			difficulteeNonChoisie.setHeaderText("Difficultée non choisie");
+			difficulteeNonChoisie.showAndWait();		
+		}
 	}
 }

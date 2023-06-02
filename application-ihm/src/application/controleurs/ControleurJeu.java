@@ -5,9 +5,10 @@
 package application.controleurs;
 
 import application.vues.GestionVues;
+
+import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -17,6 +18,7 @@ import javafx.scene.control.Alert;
 //import javafx.scene.text.Text;
 //import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
 
 /**
  * Contrôle via FXML les interactions avec la vue : les pages FXML.
@@ -27,8 +29,28 @@ import javafx.scene.layout.GridPane;
  */
 public class ControleurJeu extends ControleurPrincipal {
 	
+	final String MESSAGE_EN_COURS_DEV =
+		"""
+		Cette fonctionnalité est toujours en cours de développement.
+		
+		Elle ne sera probablement jamais développée sauf si Loïc reçoit 
+		une somme assez conséquente (paypal.me/loicfaugieres1) pour le motiver.
+		""";
+	
+	@FXML
+	private Text pseudoJoueur1;
+	
+	@FXML
+	private Text pseudoJoueur2;
+	
 	@FXML
 	private GridPane plateau;
+		
+	@FXML
+	private void initialize() { // TODO faire que ca marche quand on lance cette fenetre
+		getPseudoJoueur1().setText(modeleJeu.getNomJoueur1());
+		getPseudoJoueur2().setText(modeleJeu.getNomJoueur2());	
+	}
 	
 	@FXML
 	private void gererClicRetourMenuPrincipal() {		
@@ -39,13 +61,6 @@ public class ControleurJeu extends ControleurPrincipal {
 	
 	@FXML
 	private void gererClicSauvegarder() {
-		final String MESSAGE_EN_COURS_DEV =
-		"""
-		Cette fonctionnalité est toujours en cours de développement.
-		
-		Elle ne sera probablement jamais développée sauf si Loïc reçoit 
-		une somme assez conséquente (paypal.me/loicfaugieres1) pour le motiver.
-		""";
 		
 		/* Création d'une boîte d'alerte de type attention. */
 		Alert boiteAlerte = new Alert(Alert.AlertType.WARNING,
@@ -61,13 +76,6 @@ public class ControleurJeu extends ControleurPrincipal {
 	
 	@FXML
 	private void gererClicAide() {
-		final String MESSAGE_EN_COURS_DEV =
-		"""
-		Cette fonctionnalité est toujours en cours de développement.
-		
-		Elle ne sera probablement jamais développée sauf si Loïc reçoit 
-		une somme assez conséquente (paypal.me/loicfaugieres1) pour le motiver.
-		""";
 		
 		/* Création d'une boîte d'alerte de type attention. */
 		Alert boiteAlerte = new Alert(Alert.AlertType.WARNING,
@@ -144,6 +152,22 @@ public class ControleurJeu extends ControleurPrincipal {
 		} else {
 			retirerPion(caseCliquee);
 		}
+	}
+
+	public Text getPseudoJoueur1() {
+		return pseudoJoueur1;
+	}
+
+	public void setPseudoJoueur1(Text pseudoJoueur1) {
+		this.pseudoJoueur1 = pseudoJoueur1;
+	}
+
+	public Text getPseudoJoueur2() {
+		return pseudoJoueur2;
+	}
+
+	public void setPseudoJoueur2(Text pseudoJoueur2) {
+		this.pseudoJoueur2 = pseudoJoueur2;
 	}
 	
 }

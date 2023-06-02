@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import java.lang.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -14,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="540.0" maxWidth="960.0" minHeight="540.0" minWidth="960.0" prefHeight="540.0" prefWidth="960.0" styleClass="fondEcran" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.ControleurJeu">
+<AnchorPane maxHeight="540.0" maxWidth="960.0" minHeight="540.0" minWidth="960.0" prefHeight="540.0" prefWidth="960.0" styleClass="fondEcran" stylesheets="@application.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.ControleurJeu">
    <children>
       <ImageView fitHeight="70.0" fitWidth="71.0" layoutX="352.0" layoutY="449.0" onMouseClicked="#gererClicAide" preserveRatio="true">
          <image>
@@ -405,12 +400,12 @@
             </ImageView>
          </children>
       </GridPane>
-      <Text fill="WHITE" layoutX="93.0" layoutY="233.0" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" strokeWidth="3.0" text="PseudoJoueur1" wrappingWidth="334.0">
+      <Text fx:id="pseudoJoueur1" fill="WHITE" layoutX="93.0" layoutY="233.0" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" strokeWidth="3.0" text="PseudoJoueur1" wrappingWidth="334.0">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="94.0" layoutY="334.0" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" strokeWidth="3.0" text="PseudoJoueur2" wrappingWidth="334.0">
+      <Text fx:id="pseudoJoueur2" fill="WHITE" layoutX="94.0" layoutY="334.0" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" strokeWidth="3.0" text="PseudoJoueur2" wrappingWidth="334.0">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>
