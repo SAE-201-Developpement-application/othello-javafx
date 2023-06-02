@@ -32,7 +32,7 @@ public class ControleurChoixPseudoContreIA extends ControleurPrincipal {
 	= "Veuillez entrer un nom contenant 2 à 16 caractères.";
 	
 	@FXML
-	private TextField pseudoJoueur;
+	private TextField pseudoJoueur1;
 	
 	@FXML
 	private ImageView cocheJoueur;
@@ -41,31 +41,31 @@ public class ControleurChoixPseudoContreIA extends ControleurPrincipal {
 	private ImageView croixJoueur;
 
 	@FXML
-	private void gererClicRetourMenuPrincipal() {		
+	private void gererClicRetourNiveauOrdinateur() {		
 		// échanger la vue courante avec celle des paramètres
-		GestionVues.activerMenuPrincipal(); 
+		GestionVues.activerNiveauOrdinateur(); 
 	}
 	
 	@FXML
-	private void gererMiseAJourNomJoueur() {
+	private void gererMiseAJourNomJoueur1() {
 		
-		String nomJoueur = pseudoJoueur.getText();
+		String nomJoueur1 = pseudoJoueur1.getText();
 		
-		if (nomJoueur.isEmpty()) {
+		if (nomJoueur1.isEmpty()) {
 			croixJoueur.setVisible(false);
 			cocheJoueur.setVisible(false);
-		} else if (nomJoueur.length() > 1 && nomJoueur.length() <= 16) {
+		} else if (nomJoueur1.length() > 1 && nomJoueur1.length() <= 16) {
 			croixJoueur.setVisible(false);
 			cocheJoueur.setVisible(true);
-			modelePrincipal.setNomJoueur(nomJoueur);
+			modelePrincipal.setNomJoueur(nomJoueur1);
 		} else {
 			cocheJoueur.setVisible(false);
 			croixJoueur.setVisible(true);
 			
 		}
 		
-		if(nomJoueur.length() > 1 && nomJoueur.length() <= 16) {
-			modelePrincipal.setNomJoueur1(nomJoueur);
+		if(nomJoueur1.length() > 1 && nomJoueur1.length() <= 16) {
+			modelePrincipal.setNomJoueur1(nomJoueur1);
 		} else {
 			Alert boitePseudoIncompatible = new Alert(Alert.AlertType.ERROR,
 											      REGLES_PSEUDO);

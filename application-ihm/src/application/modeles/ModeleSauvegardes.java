@@ -13,7 +13,7 @@ package application.modeles;
  * @author Loïc FAUGIERES
  * @author Simon GUIRAUD
  */
-public class ModeleSauvegardes {
+public class ModeleSauvegardes extends ModelePrincipal {
 	// TODO coder
 	private String nomPartie;
 	

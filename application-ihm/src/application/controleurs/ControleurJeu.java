@@ -5,7 +5,7 @@
 package application.controleurs;
 
 import application.vues.GestionVues;
-import javafx.event.ActionEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
@@ -84,20 +84,46 @@ public class ControleurJeu extends ControleurPrincipal {
 	}
 	
 	@FXML
-	private void gererClicCase(ActionEvent e) {
+	private void gererClicCase(MouseEvent e) {
 		
-		String idCase = e.getSource().toString().substring(39, 41);
+		System.out.println("CLIC");
+		Node caseCliquee = (Node) e.getTarget();
 		
-		int X = Integer.parseInt(idCase.charAt(0) + "");
-		int Y = Integer.parseInt(idCase.charAt(1) + "");
+		int indexCaseCliquee;
 		
-		System.out.println("X = " + X);
-		System.out.println("Y = " + Y + "\n");
+		System.out.println(GridPane.getColumnIndex(caseCliquee) + " = X");
 		
-//		Node imageNode = plateau.getChildren().get(0);
+//		int Y = GridPane.getRowIndex(caseCliquee);
+//		int X = GridPane.getColumnIndex(caseCliquee);
 		
-//		plateau.getChildren().remove(imageNode);
+//		String idCase = e.getSource().toString().substring(17, 19);
+//		
+//		int X = Integer.parseInt(idCase.substring(0, 1));
+//		int Y = Integer.parseInt(idCase.substring(1));
+		
+//		System.out.println("X = " + X);
+//		System.out.println("Y = " + Y + "\n");
+		
+//		for (Node nodeCourante : plateau.getChildren()) {
+//			int indexLigneY = GridPane.getRowIndex(nodeCourante);
+//			int indexColonneX = GridPane.getColumnIndex(nodeCourante);
+//			
+//			if (indexLigneY == Y && indexColonneX == X) {
+//				//plateau.getChildren().get(indexCase).remove();
+//				caseCliquee = nodeCourante;
+//				//indexCaseCliquee = plateau.get
+//				System.out.println("Case trouvée : X = " + X + " Y = " + Y);
+//			}
+//		}
+//		
+//		if (caseCliquee != null) {
+//			plateau.getChildren().remove(caseCliquee);
+//		}
 		
 	}
+	
+	/*private void creerPlateau() {
+		
+	}*/
 	
 }

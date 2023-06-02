@@ -83,38 +83,66 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ImageView fitHeight="64.0" fitWidth="64.0" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="4">
-               <image>
-                  <Image url="@images/Jeu/Noir.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="64.0" fitWidth="64.0" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="3">
-               <image>
-                  <Image url="@images/Jeu/Blanc.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="64.0" fitWidth="64.0" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="4">
-               <image>
-                  <Image url="@images/Jeu/GIF1.gif" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="64.0" fitWidth="64.0" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="3">
-               <image>
-                  <Image url="@images/Jeu/GIF2.gif" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="case10" fitHeight="64.0" fitWidth="64.0" preserveRatio="true" GridPane.columnIndex="1">
-               <image>
-                  <Image url="@images/Jeu/Blanc.png" />
-               </image>
-            </ImageView>
             <ImageView fx:id="case00" fitHeight="64.0" fitWidth="64.0" onMouseClicked="#gererClicCase" preserveRatio="true">
                <image>
                   <Image url="@images/Jeu/Blanc.png" />
                </image>
             </ImageView>
-            <Button mnemonicParsing="false" onAction="#gererClicCase" text="Case01" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" onAction="#gererClicCase" text="Case11" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <ImageView fx:id="case10" fitHeight="64.0" fitWidth="64.0" onMouseClicked="#gererClicCase" preserveRatio="true" GridPane.columnIndex="1">
+               <image>
+                  <Image url="@images/Jeu/BoutonTransparent.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="case20" fitHeight="64.0" fitWidth="64.0" onMouseClicked="#gererClicCase" preserveRatio="true" GridPane.columnIndex="2">
+               <image>
+                  <Image url="@images/Jeu/BoutonTransparent.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="case30" fitHeight="64.0" fitWidth="64.0" onMouseClicked="#gererClicCase" preserveRatio="true" GridPane.columnIndex="3">
+               <image>
+                  <Image url="@images/Jeu/BoutonTransparent.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="case40" fitHeight="64.0" fitWidth="64.0" onMouseClicked="#gererClicCase" preserveRatio="true" GridPane.columnIndex="4">
+               <image>
+                  <Image url="@images/Jeu/BoutonTransparent.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="case50" fitHeight="64.0" fitWidth="64.0" onMouseClicked="#gererClicCase" preserveRatio="true" GridPane.columnIndex="5">
+               <image>
+                  <Image url="@images/Jeu/BoutonTransparent.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="case60" fitHeight="64.0" fitWidth="64.0" onMouseClicked="#gererClicCase" preserveRatio="true" GridPane.columnIndex="6">
+               <image>
+                  <Image url="@images/Jeu/BoutonTransparent.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="case70" fitHeight="64.0" fitWidth="64.0" onMouseClicked="#gererClicCase" preserveRatio="true" GridPane.columnIndex="7">
+               <image>
+                  <Image url="@images/Jeu/BoutonTransparent.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="case01" fitHeight="64.0" fitWidth="64.0" onMouseClicked="#gererClicCase" preserveRatio="true" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@images/Jeu/BoutonTransparent.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="case11" fitHeight="64.0" fitWidth="64.0" onMouseClicked="#gererClicCase" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@images/Jeu/BoutonTransparent.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="case21" fitHeight="64.0" fitWidth="64.0" onMouseClicked="#gererClicCase" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@images/Jeu/BoutonTransparent.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="case31" fitHeight="64.0" fitWidth="64.0" onMouseClicked="#gererClicCase" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@images/Jeu/BoutonTransparent.png" />
+               </image>
+            </ImageView>
          </children>
       </GridPane>
       <Text fill="WHITE" layoutX="93.0" layoutY="233.0" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" strokeWidth="3.0" text="PseudoJoueur1" wrappingWidth="334.0">
