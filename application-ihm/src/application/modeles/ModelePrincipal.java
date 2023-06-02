@@ -20,8 +20,12 @@ public class ModelePrincipal {
 	/* Type de partie : 1 contre un ordinateur, 2 contre un autre joueur et 0 par défaut*/
 	private int typePartie = 0;
 	
-	/* Pseudo du joueur par défaut (mode contre IA)*/
-	private String nomJoueur;
+//	/* Pseudo du joueur par défaut (mode contre IA)*/ plus utilisé
+//	private String nomJoueur;
+	
+	private boolean partieFacile = true;
+	
+	private boolean partieCommencee = false;
 	
 	/* Pseudo du premier joueur*/
 	private String nomJoueur1;
@@ -29,9 +33,6 @@ public class ModelePrincipal {
 	/* Pseudo du deuxième joueur, si il existe*/
 	private String nomJoueur2;
 	
-	private boolean partieFacile = true;
-	
-	private boolean partieCommencee = false;
 	
 	/** Paramètre indiquant si une sauvegarde existe */
 	private boolean sauvegardeExiste = false;
@@ -58,17 +59,18 @@ public class ModelePrincipal {
 	 * 		   passé en paramètre correspondant.
 	 */
 	public boolean parametresModifies(boolean musique, boolean son,
-										boolean voirPositionsPossibles,
-										boolean voirPionsEnlevables) {
+									  boolean voirPositionsPossibles,
+									  boolean voirPionsEnlevables) {
+		
 		return musique != this.musique || son != this.son
-			|| voirPositionsPossibles != this.voirPositionsPossibles
-			|| voirPionsEnlevables != this.voirPionsEnlevables;
+									   || voirPositionsPossibles != this.voirPositionsPossibles
+									   || voirPionsEnlevables != this.voirPionsEnlevables;
 	}
 	
-	/** @return Nom du joueur par défaut (mode contre IA). */
-	public String getNomJoueur() {
-		return nomJoueur;
-	}
+//	/** @return Nom du joueur par défaut (mode contre IA). */   plus utilisé
+//	public String getNomJoueur() {
+//		return nomJoueur;
+//	}
 	
 	/** @return Nom du premier joueur. */
 	public String getNomJoueur1() {
@@ -105,10 +107,10 @@ public class ModelePrincipal {
 		return voirPionsEnlevables;
 	}
 	
-	/** Modificateur de nomJoueur */
-	public void setNomJoueur(String nom) {
-		nomJoueur = nom;
-	}
+//	/** Modificateur de nomJoueur */
+//	public void setNomJoueur(String nom) { ON l'utilise plus ca
+//		nomJoueur = nom;
+//	}
 	
 	/** Modificateur de nomJoueur1 */
 	public void setNomJoueur1(String nom) {
@@ -164,4 +166,45 @@ public class ModelePrincipal {
 						  voirPionsEnlevables);
 	}
 	
+	/**
+	 * @return the typePartie
+	 */
+	public int getTypePartie() {
+		return typePartie;
+	}
+	
+	/**
+	 * @param typePartie the typePartie to set
+	 */
+	public void setTypePartie(int typePartie) {
+		this.typePartie = typePartie;
+	}
+	
+	/**
+	 * @return the partieFacile
+	 */
+	public boolean isPartieFacile() {
+		return partieFacile;
+	}
+	
+	/**
+	 * @param partieFacile the partieFacile to set
+	 */
+	public void setPartieFacile(boolean partieFacile) {
+		this.partieFacile = partieFacile;
+	}
+	
+	/**
+	 * @return the partieCommencee
+	 */
+	public boolean isPartieCommencee() {
+		return partieCommencee;
+	}
+	
+	/**
+	 * @param partieCommencee the partieCommencee to set
+	 */
+	public void setPartieCommencee(boolean partieCommencee) {
+		this.partieCommencee = partieCommencee;
+	}
 }

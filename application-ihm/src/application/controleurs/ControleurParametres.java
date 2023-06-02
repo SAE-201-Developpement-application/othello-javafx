@@ -48,9 +48,9 @@ public class ControleurParametres extends ControleurPrincipal {
 	@FXML
 	private ImageView iconePionsEnlevablesActivee;
 	
+	// échanger la vue courante avec celle du menu principal
 	@FXML
 	private void gererClicRetourMenuPrincipal() {
-		// échanger la vue courante avec celle des paramètres
 		boolean musique = iconeMusique.isVisible();
 		boolean son = iconeSon.isVisible();
 		boolean voirPositionsPossibles = iconePositionsPossiblesActivee

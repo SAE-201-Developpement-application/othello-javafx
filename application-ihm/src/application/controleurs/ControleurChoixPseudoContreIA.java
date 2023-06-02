@@ -27,9 +27,12 @@ import java.util.Optional;
  */
 public class ControleurChoixPseudoContreIA extends ControleurPrincipal {
 	
-	
+	/* Chaine de caractere pour l'erreur de pseudo */
 	private final String REGLES_PSEUDO 
 	= "Veuillez entrer un nom contenant 2 à 16 caractères.";
+	
+	/* Booleen pour savoir si le nom du joueur 1 est bien saisi */
+	private boolean nomOKJoueur1 = false;
 	
 	@FXML
 	private TextField pseudoJoueur1;
@@ -42,7 +45,7 @@ public class ControleurChoixPseudoContreIA extends ControleurPrincipal {
 
 	@FXML
 	private void gererClicRetourNiveauOrdinateur() {		
-		// échanger la vue courante avec celle des paramètres
+		// échanger la vue courante avec celle du niveau Ordinateur
 		GestionVues.activerNiveauOrdinateur(); 
 	}
 	
@@ -54,38 +57,44 @@ public class ControleurChoixPseudoContreIA extends ControleurPrincipal {
 		if (nomJoueur1.isEmpty()) {
 			croixJoueur.setVisible(false);
 			cocheJoueur.setVisible(false);
+			nomOKJoueur1 = false;
 		} else if (nomJoueur1.length() > 1 && nomJoueur1.length() <= 16) {
 			croixJoueur.setVisible(false);
 			cocheJoueur.setVisible(true);
-			modelePrincipal.setNomJoueur(nomJoueur1);
+			modelePrincipal.setNomJoueur1(nomJoueur1);
+			nomOKJoueur1 = true;
 		} else {
 			cocheJoueur.setVisible(false);
 			croixJoueur.setVisible(true);
-			
-		}
-		
-		if(nomJoueur1.length() > 1 && nomJoueur1.length() <= 16) {
-			modelePrincipal.setNomJoueur1(nomJoueur1);
-		} else {
-			Alert boitePseudoIncompatible = new Alert(Alert.AlertType.ERROR,
-											      REGLES_PSEUDO);
+			nomOKJoueur1 = false;
 		}
 	}
 	
 	
 	@FXML
 	private void gererClicJouer() {	
-//		final String REGLES_PSEUDO 
-//	    = "Veuillez entrer un pseudonyme contenant 2 à 16 caractères.";
-//			
-//		Alert boitePseudoIncompatible = new Alert(Alert.AlertType.ERROR);
-//		
-//		Stage stage = (Stage) boitePseudoIncompatible.getDialogPane().getScene().getWindow();
-//		stage.getIcons().add(new Image("application/vues/images/Annulation.png"));
-//		
-//		boitePseudoIncompatible.setTitle("Othello - Pseudonyme invalide");
-//		boitePseudoIncompatible.setHeaderText(REGLES_PSEUDO);
-//		boitePseudoIncompatible.showAndWait();
-		GestionVues.activerJeu();
+				
+		if (nomOKJoueur1) {
+			if (modelePrincipal.isPartieFacile()) {
+				modelePrincipal.setNomJoueur2("Bot Facile");
+			} else {
+				modelePrincipal.setNomJoueur2("Bot Difficile");
+			}
+			
+			modelePrincipal.setPartieCommencee(true);
+			modelePrincipal.setTypePartie(1);
+			GestionVues.activerJeu();
+		} else {
+			Alert boitePseudoIncompatible = new Alert(Alert.AlertType.ERROR);
+			
+			Stage stage = (Stage) boitePseudoIncompatible.getDialogPane().getScene().getWindow();
+			stage.getIcons().add(new Image("application/vues/images/Annulation.png"));
+			
+			boitePseudoIncompatible.setTitle("Othello - Pseudonyme invalide");
+			boitePseudoIncompatible.setHeaderText(REGLES_PSEUDO);
+			boitePseudoIncompatible.showAndWait();		
+		}
+		
+
 	}
 }

@@ -27,6 +27,16 @@ import java.util.Optional;
  */
 public class ControleurChoixPseudosContreJoueur extends ControleurPrincipal {
 	
+	/* Chaine de caractere pour l'erreur de pseudo */
+	private final String REGLES_PSEUDO 
+	= "Veuillez entrer un nom contenant 2 à 16 caractères.";
+	
+	/* Booleen pour savoir si le nom du joueur 1 est bien saisi */
+	private boolean nomOKJoueur1 = false;
+	
+	/* Booleen pour savoir si le nom du joueur 2 est bien saisi */
+	private boolean nomOKJoueur2 = false;
+	
 	@FXML
 	private TextField pseudoJoueur;
 	
@@ -47,7 +57,7 @@ public class ControleurChoixPseudosContreJoueur extends ControleurPrincipal {
 
 	@FXML
 	private void gererClicRetourMenuPrincipal() {		
-		// échanger la vue courante avec celle des paramètres
+		// échanger la vue courante avec celle du menu principale
 		GestionVues.activerMenuPrincipal(); 
 	}
 	
@@ -59,14 +69,16 @@ public class ControleurChoixPseudosContreJoueur extends ControleurPrincipal {
 		if (nomJoueur1.isEmpty()) {
 			croixJoueur1.setVisible(false);
 			cocheJoueur1.setVisible(false);
+			nomOKJoueur1 = false;
 		} else if (nomJoueur1.length() > 1 && nomJoueur1.length() <= 16) {
 			croixJoueur1.setVisible(false);
 			cocheJoueur1.setVisible(true);
 			modelePrincipal.setNomJoueur1(nomJoueur1);
+			nomOKJoueur1 = true;
 		} else {
 			cocheJoueur1.setVisible(false);
 			croixJoueur1.setVisible(true);
-			
+			nomOKJoueur1 = false;
 		}
 	}
 	
@@ -78,33 +90,34 @@ public class ControleurChoixPseudosContreJoueur extends ControleurPrincipal {
 		if (nomJoueur2.isEmpty()) {
 			croixJoueur2.setVisible(false);
 			cocheJoueur2.setVisible(false);
+			nomOKJoueur2 = false;
 		} else if (nomJoueur2.length() > 1 && nomJoueur2.length() <= 16) {
 			croixJoueur2.setVisible(false);
 			cocheJoueur2.setVisible(true);
-			modelePrincipal.setNomJoueur1(nomJoueur2);
+			modelePrincipal.setNomJoueur2(nomJoueur2);
+			nomOKJoueur2 = true;
 		} else {
 			cocheJoueur2.setVisible(false);
 			croixJoueur2.setVisible(true);
-			
+			nomOKJoueur2 = false;	
 		}
 	}
 	
 	@FXML
 	private void gererClicJouer() {
-// PAS BESOIN POUR l'instant
-//		final String REGLES_PSEUDO 
-//	    = "Veuillez entrer un pseudonyme contenant 2 à 16 caractères.";
-//			
-//		Alert boitePseudoIncompatible = new Alert(Alert.AlertType.ERROR);
-//		
-//		Stage stage = (Stage) boitePseudoIncompatible.getDialogPane().getScene().getWindow();
-//		stage.getIcons().add(new Image("application/vues/images/Annulation.png"));
-//		
-//		boitePseudoIncompatible.setTitle("Othello - Pseudonyme invalide");
-//		boitePseudoIncompatible.setHeaderText(REGLES_PSEUDO);
-//		boitePseudoIncompatible.showAndWait();
-		GestionVues.activerJeu();
-											      
-		
+		if (nomOKJoueur1 && nomOKJoueur2) {			
+			modelePrincipal.setPartieCommencee(true);
+			modelePrincipal.setTypePartie(2);
+			GestionVues.activerJeu();
+		} else {
+			Alert boitePseudoIncompatible = new Alert(Alert.AlertType.ERROR);
+			
+			Stage stage = (Stage) boitePseudoIncompatible.getDialogPane().getScene().getWindow();
+			stage.getIcons().add(new Image("application/vues/images/Annulation.png"));
+			
+			boitePseudoIncompatible.setTitle("Othello - Pseudonyme invalide");
+			boitePseudoIncompatible.setHeaderText(REGLES_PSEUDO);
+			boitePseudoIncompatible.showAndWait();		
+		}								      
 	}
 }
