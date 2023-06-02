@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="540.0" maxWidth="960.0" minHeight="540.0" minWidth="960.0" prefHeight="540.0" prefWidth="960.0" styleClass="fondEcran" stylesheets="@application.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.ControleurNiveauOrdinateur">
+<AnchorPane maxHeight="540.0" maxWidth="960.0" minHeight="540.0" minWidth="960.0" prefHeight="540.0" prefWidth="960.0" styleClass="fondEcran" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.ControleurNiveauOrdinateur">
    <children>
       <ImageView fitHeight="110.0" fitWidth="90.0" layoutX="1369.0" layoutY="71.0" onMouseClicked="#gererClicContinuer" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="20.0">
          <image>
             <Image url="@images/NiveauOrdinateur/Continuer.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="110.0" fitWidth="90.0" layoutX="680.0" layoutY="86.0" onMouseClicked="#gererClicRetourMenuPrincipal" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="30.0">
+      <ImageView fitHeight="110.0" fitWidth="90.0" layoutX="680.0" layoutY="86.0" onMouseClicked="#gererClicRetourMenuPrincipal" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="30.0">
          <image>
             <Image url="@images/MenuPrincipal.png" />
          </image>

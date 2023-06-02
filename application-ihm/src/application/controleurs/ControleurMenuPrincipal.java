@@ -31,26 +31,8 @@ public class ControleurMenuPrincipal extends ControleurPrincipal {
 	
 	@FXML
 	private void gererClicFermer() {
+		System.out.println("\nFermeture de l'application.");
 		Platform.exit();
-		
-//		final String MESSAGE_EN_COURS_DEV =
-//		"""
-//		Cette fonctionnalité est toujours en cours de développement.
-//		
-//		Elle ne sera probablement jamais développée sauf si Loïc reçoit 
-//		une somme assez conséquente (paypal.me/loicfaugieres1) pour le motiver.
-//		""";
-//		
-//		/* Création d'une boîte d'alerte de type attention. */
-//		Alert boiteAlerte = new Alert(Alert.AlertType.WARNING,
-//									  MESSAGE_EN_COURS_DEV);
-//		
-//		Stage stage = (Stage) boiteAlerte.getDialogPane().getScene().getWindow();
-//		stage.getIcons().add(new Image("application/vues/images/InConstruction.png"));
-//		
-//		boiteAlerte.setTitle("Othello - En cours de développement");
-//		boiteAlerte.setHeaderText("Fonctionnalité en cours de développement...");
-//		boiteAlerte.showAndWait();
 	}
 	
 	@FXML

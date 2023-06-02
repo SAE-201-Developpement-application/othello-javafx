@@ -27,9 +27,6 @@ import java.util.Optional;
  */
 public class ControleurChoixPseudosContreJoueur extends ControleurPrincipal {
 	
-	
-	
-	
 	@FXML
 	private TextField pseudoJoueur;
 	
