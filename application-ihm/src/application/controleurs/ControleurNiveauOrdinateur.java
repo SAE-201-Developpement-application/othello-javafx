@@ -69,7 +69,7 @@ public class ControleurNiveauOrdinateur extends ControleurPrincipal {
 	}
 	
 	@FXML
-	private void gererClicDifficile() { // TODO refractor le code, tres probable que la moitiée des if ser a rien
+	private void gererClicDifficile() { // TODO refractor le code, tres probable que la moitiée des if sert a rien
 		
 		
 		if (!difficileActif || facileActif) {
@@ -87,14 +87,21 @@ public class ControleurNiveauOrdinateur extends ControleurPrincipal {
 			DifficileOn.setVisible(false);
 			DifficileOff.setVisible(true);
 		}
-		
-		System.out.println("difficle : " + difficileActif + "facile " + facileActif);
 	}
 	
 	@FXML
 	private void gererClicContinuer() {
 		
 		if (facileActif || difficileActif) {
+			
+			if (facileActif) {
+				modeleJeu.setOrdinateurFacile(true);
+			} else {
+				modeleJeu.setOrdinateurFacile(false);
+			}
+			
+			modelePrincipal.setNomJoueur2(modeleJeu.isOrdinateurFacile()
+                    ? "Bot Facile" : "Bot Difficile");
 			GestionVues.activerChoixPseudoContreIA();
 		} else {
 			Alert difficulteeNonChoisie = new Alert(Alert.AlertType.ERROR, CHOISIR_DIFFICULTEE);

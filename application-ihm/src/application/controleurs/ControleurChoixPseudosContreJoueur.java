@@ -59,6 +59,12 @@ public class ControleurChoixPseudosContreJoueur extends ControleurPrincipal {
 	private void gererClicRetourMenuPrincipal() {		
 		// échanger la vue courante avec celle du menu principale
 		GestionVues.activerMenuPrincipal(); 
+		
+		/* Remise à zéro des valeurs pour éviter les bugs quand on change de mode de jeu */
+		pseudoJoueur.setText("");
+		pseudoJoueur2.setText("");
+		modelePrincipal.setNomJoueur1("");
+		modelePrincipal.setNomJoueur2("");
 	}
 	
 	@FXML
@@ -69,15 +75,18 @@ public class ControleurChoixPseudosContreJoueur extends ControleurPrincipal {
 		if (nomJoueur1.isEmpty()) {
 			croixJoueur1.setVisible(false);
 			cocheJoueur1.setVisible(false);
+			
 			nomOKJoueur1 = false;
 		} else if (nomJoueur1.length() > 1 && nomJoueur1.length() <= 16) {
 			croixJoueur1.setVisible(false);
 			cocheJoueur1.setVisible(true);
+			
 			modelePrincipal.setNomJoueur1(nomJoueur1);
 			nomOKJoueur1 = true;
 		} else {
 			cocheJoueur1.setVisible(false);
 			croixJoueur1.setVisible(true);
+			
 			nomOKJoueur1 = false;
 		}
 	}
@@ -106,8 +115,14 @@ public class ControleurChoixPseudosContreJoueur extends ControleurPrincipal {
 	@FXML
 	private void gererClicJouer() {
 		if (nomOKJoueur1 && nomOKJoueur2) {			
-			modelePrincipal.setPartieCommencee(true);
-			modelePrincipal.setTypePartie(2);
+			modeleJeu.setPartieCommence(true);
+			modeleJeu.setPartieOrdinateur(false);
+			pseudoJoueur.setText(null);
+			pseudoJoueur2.setText(null);
+			cocheJoueur1.setVisible(false);
+			cocheJoueur2.setVisible(false);
+			nomOKJoueur1 = false;
+			nomOKJoueur2 = false;
 			GestionVues.activerJeu();
 		} else {
 			Alert boitePseudoIncompatible = new Alert(Alert.AlertType.ERROR);

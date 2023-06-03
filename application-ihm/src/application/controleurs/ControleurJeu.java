@@ -19,6 +19,8 @@ import javafx.scene.control.Alert;
 //import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
+import javafx.scene.control.ButtonType;
+import java.util.Optional;
 
 /**
  * Contrôle via FXML les interactions avec la vue : les pages FXML.
@@ -30,12 +32,19 @@ import javafx.scene.text.Text;
 public class ControleurJeu extends ControleurPrincipal {
 	
 	final String MESSAGE_EN_COURS_DEV =
-		"""
-		Cette fonctionnalité est toujours en cours de développement.
+	"""
+	Cette fonctionnalité est toujours en cours de développement.
+	
+	Elle ne sera probablement jamais développée sauf si Loïc reçoit 
+	une somme assez conséquente (paypal.me/loicfaugieres1) pour le motiver.
+	""";
 		
-		Elle ne sera probablement jamais développée sauf si Loïc reçoit 
-		une somme assez conséquente (paypal.me/loicfaugieres1) pour le motiver.
-		""";
+	final String QUITTER_SANS_SAUVEGARDER =
+    """
+    Une partie de jeu est en cours.
+    
+    Souhaitez-vous tout de même quitter sans la sauvegarder ?
+    """;
 	
 	@FXML
 	private Text pseudoJoueur1;
@@ -44,20 +53,139 @@ public class ControleurJeu extends ControleurPrincipal {
 	private Text pseudoJoueur2;
 	
 	@FXML
+	private Text scoreJoueur1;
+	
+	@FXML
+	private Text scoreJoueur2;
+	
+	@FXML
+	private ImageView imageScoreJoueur1;
+	
+	@FXML
+	private ImageView imageScoreJoueur2;
+	
+	@FXML
+	private ImageView tourJoueur1;
+	
+	@FXML
+	private ImageView tourJoueur2;
+	
+	@FXML
+	private ImageView jouerMaintenant;
+	
+	@FXML
 	private GridPane plateau;
 		
 	@FXML
-	private void initialize() { // TODO faire que ca marche quand on lance cette fenetre
-		getPseudoJoueur1().setText(modeleJeu.getNomJoueur1());
-		getPseudoJoueur2().setText(modeleJeu.getNomJoueur2());	
+	private void lancerJeu() {
+		System.out.println("PK tu marche pas bowdel ?");
+		System.out.println(modelePrincipal.getNomJoueur1());
+		System.out.println(modelePrincipal.getNomJoueur2());
+		
+		initialiserPlateauJeu();
 	}
 	
 	@FXML
-	private void gererClicRetourMenuPrincipal() {		
-		// échanger la vue courante avec celle des paramètres
-		// TODO mettre des garde fou pour eviter de perdre la partie sans sauvegarder comme un con
-		GestionVues.activerMenuPrincipal(); 
+	private void gererClicRetourMenuPrincipal() {
+		// demander une confirmation si partie commencée
+		if (modeleJeu.isPartieCommence()) {
+    		// TODO mettre des garde fou pour eviter de perdre la partie sans sauvegarder comme un con
+    		
+            /* Création d'une boîte d'alerte de type attention. */
+            Alert boiteModificationNonEnregistre
+            = new Alert(Alert.AlertType.WARNING,
+                        QUITTER_SANS_SAUVEGARDER);
+            
+            ButtonType boutonQuitter = new ButtonType("Quitter sans sauvegarder");
+            ButtonType boutonRetourJeu = new ButtonType("Retour au jeu");
+            
+            boiteModificationNonEnregistre.getButtonTypes()
+                                          .setAll(boutonQuitter,
+                                                  boutonRetourJeu);
+            
+            Stage stage = (Stage) boiteModificationNonEnregistre.getDialogPane()
+                                  .getScene().getWindow();
+            stage.getIcons().add(new Image("application/vues/images/Attention.png"));
+            
+            boiteModificationNonEnregistre
+            .setTitle("Othello - Retour menu principal");
+            
+            boiteModificationNonEnregistre
+            .setHeaderText("Partie non sauvegardée");
+            
+            Optional<ButtonType> resultat = boiteModificationNonEnregistre.showAndWait();
+            
+            if (resultat.get() == boutonQuitter) {
+                
+                modelePrincipal.setNomJoueur1(null);
+                modelePrincipal.setNomJoueur2(null);
+                
+                // échanger la vue courante avec celle du menu principal
+                modificationVueAvantRetourMenuPrincipal();
+            }
+		} else {
+			// échanger la vue courante avec celle du menu principal
+            modificationVueAvantRetourMenuPrincipal();
+		}
 	}
+	
+	/**
+	 * Change la vue et réinitialise la vue du jeu par défaut.
+	 */
+	private void modificationVueAvantRetourMenuPrincipal() {
+		GestionVues.activerMenuPrincipal();
+		
+		// reinitialiserPlateauJeu();
+                
+        jouerMaintenant.setVisible(true);
+        
+        pseudoJoueur1.setVisible(false);
+        pseudoJoueur2.setVisible(false);
+        
+        scoreJoueur1.setVisible(false);
+        scoreJoueur2.setVisible(false);
+        
+        imageScoreJoueur1.setVisible(false);
+        imageScoreJoueur2.setVisible(false);
+        
+        tourJoueur1.setVisible(false);
+	}
+	
+	/**
+     * Réinitialise le plateau de jeu par défaut.
+     */
+    private void reinitialiserPlateauJeu() {
+        initialiserPlateauJeu();
+        
+        // TODO cacher les pions supplémentaires ajoutés
+    }
+    
+    /**
+     * Initialise le plateau de jeu par défaut.
+     */
+    private void initialiserPlateauJeu() {
+        
+        apparaitrePion("Blanc", 3, 3);
+        apparaitrePion("Blanc", 4, 4);
+        apparaitrePion("Noir", 3, 4);
+        apparaitrePion("Noir", 4, 3);
+        
+        pseudoJoueur1.setText(modelePrincipal.getNomJoueur1());
+        pseudoJoueur2.setText(modelePrincipal.getNomJoueur2());
+        
+        jouerMaintenant.setVisible(false);
+        
+        pseudoJoueur1.setVisible(true);
+        pseudoJoueur2.setVisible(true);
+        
+        scoreJoueur1.setVisible(true);
+        scoreJoueur2.setVisible(true);
+        
+        imageScoreJoueur1.setVisible(true);
+        imageScoreJoueur2.setVisible(true);
+        
+        tourJoueur1.setVisible(true);
+    }
 	
 	@FXML
 	private void gererClicSauvegarder() {
@@ -155,8 +283,12 @@ public class ControleurJeu extends ControleurPrincipal {
 			
 			int[][] pionsARetourner = modeleJeu.clicCase(coordonneeX, coordonneeY);
 			
-			if (pionsARetourner[0][0] == -1) {
-				System.out.println("Impossible placer pion");; // TODO : -1 = impossible placer pion
+			/* Si pionsARetourner ==
+			 * - null   =   joueur peut pas placer de pion là où il a cliqué */
+			if (pionsARetourner == null) {
+				System.out.println("ControleurJeu >> Impossible placer pion où clic");
+				
+				// ajouterErreurPlacementJoueur1() TODO appeler fonction modèle
 				if (modeleJeu.getNombreErreursPlacementJoueur1()
 					== modeleJeu.NOMBRE_MAX_ERREURS_PLACEMENT) {
 					// TODO pop-up rappelant les règles car 5 clics impossibles
@@ -177,22 +309,5 @@ public class ControleurJeu extends ControleurPrincipal {
 		} else {
 			retirerPion(caseCliquee);
 		}
-	}
-
-	public Text getPseudoJoueur1() {
-		return pseudoJoueur1;
-	}
-
-	public void setPseudoJoueur1(Text pseudoJoueur1) {
-		this.pseudoJoueur1 = pseudoJoueur1;
-	}
-
-	public Text getPseudoJoueur2() {
-		return pseudoJoueur2;
-	}
-
-	public void setPseudoJoueur2(Text pseudoJoueur2) {
-		this.pseudoJoueur2 = pseudoJoueur2;
-	}
-	
+	}	
 }

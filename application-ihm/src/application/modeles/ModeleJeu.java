@@ -4,6 +4,8 @@
  */
 package application.modeles;
 
+import java.util.Arrays;
+
 /**
  * Modèle gérant le jeu d'Othello.
  * Celui-ci s'occupe de toute la partie gestion
@@ -51,6 +53,9 @@ public class ModeleJeu extends ModelePrincipal {
 		{0, 0, 0, 0, 0, 0, 0, 0},
 		{0, 0, 0, 0, 0, 0, 0, 0}
 	};
+
+	/** Case verifiée lors d'un clic */
+	private int caseVerifiee;
 							   
 	/** Définit le type de partie, contre l'odinateur ou joueur */
 	private boolean partieOrdinateur;
@@ -58,20 +63,17 @@ public class ModeleJeu extends ModelePrincipal {
 	/** Définit la difficulté de la partie, facile ou difficile */
 	private boolean ordinateurFacile;
 
-	/** Définit si le joueur1 joue */
+	/** Définit si le joueur1 joue. */
 	private boolean tourJoueur1 = true;
 	
-	/** Nom du premier joueur. */
-	private String nomJoueur1;
-	
-	/** Nom du second joueur */
-	private String nomJoueur2;
-	
+	/** Définit si une partie est commencée */
+	private boolean partieCommence;
+
 	/** Points du premier joueur. */
-	private String nbPointsJoueur2;
+	private int scoreJoueur1;
 	
-	/** Points du second joueur (si il joue). */
-	private String nbPointsJoueur1;
+	/** Points du second joueur (ou du bot). */
+	private int scoreJoueur2;
 	
 	/** 
 	 * Commence à 0 et s'incrémente si un joueur passe le tour.
@@ -92,35 +94,50 @@ public class ModeleJeu extends ModelePrincipal {
 	 */
 	private int nombreErreursPlacementJoueur2;
 	
-	/** @return le plateau de jeu */						   
+	/**
+	 * Liste des coordonnées des pions à retourner dans la vue.
+	 */
+	private int[][] pionsARetourner = null; // Valeur par défaut
+	
+	/** @return le plateau de jeu. */						   
 	public int[][] getPlateau() {
 		return this.plateau;
 	}
 	
-	/** @return le plateau de jeu */						   
-	public int getToursPasses() {
-		return this.toursPasses;
-	}
+	/** @return si la partie est contre un ordinateur */
+    public boolean isPartieOrdinateur() {
+        return partieOrdinateur;
+    }
+    
+    /** @return si la partie est facile ou difficile */
+    public boolean isOrdinateurFacile() {
+        return ordinateurFacile;
+    }
+    
+    /** @return si c'est au joueur 1 de jouer' */
+    public boolean isTourJoueur1() {
+        return tourJoueur1;
+    }
 	
-	/** @return le nom du joueur 1 */						   
-	public String  getNomJoueur1() {
-		return this.nomJoueur1;
-	}
-	
-	/** @return le score du joueur 1 */						   
-	public String getNbPointJoueur1() {
-		return this.nbPointsJoueur1;
-	}
-	
-	/** @return le nom du joueur 2 */						   
-	public String  getNomJoueur2() {
-		return this.nomJoueur2;
+    /** @return the partieCommence */
+    public boolean isPartieCommence() {
+    	return partieCommence;
+    }
+    
+	/** @return le score du joueur 1. */						   
+	public int getScoreJoueur1() {
+		return this.scoreJoueur1;
 	}
 
 	/** @return le score du joueur 2 */						   
-	public String getNbPointJoueur2() {
-		return this.nbPointsJoueur2;
+	public int getScoreJoueur2() {
+		return this.scoreJoueur2;
 	}
+	
+	/** @return le nombre de tours consécutif passés. */                          
+    public int getToursPasses() {
+        return this.toursPasses;
+    }
 	
 	/** @return le nombre d'erreurs de placement du joueur 1 */					   
 	public int getNombreErreursPlacementJoueur1() {
@@ -132,27 +149,128 @@ public class ModeleJeu extends ModelePrincipal {
 		return this.nombreErreursPlacementJoueur2;
 	}
 	
+	/** @return la liste des pions à retourner après le placement d'un nouveau pion */
+    public int[][] getPionsARetourner() {
+        return this.pionsARetourner;
+    }
+	
 	/** @param nouveauPlateau Plateau remplaçant l'attribut plateau de this. */
 	public void setPlateau(int[][] nouveauPlateau) {
 		this.plateau = nouveauPlateau;
 	}
-	/** @param nouveauPlateau tour */
-	public void setTourJoueur1(boolean tour) {
-		this.tourJoueur1 = tour;
+	
+	/** @param partieOrdinateur Si la partie est contre un ordinateur */
+	public void setPartieOrdinateur(boolean partieOrdinateur) {
+		this.partieOrdinateur = partieOrdinateur;
+	}
+
+	/** @param ordinateurFacile Si la partie est facile (false si difficile) */
+	public void setOrdinateurFacile(boolean ordinateurFacile) {
+		this.ordinateurFacile = ordinateurFacile;
 	}
 	
+	/** @param tour Si le tour est celui du joueur 1 */
+    public void setTourJoueur1(boolean tour) {
+        this.tourJoueur1 = tour;
+    }
+    
+    /** @param partieCommence the partieCommence to set */
+    public void setPartieCommence(boolean partieCommence) {
+    	this.partieCommence = partieCommence;
+    }
+    
+    /** @param score Nouveau score du joueur 1*/
+    public void setScoreJoueur1(int score) {
+        this.scoreJoueur1 = score;
+    }
+    
+    /** @param score Nouveau score du joueur 2 */
+    public void setScoreJoueur2(int score) {
+        this.scoreJoueur2 = score;
+    }
+
 	/**
-	 * 
-	 * @param x
-	 * @param y
-	 * @return si la case est vide
+	 * Incrémentation du nombre de tours consécutifs passés.
+	 */
+    public void passerTour() {
+        this.toursPasses++;     
+    }
+    
+    /**
+     * Réinitialisation à 0 du nombre courant de
+     * tours consécutifs passés.
+     */
+    public void reinitialiserTourPasses() {
+        this.toursPasses = 0;       
+    }
+    
+    /** Incrémente le nombre d'erreurs de placement du joueur 1 */                    
+    public void ajouterErreurPlacementJoueur1() {
+        this.nombreErreursPlacementJoueur1++;
+    }
+    
+    /** Incrémente le nombre d'erreurs de placement du joueur 2 */                        
+    public void ajouterErreurPlacementJoueur2() {
+        this.nombreErreursPlacementJoueur2++;
+    }
+    
+    /** 
+     * Réinitialise/vide la liste des pions à retourner une fois
+     * ceux-ci retournés par la vue.
+     */
+    public void reinitialiserPionsARetourner() {
+        this.pionsARetourner = null;
+    }
+    
+    /** 
+     * Réinitialise/vide la liste des pions à retourner une fois
+     * ceux-ci retournés par la vue.
+     */
+    public void ajouterPionsARetourner(int[] coordonneesPion) {
+		int[][] listePions = this.getPionsARetourner();
+		
+        this.pionsARetourner = Arrays.copyOf(listePions, listePions.length + 1);
+        
+        this.pionsARetourner[listePions.length] = coordonneesPion;
+    }
+    
+    /**
+     * Gestion du clic de l'utilisateur sur une case.
+     * Si c'est possible, un pion de la couleur du joueur sera placé.
+     * 
+     * @param x Coordonnée X (colonne) de la case où poser le pion.
+     * @param y Coordonnée Y (ligne) de la case où poser le pion.
+     */
+    public int[][] clicCase(int x, int y) {
+        int[][] casesARetourner = {{-1, -1}}; // -1 = impossible placer pion
+        
+        if (placementPossible(x, y)) {
+            plateau[y][x] = 0;
+            poserPion(x, y);
+            tourJoueur1 = !tourJoueur1;
+        } else if (tourJoueur1) {
+            nombreErreursPlacementJoueur1++;
+        } else {
+            nombreErreursPlacementJoueur2++;                
+        }
+        return casesARetourner;
+    }
+	
+	/**
+	 * Vérification que la case dont les coordonnées sont en
+	 * paramètres est vide.
+	 *
+     * @param x Coordonnée X (colonne) de la case à vérifier.
+     * @param y Coordonnée Y (ligne) de la case à vérifier.
+	 * @return si la case est vide (si aucun pion n'est placé).
 	 */
 	public boolean caseVide(int x, int y) {
 		return plateau[y][x] == 0;
 	}
 	
 	/**
-	 * Modificateur de l'attribut plateau de this.
+	 * Modifie le pion de la case dont les coordonnées sont passées
+	 * en paramètres.
 	 * 
 	 * @param x Coordonnée X (colonne) de la case à modifier.
      * @param y Coordonnée Y (ligne) de la case à modifier.
@@ -173,10 +291,22 @@ public class ModeleJeu extends ModelePrincipal {
 		if (!caseVide(x, y)) {
 			return false;
 		}
-		plateau[y][x] = tourJoueur1 ? NOIR : BLANC;
-		return placementPossibleHorizontal(x, y)
-		       || placementPossibleVertical(x, y)
-		       || placementPossibleDiagonales(x, y);
+		caseVerifiee = tourJoueur1 ? NOIR : BLANC;
+		
+		/* 
+		 * Afin d'exécuter toutes les fonctions de recherche
+		 * des placements possibles et de mettre à jour la liste
+		 * des pions à retourner, des variables stockent les résultats.
+		 */
+		boolean placementHorizontal = placementPossibleHorizontal(x, y);
+		
+		boolean placementVertical = placementPossibleVertical(x, y);
+		
+		boolean placementDiagonal = placementPossibleDiagonales(x, y);
+		
+		return placementHorizontal
+		       || placementVertical
+		       || placementDiagonal;
 	}
 	
 	/**
@@ -194,17 +324,21 @@ public class ModeleJeu extends ModelePrincipal {
 	 */
 	private boolean placementPossibleHorizontal(int x, int y) {
 		
+		boolean gauche = false;
+		boolean droite = false;
+		
 		if (x == COLONNE_GAUCHE
 			|| x == COLONNE_GAUCHE + 1) {
-			return placementPossibleDroite(x, y);
+			droite = placementPossibleDroite(x, y);
 			
 		} else if (x == COLONNE_DROITE
 				   || x == COLONNE_DROITE - 1) {
-			return placementPossibleGauche(x, y);
+			gauche = placementPossibleGauche(x, y);
+		} else {
+			droite = placementPossibleDroite(x, y);
+			gauche = placementPossibleGauche(x, y);
 		}
-		// else
-		return placementPossibleDroite(x, y)
-			   || placementPossibleGauche(x, y);
+		return droite || gauche;
 	}
 	
 	/**
@@ -219,14 +353,12 @@ public class ModeleJeu extends ModelePrincipal {
 	 */
 	private boolean placementPossibleDroite(int x, int y) {
 		
-		//TODO potentielle erreur là dedans
 		
-		final int CASE_VERIFIEE = plateau[y][x];
 		final int CASE_DROITE = plateau[y][x + 1];
 
 		boolean resultat = false;
 		
-		if (CASE_VERIFIEE == CASE_DROITE || CASE_DROITE == CASE_VIDE) {
+		if (caseVerifiee == CASE_DROITE || CASE_DROITE == CASE_VIDE) {
 		    return resultat;
 		}
 		
@@ -241,7 +373,7 @@ public class ModeleJeu extends ModelePrincipal {
 			int caseCourante = plateau[y][indiceX];
 
             // Pion de la même couleur que la case vérifiée
-            if (caseCourante == CASE_VERIFIEE) {
+            if (caseCourante == caseVerifiee) {
 				resultat = true;
 			}
 			indiceX++;
@@ -261,12 +393,11 @@ public class ModeleJeu extends ModelePrincipal {
      */
     private boolean placementPossibleGauche(int x, int y) {
         
-        final int CASE_VERIFIEE = plateau[y][x];
         final int CASE_GAUCHE = plateau[y][x - 1];
 
         boolean resultat = false;
         
-        if (CASE_VERIFIEE == CASE_GAUCHE || CASE_GAUCHE == CASE_VIDE) {
+        if (caseVerifiee == CASE_GAUCHE || CASE_GAUCHE == CASE_VIDE) {
             return resultat;
         }
         
@@ -281,7 +412,7 @@ public class ModeleJeu extends ModelePrincipal {
             int caseCourante = plateau[y][indiceX];
 
             // Pion de la même couleur que la case vérifiée
-            if (caseCourante == CASE_VERIFIEE) {
+            if (caseCourante == caseVerifiee) {
                 resultat = true;
             }
             indiceX--;
@@ -304,17 +435,20 @@ public class ModeleJeu extends ModelePrincipal {
      */
     private boolean placementPossibleVertical(int x, int y) {
         
+        boolean haut = false;
+		boolean bas = false;
         if (y == LIGNE_HAUTE
             || y == LIGNE_HAUTE + 1) {
-            return placementPossibleBas(x, y);
+            bas = placementPossibleBas(x, y);
             
         } else if (y == LIGNE_BASSE
                    || y == LIGNE_BASSE - 1) {
-            return placementPossibleHaut(x, y);
-        }
-        // else
-        return placementPossibleBas(x, y)
-               || placementPossibleHaut(x, y);
+            haut = placementPossibleHaut(x, y);
+        } else {
+			haut = placementPossibleHaut(x, y);
+			bas = placementPossibleBas(x, y);
+		}
+        return haut || bas;
     }
     
     /**
@@ -329,12 +463,11 @@ public class ModeleJeu extends ModelePrincipal {
      */
     private boolean placementPossibleBas(int x, int y) {
         
-        final int CASE_VERIFIEE = plateau[y][x];
         final int CASE_DESSOUS = plateau[y + 1][x];
 
         boolean resultat = false;
         
-        if (CASE_VERIFIEE == CASE_DESSOUS || CASE_DESSOUS == CASE_VIDE) {
+        if (caseVerifiee == CASE_DESSOUS || CASE_DESSOUS == CASE_VIDE) {
             return resultat;
         }
         
@@ -349,7 +482,7 @@ public class ModeleJeu extends ModelePrincipal {
             int caseCourante = plateau[indiceY][x];
 
             // Pion de la même couleur que la case vérifiée
-            if (caseCourante == CASE_VERIFIEE) {
+            if (caseCourante == caseVerifiee) {
                 resultat = true;
             }
             indiceY++;
@@ -369,12 +502,11 @@ public class ModeleJeu extends ModelePrincipal {
      */
     private boolean placementPossibleHaut(int x, int y) {
         
-        final int CASE_VERIFIEE = plateau[y][x];
         final int CASE_DESSUS = plateau[y - 1][x];
 
         boolean resultat = false;
         
-        if (CASE_VERIFIEE == CASE_DESSUS || CASE_DESSUS == CASE_VIDE) {
+        if (caseVerifiee == CASE_DESSUS || CASE_DESSUS == CASE_VIDE) {
             return resultat;
         }
         
@@ -389,7 +521,7 @@ public class ModeleJeu extends ModelePrincipal {
             int caseCourante = plateau[indiceY][x];
 
             // Pion de la même couleur que la case vérifiée
-            if (caseCourante == CASE_VERIFIEE) {
+            if (caseCourante == caseVerifiee) {
                 resultat = true;
             }
             indiceY--;
@@ -412,6 +544,10 @@ public class ModeleJeu extends ModelePrincipal {
      */
     private boolean placementPossibleDiagonales(int x, int y) {
         
+        boolean basDroite = false;
+        boolean hautDroite = false;
+        boolean basGauche = false;
+        boolean hautGauche = false;
         // X = 0 ou X = 1
         if (x <= COLONNE_GAUCHE + 1) {
 			
@@ -421,16 +557,16 @@ public class ModeleJeu extends ModelePrincipal {
 			
 			// Y = 0 ou Y = 1
 			if (y <= LIGNE_HAUTE + 1) {
-				return placementPossibleBasDroite(x, y);
+				basDroite = placementPossibleBasDroite(x, y);
 			}
 			// Y = 6 ou Y = 7
 			else if (y >= LIGNE_BASSE - 1) {
-				return placementPossibleHautDroite(x, y);
+				hautDroite = placementPossibleHautDroite(x, y);
 			}
 			// Y >= 2 et Y <= 5
 			else {
-				return placementPossibleBasDroite(x, y)
-				       || placementPossibleHautDroite(x, y);
+				basDroite = placementPossibleBasDroite(x, y);
+				hautDroite = placementPossibleHautDroite(x, y);
 			}
 		}
 		
@@ -443,39 +579,43 @@ public class ModeleJeu extends ModelePrincipal {
 			
 			// Y = 0 ou Y = 1
             if (y <= LIGNE_HAUTE + 1) {
-				return placementPossibleBasGauche(x, y);
+				basGauche = placementPossibleBasGauche(x, y);
             }
             // Y = 6 ou Y = 7
             else if (y >= LIGNE_BASSE - 1) {
-				return placementPossibleHautGauche(x, y);
+				hautGauche = placementPossibleHautGauche(x, y);
             }
             // Y >= 2 ou Y <= 5
             else {
-				return placementPossibleBasGauche(x, y)
-                       || placementPossibleHautGauche(x, y);
+				basGauche = placementPossibleBasGauche(x, y);
+                hautGauche = placementPossibleHautGauche(x, y);
             }
 		}
 		
 		// Y = 0 ou Y = 1
 		else if (y <= LIGNE_HAUTE + 1) {
 			
-			return placementPossibleBasGauche(x, y)
-				   || placementPossibleBasDroite(x, y);			
+			basGauche = placementPossibleBasGauche(x, y);
+			basDroite = placementPossibleBasDroite(x, y);			
 		}
 		
 		// Y = 6 ou Y = 7
 		else if (y >= LIGNE_BASSE - 1) {
-			return placementPossibleHautGauche(x, y)
-				   || placementPossibleHautDroite(x, y);	
+			hautGauche = placementPossibleHautGauche(x, y);
+			hautDroite = placementPossibleHautDroite(x, y);	
+		} else {
+		
+			//    2 <= X <= 5
+			// et 2 <= Y <= 5
+        
+        	hautGauche = placementPossibleHautGauche(x, y);
+        	hautDroite = placementPossibleHautDroite(x, y);
+        	basGauche = placementPossibleBasGauche(x, y);
+			basDroite = placementPossibleBasDroite(x, y);
 		}
 		
-		//    2 <= X <= 5
-		// et 2 <= Y <= 5
-        // else
-        return placementPossibleHautGauche(x, y)
-               || placementPossibleHautDroite(x, y)
-               || placementPossibleBasGauche(x, y)
-			   || placementPossibleBasDroite(x, y);
+		return hautGauche || hautDroite 
+			   || basGauche || basDroite;
     }
     
     /*
@@ -489,12 +629,11 @@ public class ModeleJeu extends ModelePrincipal {
      * @return true si le pion peut être placé, false sinon.
      */
     private boolean placementPossibleHautGauche(int x, int y) {
-		final int CASE_VERIFIEE = plateau[y][x];
         final int CASE_HAUT_GAUCHE = plateau[y - 1][x - 1];
         
         boolean resultat = false;
         
-        if (CASE_VERIFIEE == CASE_HAUT_GAUCHE || CASE_HAUT_GAUCHE == CASE_VIDE) {
+        if (caseVerifiee == CASE_HAUT_GAUCHE || CASE_HAUT_GAUCHE == CASE_VIDE) {
             return resultat;
         }
         
@@ -511,7 +650,7 @@ public class ModeleJeu extends ModelePrincipal {
             int caseCourante = plateau[indiceY][indiceX];
 
             // Pion de la même couleur que la case vérifiée
-            if (caseCourante == CASE_VERIFIEE) {
+            if (caseCourante == caseVerifiee) {
                 resultat = true;
             }
             indiceX--;
@@ -531,12 +670,11 @@ public class ModeleJeu extends ModelePrincipal {
      * @return true si le pion peut être placé, false sinon.
      */
 	private boolean placementPossibleHautDroite(int x, int y) {
-		final int CASE_VERIFIEE = plateau[y][x];
         final int CASE_HAUT_DROITE = plateau[y - 1][x + 1];
 		
         boolean resultat = false;
         
-        if (CASE_VERIFIEE == CASE_HAUT_DROITE || CASE_HAUT_DROITE == CASE_VIDE) {
+        if (caseVerifiee == CASE_HAUT_DROITE || CASE_HAUT_DROITE == CASE_VIDE) {
             return resultat;
         }
         
@@ -553,7 +691,7 @@ public class ModeleJeu extends ModelePrincipal {
             int caseCourante = plateau[indiceY][indiceX];
 
             // Pion de la même couleur que la case vérifiée
-            if (caseCourante == CASE_VERIFIEE) {
+            if (caseCourante == caseVerifiee) {
                 resultat = true;
             }
             indiceX++;
@@ -573,12 +711,11 @@ public class ModeleJeu extends ModelePrincipal {
      * @return true si le pion peut être placé, false sinon.
      */
 	private boolean placementPossibleBasGauche(int x, int y) {
-		final int CASE_VERIFIEE = plateau[y][x];
         final int CASE_BAS_GAUCHE = plateau[y + 1][x - 1];
 		
 		boolean resultat = false;
         
-        if (CASE_VERIFIEE == CASE_BAS_GAUCHE || CASE_BAS_GAUCHE == CASE_VIDE) {
+        if (caseVerifiee == CASE_BAS_GAUCHE || CASE_BAS_GAUCHE == CASE_VIDE) {
             return resultat;
         }
         
@@ -595,7 +732,7 @@ public class ModeleJeu extends ModelePrincipal {
             int caseCourante = plateau[indiceY][indiceX];
 
             // Pion de la même couleur que la case vérifiée
-            if (caseCourante == CASE_VERIFIEE) {
+            if (caseCourante == caseVerifiee) {
                 resultat = true;
             }
             indiceX--;
@@ -615,12 +752,12 @@ public class ModeleJeu extends ModelePrincipal {
      * @return true si le pion peut être placé, false sinon.
      */
 	private boolean placementPossibleBasDroite(int x, int y) {
-		final int CASE_VERIFIEE = plateau[y][x];
+
         final int CASE_BAS_DROITE = plateau[y + 1][x + 1];
 
         boolean resultat = false;
         
-        if (CASE_VERIFIEE == CASE_BAS_DROITE || CASE_BAS_DROITE == CASE_VIDE) {
+        if (caseVerifiee == CASE_BAS_DROITE || CASE_BAS_DROITE == CASE_VIDE) {
             return resultat;
         }
         
@@ -637,35 +774,13 @@ public class ModeleJeu extends ModelePrincipal {
             int caseCourante = plateau[indiceY][indiceX];
 
             // Pion de la même couleur que la case vérifiée
-            if (caseCourante == CASE_VERIFIEE) {
+            if (caseCourante == caseVerifiee) {
                 resultat = true;
             }
             indiceX++;
             indiceY++;
         }
         return resultat;
-	}
-	
-	/**
-	 * Gestion du clic de l'utilisateur sur une case.
-	 * Si c'est possible, un pion de la couleur du joueur sera placé.
-	 * 
-     * @param x Coordonnée X (colonne) de la case où poser le pion.
-     * @param y Coordonnée Y (ligne) de la case où poser le pion.
-	 */
-	public int[][] clicCase(int x, int y) {
-		int[][] casesARetourner = {{-1, -1}}; // -1 = impossible placer pion
-		if (placementPossible(x, y)) {
-			plateau[y][x] = 0;
-			poserPion(x, y);
-			tourJoueur1 = !tourJoueur1;
-		} else if (tourJoueur1) {
-			nombreErreursPlacementJoueur1++;
-		} else {
-			nombreErreursPlacementJoueur2++;				
-		}
-		plateau[y][x] = 0;
-		return casesARetourner;
 	}
     	
 }

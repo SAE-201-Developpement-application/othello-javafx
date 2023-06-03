@@ -15,24 +15,12 @@ package application.modeles;
  * @author Simon GUIRAUD
  */
 public class ModelePrincipal {
-	// TODO coder
 	
-	/* Type de partie : 1 contre un ordinateur, 2 contre un autre joueur et 0 par défaut*/
-	private int typePartie = 0;
-	
-//	/* Pseudo du joueur par défaut (mode contre IA)*/ plus utilisé
-//	private String nomJoueur;
-	
-	private boolean partieFacile = true;
-	
-	private boolean partieCommencee = false;
-	
-	/* Pseudo du premier joueur*/
+	/* Pseudo du premier joueur */
 	private String nomJoueur1;
 	
 	/* Pseudo du deuxième joueur, si il existe*/
 	private String nomJoueur2;
-	
 	
 	/** Paramètre indiquant si une sauvegarde existe */
 	private boolean sauvegardeExiste = false;
@@ -103,42 +91,39 @@ public class ModelePrincipal {
 		return voirPionsEnlevables;
 	}
 	
-//	/** Modificateur de nomJoueur */
-//	public void setNomJoueur(String nom) { ON l'utilise plus ca
-//		nomJoueur = nom;
-//	}
-	
-	/** Modificateur de nomJoueur1 */
+	/** Modifie le nom du joueur 1 */
 	public void setNomJoueur1(String nom) {
 		nomJoueur1 = nom;
 	}
 	
-	/** Modificateur de nomJoueur2 */
+	/** Modifie le nom du joueur 2 */
 	public void setNomJoueur2(String nom) {
 		nomJoueur2 = nom;
 	}
 	
-	/** Modificateur de musique */
+	/** Modifie le statut du paramètre musique */
 	private void setMusique(boolean statut) {
 		musique = statut;
 	}
 	
-	/** Modificateur de son */
+	/** Modifie le statut du paramètre son */
 	private void setSon(boolean statut) {
 		son = statut;
 	}
 	
-	/** Modificateur de voirPositionsPossibles */
+	/** Modifie le statut du paramètre voirPositionsPossibles */
 	private void setVoirPositionsPossibles(boolean statut) {
 		voirPositionsPossibles = statut;
 	}
 	
-	/** Modificateur de voirPionsEnlevables */
+	/** Modifie le statut du paramètre voirPionsEnlevables */
 	private void setVoirPionsEnlevables(boolean statut) {
 		voirPionsEnlevables = statut;
 	}
 	
 	/**
+	 * Modifie tous les paramètres de la partie.
+	 * 
 	 * @param statutMusique Le nouveau statut d'activation de la musique.
 	 * @param statutSon Le nouveau statut d'activation du son.
 	 * @param statutVoirPositionsPossibles Le nouveau statut du paramètre de
@@ -160,47 +145,5 @@ public class ModelePrincipal {
 						  + "- voirPionsEnlevables = %b\n",
 						  musique, son, voirPositionsPossibles,
 						  voirPionsEnlevables);
-	}
-	
-	/**
-	 * @return the typePartie
-	 */
-	public int getTypePartie() {
-		return typePartie;
-	}
-	
-	/**
-	 * @param typePartie the typePartie to set
-	 */
-	public void setTypePartie(int typePartie) {
-		this.typePartie = typePartie;
-	}
-	
-	/**
-	 * @return the partieFacile
-	 */
-	public boolean isPartieFacile() {
-		return partieFacile;
-	}
-	
-	/**
-	 * @param partieFacile the partieFacile to set
-	 */
-	public void setPartieFacile(boolean partieFacile) {
-		this.partieFacile = partieFacile;
-	}
-	
-	/**
-	 * @return the partieCommencee
-	 */
-	public boolean isPartieCommencee() {
-		return partieCommencee;
-	}
-	
-	/**
-	 * @param partieCommencee the partieCommencee to set
-	 */
-	public void setPartieCommencee(boolean partieCommencee) {
-		this.partieCommencee = partieCommencee;
 	}
 }

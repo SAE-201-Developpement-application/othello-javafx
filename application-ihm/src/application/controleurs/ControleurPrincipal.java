@@ -5,7 +5,6 @@
 package application.controleurs;
 
 import application.modeles.*;
-import application.vues.*;
 
 /**
  * Contrôleur principal de l'application Othello.
@@ -16,8 +15,8 @@ import application.vues.*;
  */
 public class ControleurPrincipal {
 	
-	public ModelePrincipal modelePrincipal = new ModelePrincipal();
-	public ModeleSauvegardes modeleSauvegardes = new ModeleSauvegardes();
-	public ModeleJeu modeleJeu = new ModeleJeu();
+	public static ModelePrincipal modelePrincipal = new ModelePrincipal();
+	public static ModeleSauvegardes modeleSauvegardes = new ModeleSauvegardes();
+	public static ModeleJeu modeleJeu = new ModeleJeu();
 
 }

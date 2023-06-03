@@ -31,22 +31,22 @@
             <Image url="@images/Jeu/Sauvegarder.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="53.0" fitWidth="56.0" layoutX="28.0" layoutY="195.0" preserveRatio="true">
+      <ImageView fx:id="tourJoueur1" fitHeight="53.0" fitWidth="56.0" layoutX="28.0" layoutY="195.0" preserveRatio="true" visible="false">
          <image>
             <Image url="@images/Jeu/Tour.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="53.0" fitWidth="56.0" layoutX="28.0" layoutY="296.0" preserveRatio="true" visible="false">
+      <ImageView fx:id="tourJoueur2" fitHeight="53.0" fitWidth="56.0" layoutX="28.0" layoutY="296.0" preserveRatio="true" visible="false">
          <image>
             <Image url="@images/Jeu/Tour.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="64.0" fitWidth="64.0" layoutX="354.0" layoutY="291.0" preserveRatio="true">
+      <ImageView fx:id="imageScoreJoueur2" fitHeight="64.0" fitWidth="64.0" layoutX="354.0" layoutY="291.0" preserveRatio="true" visible="false">
          <image>
             <Image url="@images/Jeu/Blanc.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="64.0" fitWidth="64.0" layoutX="354.0" layoutY="190.0" preserveRatio="true">
+      <ImageView fx:id="imageScoreJoueur1" fitHeight="64.0" fitWidth="64.0" layoutX="354.0" layoutY="190.0" preserveRatio="true" visible="false">
          <image>
             <Image url="@images/Jeu/Noir.png" />
          </image>
@@ -400,25 +400,30 @@
             </ImageView>
          </children>
       </GridPane>
-      <Text fx:id="pseudoJoueur1" fill="WHITE" layoutX="93.0" layoutY="233.0" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" strokeWidth="3.0" text="PseudoJoueur1" wrappingWidth="334.0">
+      <Text fx:id="pseudoJoueur1" fill="WHITE" layoutX="93.0" layoutY="233.0" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" strokeWidth="3.0" text="PseudoJoueur1" visible="false" wrappingWidth="334.0">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>
       </Text>
-      <Text fx:id="pseudoJoueur2" fill="WHITE" layoutX="94.0" layoutY="334.0" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" strokeWidth="3.0" text="PseudoJoueur2" wrappingWidth="334.0">
+      <Text fx:id="pseudoJoueur2" fill="WHITE" layoutX="94.0" layoutY="334.0" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" strokeWidth="3.0" text="PseudoJoueur2" visible="false" wrappingWidth="334.0">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="360.0" layoutY="232.0" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" strokeWidth="2.0" text="2" textAlignment="CENTER" wrappingWidth="53.0">
+      <Text fx:id="scoreJoueur1" fill="WHITE" layoutX="360.0" layoutY="232.0" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" strokeWidth="2.0" text="2" textAlignment="CENTER" visible="false" wrappingWidth="53.0">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>
       </Text>
-      <Text layoutX="360.0" layoutY="333.0" stroke="WHITE" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" strokeWidth="2.0" text="2" textAlignment="CENTER" wrappingWidth="53.0">
+      <Text fx:id="scoreJoueur2" layoutX="360.0" layoutY="333.0" stroke="WHITE" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" strokeWidth="2.0" text="2" textAlignment="CENTER" visible="false" wrappingWidth="53.0">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>
       </Text>
+      <ImageView fx:id="jouerMaintenant" fitHeight="138.0" fitWidth="381.0" layoutX="35.0" layoutY="185.0" onMouseClicked="#lancerJeu" preserveRatio="true">
+         <image>
+            <Image url="@images/Jeu/JouerMaintenant.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

@@ -223,7 +223,7 @@ public class ControleurParametres extends ControleurPrincipal {
 		
 		Stage stage2 = (Stage) boiteAnnulation.getDialogPane().getScene().getWindow();
 		stage2.getIcons()
-		.add(new Image("application/vues/images/Parametres/Attention.png"));
+		.add(new Image("application/vues/images/Attention.png"));
 
 		boiteAnnulation.setTitle("Othello - Annulation paramètres");
 		boiteAnnulation.setHeaderText("Annulation paramètres");

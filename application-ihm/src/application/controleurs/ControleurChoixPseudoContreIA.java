@@ -48,6 +48,11 @@ public class ControleurChoixPseudoContreIA extends ControleurPrincipal {
 	private void gererClicRetourNiveauOrdinateur() {		
 		// échanger la vue courante avec celle du niveau Ordinateur
 		GestionVues.activerNiveauOrdinateur(); 
+		
+		/* Remise à zéro des valeurs pour éviter les bugs quand on change de mode de jeu */
+		pseudoJoueur1.setText("");
+		modelePrincipal.setNomJoueur1("");
+		modelePrincipal.setNomJoueur2("");
 	}
 	
 	@FXML
@@ -75,14 +80,13 @@ public class ControleurChoixPseudoContreIA extends ControleurPrincipal {
 	@FXML
 	private void gererClicJouer() {	
 				
-		if (nomOKJoueur1) {
-			modelePrincipal.setNomJoueur2(modelePrincipal.isPartieFacile()
-			                              ? "Bot Facile" : "Bot Difficile");
-			
-			modelePrincipal.setPartieCommencee(true);
-			modelePrincipal.setTypePartie(1);
-
+		if (nomOKJoueur1) {			
+			modeleJeu.setPartieCommence(true);
+			modeleJeu.setPartieOrdinateur(true);;
+			pseudoJoueur1.setText(null);
+			cocheJoueur.setVisible(false);
 			GestionVues.activerJeu();
+			nomOKJoueur1 = false;
 		} else {
 			Alert boitePseudoIncompatible = new Alert(Alert.AlertType.ERROR);
 			
