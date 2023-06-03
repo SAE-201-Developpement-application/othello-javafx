@@ -14,12 +14,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
-//import javafx.scene.control.ButtonType;
-//import javafx.scene.text.Text;
-//import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.scene.control.ButtonType;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
+
 import java.util.Optional;
 
 /**
@@ -78,11 +79,9 @@ public class ControleurJeu extends ControleurPrincipal {
 		
 	@FXML
 	private void lancerJeu() {
-		System.out.println("PK tu marche pas bowdel ?");
-		System.out.println(modelePrincipal.getNomJoueur1());
-		System.out.println(modelePrincipal.getNomJoueur2());
-		
+		modeleJeu.setPartieCommence(true);
 		initialiserPlateauJeu();
+		System.out.print(modeleJeu.isPartieCommence());
 	}
 	
 	@FXML
@@ -117,9 +116,6 @@ public class ControleurJeu extends ControleurPrincipal {
             
             if (resultat.get() == boutonQuitter) {
                 
-                modelePrincipal.setNomJoueur1(null);
-                modelePrincipal.setNomJoueur2(null);
-                
                 // échanger la vue courante avec celle du menu principal
                 modificationVueAvantRetourMenuPrincipal();
             }
@@ -136,7 +132,10 @@ public class ControleurJeu extends ControleurPrincipal {
 		GestionVues.activerMenuPrincipal();
 		
 		// reinitialiserPlateauJeu();
-                
+		
+        modelePrincipal.setNomJoueur1(null);
+        modelePrincipal.setNomJoueur2(null);
+        
         jouerMaintenant.setVisible(true);
         
         pseudoJoueur1.setVisible(false);
@@ -169,7 +168,7 @@ public class ControleurJeu extends ControleurPrincipal {
         apparaitrePion("Blanc", 4, 4);
         apparaitrePion("Noir", 3, 4);
         apparaitrePion("Noir", 4, 3);
-        
+                
         pseudoJoueur1.setText(modelePrincipal.getNomJoueur1());
         pseudoJoueur2.setText(modelePrincipal.getNomJoueur2());
         
@@ -300,6 +299,8 @@ public class ControleurJeu extends ControleurPrincipal {
 									   + pionARetourner[0]
 									   + "\nY = "
 									   + pionARetourner[1]);
+					
+
 					// TODO @Tom retourne moi ce pion en fonction de la couleur
 					// (bonne change jsp encore comment faire là - méthode getCouleurParCoordonnees ds modele ?)
 				}
@@ -309,5 +310,32 @@ public class ControleurJeu extends ControleurPrincipal {
 		} else {
 			retirerPion(caseCliquee);
 		}
-	}	
+	}
+	
+	@FXML
+	private void demarrerGIF() {
+	    ImageView gifNoirVersBlanc = new ImageView(new Image("application/vues/images/Jeu/GIF1.gif"));
+	    ImageView gifBlancVersNoir = new ImageView(new Image("application/vues/images/Jeu/GIF2.gif"));
+	    
+	    gifNoirVersBlanc.setFitWidth(65);
+	    gifNoirVersBlanc.setFitHeight(65);
+	    
+	    gifBlancVersNoir.setFitWidth(65);
+	    gifBlancVersNoir.setFitHeight(65);
+
+	    Timeline timeline = new Timeline(new KeyFrame(Duration.millis(30), event -> {
+	        System.out.println("Wazoo"); // Instructions à exécuter à la fin de l'animation
+	    }));
+	    
+	    timeline.setCycleCount(1); // Exécute l'animation une seule fois
+	    timeline.play();
+
+	    // Ajoutez l'ImageView du GIF à votre interface graphique
+	    // par exemple, en l'ajoutant à un conteneur approprié, comme un GridPane
+	    // ou en remplaçant une ImageView existante
+	    
+		// GridPane.setColumnIndex(pion, coordonneeX);
+		// GridPane.setRowIndex(pion, coordonneeY);
+	    plateau.getChildren().add(gifNoirVersBlanc); // Assurez-vous d'avoir un GridPane nommé "plateau" dans votre FXML
+	}
 }

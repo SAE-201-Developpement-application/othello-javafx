@@ -6,6 +6,8 @@ package application.modeles;
 
 import java.util.Arrays;
 
+import javax.print.attribute.standard.PrinterIsAcceptingJobs;
+
 /**
  * Modèle gérant le jeu d'Othello.
  * Celui-ci s'occupe de toute la partie gestion
@@ -37,6 +39,11 @@ public class ModeleJeu extends ModelePrincipal {
      * avant qu'une alerte informe le joueur des règles.
      */
     public final static int NOMBRE_MAX_ERREURS_PLACEMENT = 5;
+    
+    /**
+	 * Liste vide servant à reinitialiser la liste des pions à retourner dans la vue.
+	 */
+	private int[][] PIONS_A_RETOURNER_PAR_DEFAUT = {}; // Valeur par défaut
 	
 	/**
 	 * Plateau de jeu composé d'un tableau 
@@ -80,24 +87,66 @@ public class ModeleJeu extends ModelePrincipal {
 	 * Si deux tours sont passés d'affilée, la partie s'arrete,
 	 * sinon le nombre de tours passés repasse à 0.
 	 */
-	private int toursPasses;
+	private int toursPasses = 0;
 	
 	/**
 	 * Lorsque ce nombre sera égal à NOMBRE_MAX_ERREURS_PLACEMENT,
 	 * une fenêtre d'alerte expliquera au joueur 1 les règles.
 	 */
-	private int nombreErreursPlacementJoueur1;
+	private int nombreErreursPlacementJoueur1 = 0;
 	
 	/**
 	 * Lorsque ce nombre sera égal à NOMBRE_MAX_ERREURS_PLACEMENT,
 	 * une fenêtre d'alerte expliquera au joueur 2 les règles.
 	 */
-	private int nombreErreursPlacementJoueur2;
+	private int nombreErreursPlacementJoueur2 = 0;
 	
 	/**
 	 * Liste des coordonnées des pions à retourner dans la vue.
 	 */
-	private int[][] pionsARetourner = null; // Valeur par défaut
+	private int[][] pionsARetourner = {}; // Valeur par défaut
+	
+	/**
+	 * Liste des coordonnées des pions à retourner en haut dans la vue.
+	 */
+	private int[][] pionsARetournerHaut = {}; // Valeur par défaut
+	
+	/**
+	 * Liste des coordonnées des pions à retourner en bas dans la vue.
+	 */
+	private int[][] pionsARetournerBas = {}; // Valeur par défaut
+	
+	/**
+	 * Liste des coordonnées des pions à retourner à gauche dans la vue.
+	 */
+	private int[][] pionsARetournerGauche = {}; // Valeur par défaut
+	
+	/**
+	 * Liste des coordonnées des pions à retourner à droite dans la vue.
+	 */
+	private int[][] pionsARetournerDroite = {}; // Valeur par défaut
+	
+	/**
+	 * Liste des coordonnées des pions à retourner en haut à gauche dans la vue.
+	 */
+	private int[][] pionsARetournerHautGauche = {}; // Valeur par défaut
+	
+	/**
+	 * Liste des coordonnées des pions à retourner en haut à droite dans la vue.
+	 */
+	private int[][] pionsARetournerHautDroite = {}; // Valeur par défaut
+	
+	/**
+	 * Liste des coordonnées des pions à retourner en bas à droite dans la vue.
+	 */
+	private int[][] pionsARetournerBasDroite = {}; // Valeur par défaut
+	
+	/**
+	 * Liste des coordonnées des pions à retourner en bas à gauche dans la vue.
+	 */
+	private int[][] pionsARetournerBasGauche = {}; // Valeur par défaut
+	
+	
 	
 	/** @return le plateau de jeu. */						   
 	public int[][] getPlateau() {
@@ -119,7 +168,7 @@ public class ModeleJeu extends ModelePrincipal {
         return tourJoueur1;
     }
 	
-    /** @return the partieCommence */
+    /** @return si la partieCommence */
     public boolean isPartieCommence() {
     	return partieCommence;
     }
@@ -154,6 +203,62 @@ public class ModeleJeu extends ModelePrincipal {
         return this.pionsARetourner;
     }
 	
+	/**
+	 * @return les pionsARetournerHaut
+	 */
+	public int[][] getPionsARetournerHaut() {
+		return pionsARetournerHaut;
+	}
+
+	/**
+	 * @return les pionsARetournerBas
+	 */
+	public int[][] getPionsARetournerBas() {
+		return pionsARetournerBas;
+	}
+
+	/**
+	 * @return les pionsARetournerGauche
+	 */
+	public int[][] getPionsARetournerGauche() {
+		return pionsARetournerGauche;
+	}
+
+	/**
+	 * @return les pionsARetournerDroite
+	 */
+	public int[][] getPionsARetournerDroite() {
+		return pionsARetournerDroite;
+	}
+
+	/**
+	 * @return les pionsARetournerHautGauche
+	 */
+	public int[][] getPionsARetournerHautGauche() {
+		return pionsARetournerHautGauche;
+	}
+
+	/**
+	 * @return les pionsARetournerHautDroite
+	 */
+	public int[][] getPionsARetournerHautDroite() {
+		return pionsARetournerHautDroite;
+	}
+
+	/**
+	 * @return les pionsARetournerBasDroite
+	 */
+	public int[][] getPionsARetournerBasDroite() {
+		return pionsARetournerBasDroite;
+	}
+
+	/**
+	 * @return les pionsARetournerBasGauche
+	 */
+	public int[][] getPionsARetournerBasGauche() {
+		return pionsARetournerBasGauche;
+	}
+
 	/** @param nouveauPlateau Plateau remplaçant l'attribut plateau de this. */
 	public void setPlateau(int[][] nouveauPlateau) {
 		this.plateau = nouveauPlateau;
@@ -219,19 +324,214 @@ public class ModeleJeu extends ModelePrincipal {
      * ceux-ci retournés par la vue.
      */
     public void reinitialiserPionsARetourner() {
-        this.pionsARetourner = null;
+        this.pionsARetourner = PIONS_A_RETOURNER_PAR_DEFAUT;
     }
     
     /** 
      * Réinitialise/vide la liste des pions à retourner une fois
      * ceux-ci retournés par la vue.
      */
-    public void ajouterPionsARetourner(int[] coordonneesPion) {
-		int[][] listePions = this.getPionsARetourner();
+    public void reinitialiserPionsARetournerDroite() {
+        this.pionsARetournerDroite = PIONS_A_RETOURNER_PAR_DEFAUT;
+    }
+    
+    /** 
+     * Réinitialise/vide la liste des pions à retourner une fois
+     * ceux-ci retournés par la vue.
+     */
+    public void reinitialiserPionsARetournerGauche() {
+        this.pionsARetournerGauche = PIONS_A_RETOURNER_PAR_DEFAUT;
+    }
+    
+    /** 
+     * Réinitialise/vide la liste des pions à retourner une fois
+     * ceux-ci retournés par la vue.
+     */
+    public void reinitialiserPionsARetournerHaut() {
+        this.pionsARetournerHaut = PIONS_A_RETOURNER_PAR_DEFAUT;
+    }
+    
+    /** 
+     * Réinitialise/vide la liste des pions à retourner une fois
+     * ceux-ci retournés par la vue.
+     */
+    public void reinitialiserPionsARetournerBas() {
+        this.pionsARetournerBas = PIONS_A_RETOURNER_PAR_DEFAUT;
+    }
+    
+    /** 
+     * Réinitialise/vide la liste des pions à retourner une fois
+     * ceux-ci retournés par la vue.
+     */
+    public void reinitialiserPionsARetournerHautGauche() {
+        this.pionsARetournerHautGauche = PIONS_A_RETOURNER_PAR_DEFAUT;
+    }
+    
+    /** 
+     * Réinitialise/vide la liste des pions à retourner une fois
+     * ceux-ci retournés par la vue.
+     */
+    public void reinitialiserPionsARetournerHautDroite() {
+        this.pionsARetournerHautDroite = PIONS_A_RETOURNER_PAR_DEFAUT;
+    }
+    
+    /** 
+     * Réinitialise/vide la liste des pions à retourner une fois
+     * ceux-ci retournés par la vue.
+     */
+    public void reinitialiserPionsARetournerBasGauche() {
+        this.pionsARetournerBasGauche = PIONS_A_RETOURNER_PAR_DEFAUT;
+    }
+    
+    /** 
+     * Réinitialise/vide la liste des pions à retourner une fois
+     * ceux-ci retournés par la vue.
+     */
+    public void reinitialiserPionsARetournerBasDroite() {
+        this.pionsARetournerBasDroite = PIONS_A_RETOURNER_PAR_DEFAUT;
+    }
+    
+    /** 
+     * Réinitialise/vide la liste des pions à retourner une fois
+     * ceux-ci retournés par la vue.
+     */
+    public void concatenerListesPionsARetourner() {
 		
-        this.pionsARetourner = Arrays.copyOf(listePions, listePions.length + 1);
+		int[][][] listeListesPionsARetourner = {pionsARetournerDroite,
+												 	pionsARetournerGauche,
+												  	pionsARetournerBas, 
+												  	pionsARetournerHaut, 
+												  	pionsARetournerHautGauche, 
+												  	pionsARetournerHautDroite, 
+												  	pionsARetournerBasGauche, 
+												  	pionsARetournerBasDroite};
+		
+		for (int indiceListeListe = 0;
+			 indiceListeListe < listeListesPionsARetourner.length; 
+			 indiceListeListe++) {
+			for (int indiceSousListe = 0; 
+				 indiceSousListe < listeListesPionsARetourner[indiceListeListe].length;
+				 indiceSousListe++) { 
+				
+				int[][] listePions = this.getPionsARetourner();
+				
+				this.pionsARetourner = Arrays.copyOf(listePions, listePions.length + 1);
+				
+				this.pionsARetourner[listePions.length] 
+				= listeListesPionsARetourner[indiceListeListe][indiceSousListe];
+			}
+		}
+        reinitialiserSousListes();
+    }
+    
+    private void reinitialiserSousListes() {
+		
+		reinitialiserPionsARetournerDroite();
+		reinitialiserPionsARetournerGauche();
+		reinitialiserPionsARetournerBas();
+		reinitialiserPionsARetournerHaut();
+		reinitialiserPionsARetournerHautGauche();
+		reinitialiserPionsARetournerHautDroite();
+		reinitialiserPionsARetournerBasGauche();
+		reinitialiserPionsARetournerBasDroite();
         
-        this.pionsARetourner[listePions.length] = coordonneesPion;
+	}
+    
+    
+    /** 
+     * Réinitialise/vide la liste des pions à retourner une fois
+     * ceux-ci retournés par la vue.
+     */
+    public void ajouterPionsARetournerDroite(int[] coordonneesPion) {
+		int[][] listePions = this.getPionsARetournerDroite();
+		
+        this.pionsARetournerDroite = Arrays.copyOf(listePions, listePions.length + 1);
+        
+        this.pionsARetournerDroite[listePions.length] = coordonneesPion;
+    }
+    
+    /** 
+     * Réinitialise/vide la liste des pions à retourner une fois
+     * ceux-ci retournés par la vue.
+     */
+    public void ajouterPionsARetournerGauche(int[] coordonneesPion) {
+		int[][] listePions = this.getPionsARetournerGauche();
+		
+        this.pionsARetournerGauche = Arrays.copyOf(listePions, listePions.length + 1);
+        
+        this.pionsARetournerGauche[listePions.length] = coordonneesPion;
+    }
+    
+    /** 
+     * Réinitialise/vide la liste des pions à retourner une fois
+     * ceux-ci retournés par la vue.
+     */
+    public void ajouterPionsARetournerHaut(int[] coordonneesPion) {
+		int[][] listePions = this.getPionsARetournerHaut();
+		
+        this.pionsARetournerHaut = Arrays.copyOf(listePions, listePions.length + 1);
+        
+        this.pionsARetournerHaut[listePions.length] = coordonneesPion;
+    }
+    
+    /** 
+     * Réinitialise/vide la liste des pions à retourner une fois
+     * ceux-ci retournés par la vue.
+     */
+    public void ajouterPionsARetournerBas(int[] coordonneesPion) {
+		int[][] listePions = this.getPionsARetournerBas();
+		
+        this.pionsARetournerBas = Arrays.copyOf(listePions, listePions.length + 1);
+        
+        this.pionsARetournerBas[listePions.length] = coordonneesPion;
+    }
+    
+    /** 
+     * Réinitialise/vide la liste des pions à retourner une fois
+     * ceux-ci retournés par la vue.
+     */
+    public void ajouterPionsARetournerHautGauche(int[] coordonneesPion) {
+		int[][] listePions = this.getPionsARetournerHautGauche();
+		
+        this.pionsARetournerHautGauche = Arrays.copyOf(listePions, listePions.length + 1);
+        
+        this.pionsARetournerHautGauche[listePions.length] = coordonneesPion;
+    }
+    
+    /** 
+     * Réinitialise/vide la liste des pions à retourner une fois
+     * ceux-ci retournés par la vue.
+     */
+    public void ajouterPionsARetournerHautDroite(int[] coordonneesPion) {
+		int[][] listePions = this.getPionsARetournerHautDroite();
+		
+        this.pionsARetournerHautDroite = Arrays.copyOf(listePions, listePions.length + 1);
+        
+        this.pionsARetournerHautDroite[listePions.length] = coordonneesPion;
+    }
+    
+    /** 
+     * Réinitialise/vide la liste des pions à retourner une fois
+     * ceux-ci retournés par la vue.
+     */
+    public void ajouterPionsARetournerBasGauche(int[] coordonneesPion) {
+		int[][] listePions = this.getPionsARetournerBasGauche();
+		
+        this.pionsARetournerBasGauche = Arrays.copyOf(listePions, listePions.length + 1);
+        
+        this.pionsARetournerBasGauche[listePions.length] = coordonneesPion;
+    }
+    
+    /** 
+     * Réinitialise/vide la liste des pions à retourner une fois
+     * ceux-ci retournés par la vue.
+     */
+    public void ajouterPionsARetournerBasDroite(int[] coordonneesPion) {
+		int[][] listePions = this.getPionsARetournerBasDroite();
+		
+        this.pionsARetournerBasDroite = Arrays.copyOf(listePions, listePions.length + 1);
+        
+        this.pionsARetournerBasDroite[listePions.length] = coordonneesPion;
     }
     
     /**
@@ -245,9 +545,18 @@ public class ModeleJeu extends ModelePrincipal {
         int[][] casesARetourner = {{-1, -1}}; // -1 = impossible placer pion
         
         if (placementPossible(x, y)) {
-            plateau[y][x] = 0;
             poserPion(x, y);
-            tourJoueur1 = !tourJoueur1;
+            concatenerListesPionsARetourner();
+            casesARetourner = getPionsARetourner();
+            for (int indice = 0; indice < casesARetourner.length; indice++) {
+				poserPion(casesARetourner[indice][0],casesARetourner[indice][1]);                       // TODO c'est la pour le gif qui retourne les pions
+			}
+			reinitialiserPionsARetourner();
+            if (tourJoueur1) {
+				tourJoueur1 = false;
+			} else {
+				tourJoueur1 = true;
+			}
         } else if (tourJoueur1) {
             nombreErreursPlacementJoueur1++;
         } else {
@@ -355,6 +664,7 @@ public class ModeleJeu extends ModelePrincipal {
 		
 		
 		final int CASE_DROITE = plateau[y][x + 1];
+		int [] coordonneesCaseDroite = {x + 1, y};
 
 		boolean resultat = false;
 		
@@ -362,6 +672,7 @@ public class ModeleJeu extends ModelePrincipal {
 		    return resultat;
 		}
 		
+		ajouterPionsARetournerDroite(coordonneesCaseDroite);
 		int indiceX = x + 2;
 		
 		/* Parcours de la ligne à droite de la case initiale
@@ -371,12 +682,19 @@ public class ModeleJeu extends ModelePrincipal {
 		       && !caseVide(indiceX, y)
 		       && !resultat) {
 			int caseCourante = plateau[y][indiceX];
+			int [] coordonneesCaseCourante = {y, indiceX};
+			
 
             // Pion de la même couleur que la case vérifiée
             if (caseCourante == caseVerifiee) {
 				resultat = true;
+			} else {
+				ajouterPionsARetournerDroite(coordonneesCaseCourante);
 			}
 			indiceX++;
+		}
+		if (!resultat) {
+			reinitialiserPionsARetournerDroite();
 		}
 		return resultat;
 	}
@@ -394,13 +712,14 @@ public class ModeleJeu extends ModelePrincipal {
     private boolean placementPossibleGauche(int x, int y) {
         
         final int CASE_GAUCHE = plateau[y][x - 1];
+        int [] coordonneesCaseGauche = {x - 1, y};
 
         boolean resultat = false;
         
         if (caseVerifiee == CASE_GAUCHE || CASE_GAUCHE == CASE_VIDE) {
             return resultat;
         }
-        
+    	ajouterPionsARetournerGauche(coordonneesCaseGauche);
         int indiceX = x - 2;
         
         /* Parcours de la ligne à gauche de la case initiale
@@ -410,13 +729,19 @@ public class ModeleJeu extends ModelePrincipal {
                && !caseVide(indiceX, y)
                && !resultat) {
             int caseCourante = plateau[y][indiceX];
+			int [] coordonneesCaseCourante = {y, indiceX};
 
             // Pion de la même couleur que la case vérifiée
             if (caseCourante == caseVerifiee) {
                 resultat = true;
-            }
+            } else {
+				ajouterPionsARetournerGauche(coordonneesCaseCourante);
+			}
             indiceX--;
         }
+        if (!resultat) {
+			reinitialiserPionsARetournerGauche();
+		}
         return resultat;
     }
 	
@@ -464,13 +789,14 @@ public class ModeleJeu extends ModelePrincipal {
     private boolean placementPossibleBas(int x, int y) {
         
         final int CASE_DESSOUS = plateau[y + 1][x];
+        int [] coordonneesCaseBas = {x, y + 1};
 
         boolean resultat = false;
         
         if (caseVerifiee == CASE_DESSOUS || CASE_DESSOUS == CASE_VIDE) {
             return resultat;
         }
-        
+        ajouterPionsARetournerBas(coordonneesCaseBas);
         int indiceY = y + 2;
         
         /* Parcours de la colonne en-dessous de la case initiale
@@ -480,13 +806,19 @@ public class ModeleJeu extends ModelePrincipal {
                && !caseVide(x, indiceY)
                && !resultat) {
             int caseCourante = plateau[indiceY][x];
+            int[] coordonneesCaseCourante = {indiceY, x};
 
             // Pion de la même couleur que la case vérifiée
             if (caseCourante == caseVerifiee) {
                 resultat = true;
-            }
+            } else {
+				ajouterPionsARetournerBas(coordonneesCaseCourante);
+			}
             indiceY++;
         }
+        if (!resultat) {
+			reinitialiserPionsARetournerBas();
+		}
         return resultat;
     }
     
@@ -503,13 +835,14 @@ public class ModeleJeu extends ModelePrincipal {
     private boolean placementPossibleHaut(int x, int y) {
         
         final int CASE_DESSUS = plateau[y - 1][x];
+        int[] coordonneesCaseDessus = {x, y - 1};
 
         boolean resultat = false;
         
         if (caseVerifiee == CASE_DESSUS || CASE_DESSUS == CASE_VIDE) {
             return resultat;
         }
-        
+        ajouterPionsARetournerHaut(coordonneesCaseDessus);
         int indiceY = y - 2;
         
         /* Parcours de la colonne au-dessus de la case initiale
@@ -519,13 +852,19 @@ public class ModeleJeu extends ModelePrincipal {
                && !caseVide(x, indiceY)
                && !resultat) {
             int caseCourante = plateau[indiceY][x];
+        	int[] coordonneesCaseCourante = {y - 1, x};
 
             // Pion de la même couleur que la case vérifiée
             if (caseCourante == caseVerifiee) {
                 resultat = true;
-            }
+            } else {
+				ajouterPionsARetournerHaut(coordonneesCaseCourante);
+			}
             indiceY--;
         }
+        if (!resultat) {
+			reinitialiserPionsARetournerHaut();
+		}
         return resultat;
     }
 	
@@ -630,6 +969,8 @@ public class ModeleJeu extends ModelePrincipal {
      */
     private boolean placementPossibleHautGauche(int x, int y) {
         final int CASE_HAUT_GAUCHE = plateau[y - 1][x - 1];
+        int[] coordonneesCaseHautGauche = {x - 1, y - 1};
+
         
         boolean resultat = false;
         
@@ -637,6 +978,7 @@ public class ModeleJeu extends ModelePrincipal {
             return resultat;
         }
         
+        ajouterPionsARetournerHautGauche(coordonneesCaseHautGauche);
         int indiceX = x - 2;
         int indiceY = y - 2;
         
@@ -648,14 +990,20 @@ public class ModeleJeu extends ModelePrincipal {
                && !caseVide(indiceX, indiceY)
                && !resultat) {
             int caseCourante = plateau[indiceY][indiceX];
+        	int[] coordonneesCaseCourante = {indiceY, indiceX};
 
             // Pion de la même couleur que la case vérifiée
             if (caseCourante == caseVerifiee) {
                 resultat = true;
-            }
+            } else {
+				ajouterPionsARetournerHautGauche(coordonneesCaseCourante);
+			}
             indiceX--;
             indiceY--;
         }
+        if (!resultat) {
+			reinitialiserPionsARetournerHautGauche();
+		}
         return resultat;
 	}
 	
@@ -671,6 +1019,7 @@ public class ModeleJeu extends ModelePrincipal {
      */
 	private boolean placementPossibleHautDroite(int x, int y) {
         final int CASE_HAUT_DROITE = plateau[y - 1][x + 1];
+        int[] coordonneesHautDroite = {x + 1, y - 1};
 		
         boolean resultat = false;
         
@@ -678,6 +1027,7 @@ public class ModeleJeu extends ModelePrincipal {
             return resultat;
         }
         
+        ajouterPionsARetournerHautDroite(coordonneesHautDroite);
         int indiceX = x + 2;
         int indiceY = y - 2;
         
@@ -689,14 +1039,20 @@ public class ModeleJeu extends ModelePrincipal {
                && !caseVide(indiceX, indiceY)
                && !resultat) {
             int caseCourante = plateau[indiceY][indiceX];
+       		int[] coordonneesCaseCourante = {indiceY, indiceX};
 
             // Pion de la même couleur que la case vérifiée
             if (caseCourante == caseVerifiee) {
                 resultat = true;
-            }
+            } else {
+				ajouterPionsARetournerHautDroite(coordonneesCaseCourante);
+			}
             indiceX++;
             indiceY--;
         }
+        if (!resultat) {
+			reinitialiserPionsARetournerHautDroite();
+		}
         return resultat;
 	}
 	
@@ -712,6 +1068,7 @@ public class ModeleJeu extends ModelePrincipal {
      */
 	private boolean placementPossibleBasGauche(int x, int y) {
         final int CASE_BAS_GAUCHE = plateau[y + 1][x - 1];
+        int[] coordonneesCaseBasGauche = {x - 1, y + 1};
 		
 		boolean resultat = false;
         
@@ -719,6 +1076,7 @@ public class ModeleJeu extends ModelePrincipal {
             return resultat;
         }
         
+        ajouterPionsARetournerBasGauche(coordonneesCaseBasGauche);
         int indiceX = x - 2;
         int indiceY = y + 2;
         
@@ -730,14 +1088,20 @@ public class ModeleJeu extends ModelePrincipal {
                && !caseVide(indiceX, indiceY)
                && !resultat) {
             int caseCourante = plateau[indiceY][indiceX];
+            int[] coordonneesCaseCourante = {indiceY, indiceX};
 
             // Pion de la même couleur que la case vérifiée
             if (caseCourante == caseVerifiee) {
                 resultat = true;
-            }
+            } else {
+				ajouterPionsARetournerBasGauche(coordonneesCaseCourante);
+			}
             indiceX--;
             indiceY++;
         }
+        if (!resultat) {
+			reinitialiserPionsARetournerBasGauche();
+		}
         return resultat;
 	}
 	
@@ -754,6 +1118,7 @@ public class ModeleJeu extends ModelePrincipal {
 	private boolean placementPossibleBasDroite(int x, int y) {
 
         final int CASE_BAS_DROITE = plateau[y + 1][x + 1];
+        int[] coordonneesCaseBasDroite = {x + 1, y + 1};
 
         boolean resultat = false;
         
@@ -761,6 +1126,7 @@ public class ModeleJeu extends ModelePrincipal {
             return resultat;
         }
         
+        ajouterPionsARetournerBasDroite(coordonneesCaseBasDroite);
         int indiceX = x + 2;
         int indiceY = y + 2;
         
@@ -772,14 +1138,20 @@ public class ModeleJeu extends ModelePrincipal {
                && !caseVide(indiceX, indiceY)
                && !resultat) {
             int caseCourante = plateau[indiceY][indiceX];
-
+    	    int[] coordonneesCaseCourante = {indiceY, indiceX};
+	
             // Pion de la même couleur que la case vérifiée
             if (caseCourante == caseVerifiee) {
                 resultat = true;
-            }
+            } else {
+				ajouterPionsARetournerBasDroite(coordonneesCaseCourante);
+			}
             indiceX++;
             indiceY++;
         }
+        if (!resultat) {
+			reinitialiserPionsARetournerBasDroite();
+		}
         return resultat;
 	}
     	

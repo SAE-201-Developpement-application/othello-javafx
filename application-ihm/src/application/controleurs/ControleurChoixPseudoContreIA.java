@@ -6,18 +6,15 @@ package application.controleurs;
 
 import application.vues.GestionVues;
 
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.text.Text;
 import javafx.scene.control.TextField;
 
-import java.util.Optional;
-
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 /**
  * Contrôle via FXML les interactions avec la vue : les pages FXML.
@@ -64,7 +61,9 @@ public class ControleurChoixPseudoContreIA extends ControleurPrincipal {
 			croixJoueur.setVisible(false);
 			cocheJoueur.setVisible(false);
 			nomOKJoueur1 = false;
-		} else if (nomJoueur1.length() > 1 && nomJoueur1.length() <= 16) {
+		} else if (nomJoueur1.length() > 1 && nomJoueur1.length() <= 16 
+				                           && contientDeuxCaracteresNonVides(nomJoueur1)) {
+			
 			croixJoueur.setVisible(false);
 			cocheJoueur.setVisible(true);
 			modelePrincipal.setNomJoueur1(nomJoueur1);
@@ -76,17 +75,24 @@ public class ControleurChoixPseudoContreIA extends ControleurPrincipal {
 		}
 	}
 	
+	public boolean contientDeuxCaracteresNonVides(String str) {
+	    Pattern patternARespecter = Pattern.compile(".*\\S.*\\S.*");
+	    Matcher matcher = patternARespecter.matcher(str);
+	    return matcher.matches();
+	}
 	
 	@FXML
 	private void gererClicJouer() {	
 				
 		if (nomOKJoueur1) {			
-			modeleJeu.setPartieCommence(true);
 			modeleJeu.setPartieOrdinateur(true);;
 			pseudoJoueur1.setText(null);
 			cocheJoueur.setVisible(false);
-			GestionVues.activerJeu();
+			modeleJeu.setPartieCommence(false);
+			
 			nomOKJoueur1 = false;
+			
+			GestionVues.activerJeu();
 		} else {
 			Alert boitePseudoIncompatible = new Alert(Alert.AlertType.ERROR);
 			

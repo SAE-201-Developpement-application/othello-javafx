@@ -4,6 +4,9 @@
  */
 package application.controleurs;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import application.vues.GestionVues;
 
 import javafx.fxml.FXML;
@@ -11,11 +14,7 @@ import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.text.Text;
 import javafx.scene.control.TextField;
-
-import java.util.Optional;
 
 
 /**
@@ -68,7 +67,7 @@ public class ControleurChoixPseudosContreJoueur extends ControleurPrincipal {
 	}
 	
 	@FXML
-	private void gererMiseAJourNomJoueur1() {	// TODO mettre le déclencheur sur FX builder, je sait plus lequel c'est
+	private void gererMiseAJourNomJoueur1() {
 		
 		String nomJoueur1 = pseudoJoueur.getText();
 		
@@ -77,7 +76,9 @@ public class ControleurChoixPseudosContreJoueur extends ControleurPrincipal {
 			cocheJoueur1.setVisible(false);
 			
 			nomOKJoueur1 = false;
-		} else if (nomJoueur1.length() > 1 && nomJoueur1.length() <= 16) {
+		} else if (nomJoueur1.length() > 1 && nomJoueur1.length() <= 16 
+										   && contientDeuxCaracteresNonVides(nomJoueur1)) {
+			
 			croixJoueur1.setVisible(false);
 			cocheJoueur1.setVisible(true);
 			
@@ -92,7 +93,7 @@ public class ControleurChoixPseudosContreJoueur extends ControleurPrincipal {
 	}
 	
 	@FXML
-	private void gererMiseAJourNomJoueur2() {	// TODO mettre le déclencheur sur FX builder, je sait plus lequel c'est
+	private void gererMiseAJourNomJoueur2() {
 	
 		String nomJoueur2 = pseudoJoueur2.getText();
 		
@@ -100,7 +101,8 @@ public class ControleurChoixPseudosContreJoueur extends ControleurPrincipal {
 			croixJoueur2.setVisible(false);
 			cocheJoueur2.setVisible(false);
 			nomOKJoueur2 = false;
-		} else if (nomJoueur2.length() > 1 && nomJoueur2.length() <= 16) {
+		} else if (nomJoueur2.length() > 1 && nomJoueur2.length() <= 16 
+										   && contientDeuxCaracteresNonVides(nomJoueur2)) {
 			croixJoueur2.setVisible(false);
 			cocheJoueur2.setVisible(true);
 			modelePrincipal.setNomJoueur2(nomJoueur2);
@@ -112,10 +114,15 @@ public class ControleurChoixPseudosContreJoueur extends ControleurPrincipal {
 		}
 	}
 	
+	public boolean contientDeuxCaracteresNonVides(String str) {
+	    Pattern patternARespecter = Pattern.compile(".*\\S.*\\S.*");
+	    Matcher matcher = patternARespecter.matcher(str);
+	    return matcher.matches();
+	}
+	
 	@FXML
 	private void gererClicJouer() {
 		if (nomOKJoueur1 && nomOKJoueur2) {			
-			modeleJeu.setPartieCommence(true);
 			modeleJeu.setPartieOrdinateur(false);
 			pseudoJoueur.setText(null);
 			pseudoJoueur2.setText(null);
@@ -123,6 +130,9 @@ public class ControleurChoixPseudosContreJoueur extends ControleurPrincipal {
 			cocheJoueur2.setVisible(false);
 			nomOKJoueur1 = false;
 			nomOKJoueur2 = false;
+			
+			modeleJeu.setPartieCommence(false);
+
 			GestionVues.activerJeu();
 		} else {
 			Alert boitePseudoIncompatible = new Alert(Alert.AlertType.ERROR);
