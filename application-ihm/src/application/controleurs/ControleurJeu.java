@@ -102,6 +102,29 @@ public class ControleurJeu extends ControleurPrincipal {
 		return resultat;
 	}
 	
+	private void apparaitrePion(String couleur, int coordonneeX, int coordonneeY) {
+		ImageView pion
+		= new ImageView("application/vues/images/Jeu/" + couleur + ".png");
+		
+		pion.setFitWidth(65);
+		pion.setFitHeight(65);
+		pion.setId("pion" + coordonneeX + coordonneeY);
+		
+		// Ajout d'un écouteur de clic au pion affiché
+		pion.addEventFilter(MouseEvent.MOUSE_CLICKED,
+							new EventHandler<MouseEvent>() {
+		    @Override
+		    public void handle(MouseEvent mouseEvent) {
+		        gererClicCase(mouseEvent);
+		    }
+		});
+		
+		GridPane.setColumnIndex(pion, coordonneeX);
+		GridPane.setRowIndex(pion, coordonneeY);
+		
+		ajouterPion(pion);
+	}
+	
 	private void ajouterPion(ImageView image) {
 		plateau.getChildren().add(image);
 	}
@@ -129,26 +152,28 @@ public class ControleurJeu extends ControleurPrincipal {
 		
 		// Si image cliquée == image/fond invisible
 		if (idCase.startsWith("case")) {
-			ImageView pionBlanc
-			= new ImageView("application/vues/images/Jeu/Blanc.png");
 			
-			pionBlanc.setFitWidth(65);
-			pionBlanc.setFitHeight(65);
-			pionBlanc.setId("pion" + coordonneeX + coordonneeY);
+			int[][] pionsARetourner = modeleJeu.clicCase(coordonneeX, coordonneeY);
 			
-			// Ajout d'un écouteur de clic au pion affiché
-			pionBlanc.addEventFilter(MouseEvent.MOUSE_CLICKED,
-									 new EventHandler<MouseEvent>() {
-			    @Override
-			    public void handle(MouseEvent mouseEvent) {
-			        gererClicCase(mouseEvent);
-			    }
-			});
-			
-			GridPane.setColumnIndex(pionBlanc, coordonneeX);
-			GridPane.setRowIndex(pionBlanc, coordonneeY);
-			
-			ajouterPion(pionBlanc);			
+			if (pionsARetourner[0][0] == -1) {
+				System.out.println("Impossible placer pion");; // TODO : -1 = impossible placer pion
+				if (modeleJeu.getNombreErreursPlacementJoueur1()
+					== modeleJeu.NOMBRE_MAX_ERREURS_PLACEMENT) {
+					// TODO pop-up rappelant les règles car 5 clics impossibles
+				}
+			} else {
+				for (int[] pionARetourner : pionsARetourner) {
+					System.out.println("\nPion à retourner :"
+									   + "\nX = "
+									   + pionARetourner[0]
+									   + "\nY = "
+									   + pionARetourner[1]);
+					// TODO @Tom retourne moi ce pion en fonction de la couleur
+					// (bonne change jsp encore comment faire là - méthode getCouleurParCoordonnees ds modele ?)
+				}
+				
+				apparaitrePion("Noir", coordonneeX, coordonneeY);
+			}
 		} else {
 			retirerPion(caseCliquee);
 		}

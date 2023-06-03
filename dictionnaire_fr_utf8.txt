@@ -22772,3 +22772,11 @@ modificateur
 cliquée
 écouteur
 clic
+horizontale
+coordonnée
+diagonales
+vérifiée
+coordonnées
+vérifie
+repasse
+expliquera

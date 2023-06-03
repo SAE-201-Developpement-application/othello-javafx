@@ -62,15 +62,11 @@ public class ModelePrincipal {
 									  boolean voirPositionsPossibles,
 									  boolean voirPionsEnlevables) {
 		
-		return musique != this.musique || son != this.son
-									   || voirPositionsPossibles != this.voirPositionsPossibles
-									   || voirPionsEnlevables != this.voirPionsEnlevables;
+		return musique != this.musique
+			   || son != this.son
+			   || voirPositionsPossibles != this.voirPositionsPossibles
+			   || voirPionsEnlevables != this.voirPionsEnlevables;
 	}
-	
-//	/** @return Nom du joueur par défaut (mode contre IA). */   plus utilisé
-//	public String getNomJoueur() {
-//		return nomJoueur;
-//	}
 	
 	/** @return Nom du premier joueur. */
 	public String getNomJoueur1() {

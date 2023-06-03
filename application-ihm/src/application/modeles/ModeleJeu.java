@@ -24,9 +24,21 @@ public class ModeleJeu extends ModelePrincipal {
 	/** Représentation d'une case contenant un pion blanc. */
 	private final int BLANC = 2;
 	
+	private final static int COLONNE_GAUCHE = 0;
+    private final static int COLONNE_DROITE = 7;
+    
+    private final static int LIGNE_HAUTE = 0;
+    private final static int LIGNE_BASSE = 7;
+    
+    /**
+     * Nombre maximal d'erreurs de placement impossible d'un pion
+     * avant qu'une alerte informe le joueur des règles.
+     */
+    public final static int NOMBRE_MAX_ERREURS_PLACEMENT = 5;
+	
 	/**
 	 * Plateau de jeu composé d'un tableau 
-	 * contenant 8 tableaux contenant chaqun 8 cases.
+	 * contenant 8 tableaux contenant chacun 8 cases.
 	 * On pourra en déduire des coordonnées x et y.
 	 */
 	private int[][] plateau = {
@@ -43,7 +55,7 @@ public class ModeleJeu extends ModelePrincipal {
 	/** Définit le type de partie, contre l'odinateur ou joueur */
 	private boolean partieOrdinateur;
 	
-	/** Définit la difficultée de la partie, facile ou difficile */
+	/** Définit la difficulté de la partie, facile ou difficile */
 	private boolean ordinateurFacile;
 
 	/** Définit si le joueur1 joue */
@@ -66,13 +78,19 @@ public class ModeleJeu extends ModelePrincipal {
 	 * Si deux tours sont passés d'affilée, la partie s'arrete,
 	 * sinon le nombre de tours passés repasse à 0.
 	 */
-	private int toursPasses = 0;
-
-	private final static int COLONNE_GAUCHE = 0;
-    private final static int COLONNE_DROITE = 7;
-    
-    private final static int LIGNE_HAUTE = 0;
-    private final static int LIGNE_BASSE = 7;
+	private int toursPasses;
+	
+	/**
+	 * Lorsque ce nombre sera égal à NOMBRE_MAX_ERREURS_PLACEMENT,
+	 * une fenêtre d'alerte expliquera au joueur 1 les règles.
+	 */
+	private int nombreErreursPlacementJoueur1;
+	
+	/**
+	 * Lorsque ce nombre sera égal à NOMBRE_MAX_ERREURS_PLACEMENT,
+	 * une fenêtre d'alerte expliquera au joueur 2 les règles.
+	 */
+	private int nombreErreursPlacementJoueur2;
 	
 	/** @return le plateau de jeu */						   
 	public int[][] getPlateau() {
@@ -104,9 +122,23 @@ public class ModeleJeu extends ModelePrincipal {
 		return this.nbPointsJoueur2;
 	}
 	
+	/** @return le nombre d'erreurs de placement du joueur 1 */					   
+	public int getNombreErreursPlacementJoueur1() {
+		return this.nombreErreursPlacementJoueur1;
+	}
+	
+	/** @return le nombre d'erreurs de placement du joueur 2 */						   
+	public int getNombreErreursPlacementJoueur2() {
+		return this.nombreErreursPlacementJoueur2;
+	}
+	
 	/** @param nouveauPlateau Plateau remplaçant l'attribut plateau de this. */
 	public void setPlateau(int[][] nouveauPlateau) {
 		this.plateau = nouveauPlateau;
+	}
+	/** @param nouveauPlateau tour */
+	public void setTourJoueur1(boolean tour) {
+		this.tourJoueur1 = tour;
 	}
 	
 	/**
@@ -120,13 +152,13 @@ public class ModeleJeu extends ModelePrincipal {
 	}
 	
 	/**
-	 * Appelée lors d'un clic sur la grille
+	 * Modificateur de l'attribut plateau de this.
+	 * 
+	 * @param x Coordonnée X (colonne) de la case à modifier.
+     * @param y Coordonnée Y (ligne) de la case à modifier.
 	 */
-	public void poserPionSiCaseVide(int x, int y) {
-		if (caseVide(x, y)) {	
-			plateau[y][x] = tourJoueur1 ? NOIR : BLANC;
-		}
-		
+	public void poserPion(int x, int y) {
+		plateau[y][x] = tourJoueur1 ? NOIR : BLANC;
 	}
 	
 	/**
@@ -138,9 +170,13 @@ public class ModeleJeu extends ModelePrincipal {
 	 * @return true si le pion peut être placé, false sinon.
 	 */
 	public boolean placementPossible(int x, int y) {
+		if (!caseVide(x, y)) {
+			return false;
+		}
+		plateau[y][x] = tourJoueur1 ? NOIR : BLANC;
 		return placementPossibleHorizontal(x, y)
-		       || placementPossibleVertical(x, y);
-		         /*|| placementPossibleDiagonales(x, y)*/
+		       || placementPossibleVertical(x, y)
+		       || placementPossibleDiagonales(x, y);
 	}
 	
 	/**
@@ -182,6 +218,8 @@ public class ModeleJeu extends ModelePrincipal {
 	 * @return true si le pion peut être placé, false sinon.
 	 */
 	private boolean placementPossibleDroite(int x, int y) {
+		
+		//TODO potentielle erreur là dedans
 		
 		final int CASE_VERIFIEE = plateau[y][x];
 		final int CASE_DROITE = plateau[y][x + 1];
@@ -237,7 +275,7 @@ public class ModeleJeu extends ModelePrincipal {
         /* Parcours de la ligne à gauche de la case initiale
            afin de déterminer la présence d'un pion allié
            permettant un placement */
-        while (indiceX > 0
+        while (indiceX >= 0
                && !caseVide(indiceX, y)
                && !resultat) {
             int caseCourante = plateau[y][indiceX];
@@ -257,8 +295,8 @@ public class ModeleJeu extends ModelePrincipal {
      * adverses au-dessus ou en-dessous.
      * <p>
      * Lorsqu'un pion est à l'extrémité d'une colonne, il n'est possible
-     * de le retourner que de façon horizontale ; c'est-à-dire qu'il est possible
-     * de le retourner seulement en étant dans la même ligne.</p>
+     * de le retourner que de façon horizontale ; c'est-à-dire qu'il est 
+     * possible de le retourner seulement en étant dans la même ligne.</p>
      *
      * @param x Coordonnée X (colonne) de la case à vérifier.
      * @param y Coordonnée Y (ligne) de la case à vérifier.
@@ -345,7 +383,7 @@ public class ModeleJeu extends ModelePrincipal {
         /* Parcours de la colonne au-dessus de la case initiale
            afin de déterminer la présence d'un pion allié
            permettant un placement */
-        while (indiceY > 0
+        while (indiceY >= 0
                && !caseVide(x, indiceY)
                && !resultat) {
             int caseCourante = plateau[indiceY][x];
@@ -443,30 +481,191 @@ public class ModeleJeu extends ModelePrincipal {
     /*
      * Vérification de la possibilité de placer un pion sur une case
      * en fonction de la possibilité de retourner des pions
-     * adverses dans une de ses diagonales.
-     * <p>
-     * Lorsqu'un pion est à l'extrémité d'une ligne ou d'une colonne (sur
-     * un bord du plateau), il n'est pas possible de le retourner
-     * depuis un pion placé en diagonale.</p>
+     * adverses dans sa diagonale partant du bas et allant
+     * vers le haut et la gauche.
      *
      * @param x Coordonnée X (colonne) de la case à vérifier.
      * @param y Coordonnée Y (ligne) de la case à vérifier.
      * @return true si le pion peut être placé, false sinon.
      */
     private boolean placementPossibleHautGauche(int x, int y) {
-		return true;
+		final int CASE_VERIFIEE = plateau[y][x];
+        final int CASE_HAUT_GAUCHE = plateau[y - 1][x - 1];
+        
+        boolean resultat = false;
+        
+        if (CASE_VERIFIEE == CASE_HAUT_GAUCHE || CASE_HAUT_GAUCHE == CASE_VIDE) {
+            return resultat;
+        }
+        
+        int indiceX = x - 2;
+        int indiceY = y - 2;
+        
+        /* Parcours de la diagonale au-dessus à gauche de la case
+           initiale afin de déterminer la présence d'un pion allié
+           permettant un placement */
+        while (indiceX >= 0
+        	   && indiceY >= 0
+               && !caseVide(indiceX, indiceY)
+               && !resultat) {
+            int caseCourante = plateau[indiceY][indiceX];
+
+            // Pion de la même couleur que la case vérifiée
+            if (caseCourante == CASE_VERIFIEE) {
+                resultat = true;
+            }
+            indiceX--;
+            indiceY--;
+        }
+        return resultat;
 	}
 	
+    /**
+     * Vérification de la possibilité de placer un pion sur une case
+     * en fonction de la possibilité de retourner des pions
+     * adverses dans sa diagonale partant du bas et allant
+     * vers le haut et la droite.
+     *
+     * @param x Coordonnée X (colonne) de la case à vérifier.
+     * @param y Coordonnée Y (ligne) de la case à vérifier.
+     * @return true si le pion peut être placé, false sinon.
+     */
 	private boolean placementPossibleHautDroite(int x, int y) {
-		return true;
+		final int CASE_VERIFIEE = plateau[y][x];
+        final int CASE_HAUT_DROITE = plateau[y - 1][x + 1];
+		
+        boolean resultat = false;
+        
+        if (CASE_VERIFIEE == CASE_HAUT_DROITE || CASE_HAUT_DROITE == CASE_VIDE) {
+            return resultat;
+        }
+        
+        int indiceX = x + 2;
+        int indiceY = y - 2;
+        
+        /* Parcours de la diagonale au-dessus à gauche de la case
+           initiale afin de déterminer la présence d'un pion allié
+           permettant un placement */
+        while (indiceX < plateau[indiceY].length
+        	   && indiceY >= 0
+               && !caseVide(indiceX, indiceY)
+               && !resultat) {
+            int caseCourante = plateau[indiceY][indiceX];
+
+            // Pion de la même couleur que la case vérifiée
+            if (caseCourante == CASE_VERIFIEE) {
+                resultat = true;
+            }
+            indiceX++;
+            indiceY--;
+        }
+        return resultat;
 	}
 	
+    /**
+     * Vérification de la possibilité de placer un pion sur une case
+     * en fonction de la possibilité de retourner des pions
+     * adverses dans sa diagonale partant du haut et allant
+     * vers le bas et la gauche.
+     *
+     * @param x Coordonnée X (colonne) de la case à vérifier.
+     * @param y Coordonnée Y (ligne) de la case à vérifier.
+     * @return true si le pion peut être placé, false sinon.
+     */
 	private boolean placementPossibleBasGauche(int x, int y) {
-		return true;
+		final int CASE_VERIFIEE = plateau[y][x];
+        final int CASE_BAS_GAUCHE = plateau[y + 1][x - 1];
+		
+		boolean resultat = false;
+        
+        if (CASE_VERIFIEE == CASE_BAS_GAUCHE || CASE_BAS_GAUCHE == CASE_VIDE) {
+            return resultat;
+        }
+        
+        int indiceX = x - 2;
+        int indiceY = y + 2;
+        
+        /* Parcours de la diagonale en-dessous à gauche de la case
+           initiale afin de déterminer la présence d'un pion allié
+           permettant un placement */
+        while (indiceX >= 0
+        	   && indiceY < plateau.length
+               && !caseVide(indiceX, indiceY)
+               && !resultat) {
+            int caseCourante = plateau[indiceY][indiceX];
+
+            // Pion de la même couleur que la case vérifiée
+            if (caseCourante == CASE_VERIFIEE) {
+                resultat = true;
+            }
+            indiceX--;
+            indiceY++;
+        }
+        return resultat;
 	}
 	
+    /**
+     * Vérification de la possibilité de placer un pion sur une case
+     * en fonction de la possibilité de retourner des pions
+     * adverses dans sa diagonale partant du haut et allant
+     * vers le bas et la droite.
+     *
+     * @param x Coordonnée X (colonne) de la case à vérifier.
+     * @param y Coordonnée Y (ligne) de la case à vérifier.
+     * @return true si le pion peut être placé, false sinon.
+     */
 	private boolean placementPossibleBasDroite(int x, int y) {
-		return true;
+		final int CASE_VERIFIEE = plateau[y][x];
+        final int CASE_BAS_DROITE = plateau[y + 1][x + 1];
+
+        boolean resultat = false;
+        
+        if (CASE_VERIFIEE == CASE_BAS_DROITE || CASE_BAS_DROITE == CASE_VIDE) {
+            return resultat;
+        }
+        
+        int indiceX = x + 2;
+        int indiceY = y + 2;
+        
+        /* Parcours de la diagonale en-dessous à droite de la case
+           initiale afin de déterminer la présence d'un pion allié
+           permettant un placement */
+        while (indiceX < plateau[indiceY].length
+        	   && indiceY < plateau.length
+               && !caseVide(indiceX, indiceY)
+               && !resultat) {
+            int caseCourante = plateau[indiceY][indiceX];
+
+            // Pion de la même couleur que la case vérifiée
+            if (caseCourante == CASE_VERIFIEE) {
+                resultat = true;
+            }
+            indiceX++;
+            indiceY++;
+        }
+        return resultat;
+	}
+	
+	/**
+	 * Gestion du clic de l'utilisateur sur une case.
+	 * Si c'est possible, un pion de la couleur du joueur sera placé.
+	 * 
+     * @param x Coordonnée X (colonne) de la case où poser le pion.
+     * @param y Coordonnée Y (ligne) de la case où poser le pion.
+	 */
+	public int[][] clicCase(int x, int y) {
+		int[][] casesARetourner = {{-1, -1}}; // -1 = impossible placer pion
+		if (placementPossible(x, y)) {
+			plateau[y][x] = 0;
+			poserPion(x, y);
+			tourJoueur1 = !tourJoueur1;
+		} else if (tourJoueur1) {
+			nombreErreursPlacementJoueur1++;
+		} else {
+			nombreErreursPlacementJoueur2++;				
+		}
+		plateau[y][x] = 0;
+		return casesARetourner;
 	}
     	
 }
