@@ -271,6 +271,7 @@ public class ControleurJeu extends ControleurPrincipal {
 		int[] coordonnees = getCoordonneesCase(idCase);
 		int coordonneeX = coordonnees[0];
 		int coordonneeY = coordonnees[1];
+		int[][] casesARetournerNull = {{-1, -1}};
 
 		System.out.println("ControleurJeu >> Case cliquée :"
 						   + "\nID = "+ idCase
@@ -284,7 +285,7 @@ public class ControleurJeu extends ControleurPrincipal {
 			
 			/* Si pionsARetourner ==
 			 * - null   =   joueur peut pas placer de pion là où il a cliqué */
-			if (pionsARetourner == null) {
+			if (pionsARetourner == casesARetournerNull) {
 				System.out.println("ControleurJeu >> Impossible placer pion où clic");
 				
 				// ajouterErreurPlacementJoueur1() TODO appeler fonction modèle
@@ -312,7 +313,7 @@ public class ControleurJeu extends ControleurPrincipal {
 		}
 	}
 	
-	@FXML
+	@FXML // TODO Loic d'apres GPT c'est comme ca qu'on utilise un gif, ping moi si tu bite rien (tiens bite est un mot du dictionnaire ¯\_(ツ)_/¯) 
 	private void demarrerGIF() {
 	    ImageView gifNoirVersBlanc = new ImageView(new Image("application/vues/images/Jeu/GIF1.gif"));
 	    ImageView gifBlancVersNoir = new ImageView(new Image("application/vues/images/Jeu/GIF2.gif"));
