@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -9,9 +13,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="540.0" maxWidth="960.0" minHeight="540.0" minWidth="960.0" prefHeight="540.0" prefWidth="960.0" styleClass="fondEcran" stylesheets="@application.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.ControleurJeu">
+<AnchorPane maxHeight="540.0" maxWidth="960.0" minHeight="540.0" minWidth="960.0" prefHeight="540.0" prefWidth="960.0" styleClass="fondEcran" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.ControleurJeu">
    <children>
-      <ImageView fitHeight="70.0" fitWidth="71.0" layoutX="352.0" layoutY="449.0" onMouseClicked="#gererClicAide" preserveRatio="true">
+      <ImageView fitHeight="70.0" fitWidth="71.0" layoutX="351.0" layoutY="449.0" onMouseClicked="#gererClicAide" preserveRatio="true">
          <image>
             <Image url="@images/Jeu/Aide.png" />
          </image>
@@ -21,12 +25,12 @@
             <Image url="@images/Jeu/MenuPrincipal.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="66.0" fitWidth="213.0" layoutX="119.0" layoutY="452.0" preserveRatio="true">
+      <ImageView fitHeight="66.0" fitWidth="213.0" layoutX="116.0" layoutY="452.0" preserveRatio="true">
          <image>
             <Image url="@images/Jeu/PasserTour.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="70.0" fitWidth="68.0" layoutX="352.0" layoutY="27.0" onMouseClicked="#gererClicSauvegarder" preserveRatio="true">
+      <ImageView fitHeight="70.0" fitWidth="68.0" layoutX="351.0" layoutY="27.0" onMouseClicked="#gererClicSauvegarder" preserveRatio="true">
          <image>
             <Image url="@images/Jeu/Sauvegarder.png" />
          </image>
@@ -420,7 +424,7 @@
             <Font name="System Bold" size="30.0" />
          </font>
       </Text>
-      <ImageView fx:id="jouerMaintenant" fitHeight="138.0" fitWidth="381.0" layoutX="35.0" layoutY="185.0" onMouseClicked="#lancerJeu" preserveRatio="true">
+      <ImageView fx:id="jouerMaintenant" fitHeight="138.0" fitWidth="381.0" layoutX="29.0" layoutY="197.0" onMouseClicked="#lancerJeu" preserveRatio="true">
          <image>
             <Image url="@images/Jeu/JouerMaintenant.png" />
          </image>

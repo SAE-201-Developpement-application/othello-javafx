@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="540.0" maxWidth="960.0" minHeight="540.0" minWidth="960.0" prefHeight="540.0" prefWidth="960.0" styleClass="fondEcran" stylesheets="@application.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.ControleurNiveauOrdinateur">
+<AnchorPane maxHeight="540.0" maxWidth="960.0" minHeight="540.0" minWidth="960.0" prefHeight="540.0" prefWidth="960.0" styleClass="fondEcran" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.ControleurNiveauOrdinateur">
    <children>
       <ImageView fitHeight="110.0" fitWidth="90.0" layoutX="1369.0" layoutY="71.0" onMouseClicked="#gererClicContinuer" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="20.0">
          <image>
@@ -16,12 +19,12 @@
             <Image url="@images/MenuPrincipal.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="FacileOff" fitHeight="211.0" fitWidth="214.0" layoutX="238.0" layoutY="247.0" onMouseClicked="#gererClicFacile" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="facileOff" fitHeight="211.0" fitWidth="214.0" layoutX="238.0" layoutY="247.0" onMouseClicked="#gererClicFacile" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/NiveauOrdinateur/Facile.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="DifficileOff" fitHeight="211.0" fitWidth="280.0" layoutX="519.0" layoutY="247.0" onMouseClicked="#gererClicDifficile" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="difficileOff" fitHeight="211.0" fitWidth="280.0" layoutX="519.0" layoutY="247.0" onMouseClicked="#gererClicDifficile" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/NiveauOrdinateur/Difficile.png" />
          </image>
@@ -31,12 +34,12 @@
             <Image url="@images/NiveauOrdinateur/TitreNiveauDifficulte.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="FacileOn" fitHeight="263.0" fitWidth="292.0" layoutX="220.0" layoutY="221.0" onMouseClicked="#gererClicFacile" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="facileOn" fitHeight="263.0" fitWidth="292.0" layoutX="220.0" layoutY="221.0" onMouseClicked="#gererClicFacile" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@images/NiveauOrdinateur/Facile.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="DifficileOn" fitHeight="263.0" fitWidth="260.0" layoutX="496.0" layoutY="225.0" onMouseClicked="#gererClicDifficile" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="difficileOn" fitHeight="263.0" fitWidth="260.0" layoutX="496.0" layoutY="225.0" onMouseClicked="#gererClicDifficile" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@images/NiveauOrdinateur/Difficile.png" />
          </image>

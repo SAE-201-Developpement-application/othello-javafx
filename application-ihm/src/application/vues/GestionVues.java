@@ -4,17 +4,7 @@
  */
 package application.vues;
 	
-import java.io.IOException;
-
 import application.Othello;
-
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.stage.Stage;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
-
 
 /**
  * Classe principale de l'application permettant d'afficher des fenêtres au contenu

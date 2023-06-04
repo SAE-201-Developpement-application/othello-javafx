@@ -4,7 +4,6 @@
  */
 package application.controleurs;
 
-import application.modeles.ModelePrincipal;
 import application.vues.GestionVues;
 import javafx.fxml.FXML;
 import javafx.stage.Stage;

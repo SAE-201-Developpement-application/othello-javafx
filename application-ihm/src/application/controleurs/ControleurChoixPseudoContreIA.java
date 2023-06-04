@@ -25,12 +25,12 @@ import java.util.regex.Matcher;
  */
 public class ControleurChoixPseudoContreIA extends ControleurPrincipal {
 	
-	/* Chaine de caractere pour l'erreur de pseudo */
+	/* Chaîne de caractères pour l'erreur de pseudo */
 	private final String REGLES_PSEUDO 
 	= "Veuillez entrer un nom contenant 2 à 16 caractères.";
 	
-	/* Booleen pour savoir si le nom du joueur 1 est bien saisi */
-	private boolean nomOKJoueur1 = false;
+	/* Booléen pour savoir si le nom du joueur 1 est bien saisi */
+	private boolean nomOkJoueur1 = false;
 	
 	@FXML
 	private TextField pseudoJoueur1;
@@ -50,6 +50,8 @@ public class ControleurChoixPseudoContreIA extends ControleurPrincipal {
 		pseudoJoueur1.setText("");
 		modelePrincipal.setNomJoueur1("");
 		modelePrincipal.setNomJoueur2("");
+		cocheJoueur.setVisible(false);
+		croixJoueur.setVisible(false);
 	}
 	
 	@FXML
@@ -60,18 +62,18 @@ public class ControleurChoixPseudoContreIA extends ControleurPrincipal {
 		if (nomJoueur1.isEmpty()) {
 			croixJoueur.setVisible(false);
 			cocheJoueur.setVisible(false);
-			nomOKJoueur1 = false;
+			nomOkJoueur1 = false;
 		} else if (nomJoueur1.length() > 1 && nomJoueur1.length() <= 16 
 				                           && contientDeuxCaracteresNonVides(nomJoueur1)) {
 			
 			croixJoueur.setVisible(false);
 			cocheJoueur.setVisible(true);
 			modelePrincipal.setNomJoueur1(nomJoueur1);
-			nomOKJoueur1 = true;
+			nomOkJoueur1 = true;
 		} else {
 			cocheJoueur.setVisible(false);
 			croixJoueur.setVisible(true);
-			nomOKJoueur1 = false;
+			nomOkJoueur1 = false;
 		}
 	}
 	
@@ -84,13 +86,13 @@ public class ControleurChoixPseudoContreIA extends ControleurPrincipal {
 	@FXML
 	private void gererClicJouer() {	
 				
-		if (nomOKJoueur1) {			
+		if (nomOkJoueur1) {			
 			modeleJeu.setPartieOrdinateur(true);;
 			pseudoJoueur1.setText(null);
 			cocheJoueur.setVisible(false);
 			modeleJeu.setPartieCommence(false);
 			
-			nomOKJoueur1 = false;
+			nomOkJoueur1 = false;
 			
 			GestionVues.activerJeu();
 		} else {

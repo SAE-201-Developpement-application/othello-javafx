@@ -64,6 +64,12 @@ public class ControleurChoixPseudosContreJoueur extends ControleurPrincipal {
 		pseudoJoueur2.setText("");
 		modelePrincipal.setNomJoueur1("");
 		modelePrincipal.setNomJoueur2("");
+		
+		cocheJoueur1.setVisible(false);
+		croixJoueur1.setVisible(false);
+		
+		cocheJoueur2.setVisible(false);
+		croixJoueur2.setVisible(false);
 	}
 	
 	@FXML

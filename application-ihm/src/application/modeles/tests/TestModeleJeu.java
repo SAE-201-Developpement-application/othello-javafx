@@ -52,17 +52,6 @@ class TestModeleJeu {
         
         assertArrayEquals(plateauTest, jeuTestInitial.getPlateau());
 	}
-	
-	/*
-	 * -----------------
-	 * METHODES A TESTER
-	 * -----------------
-	 *
-	 * -- GETTERS
-	 * Faits
-	 * -- SETTERS
-	 * clicCase(int x, int y)
-	 */
     
     /**
      * Méthode de test de {@link application.modeles.ModeleJeu#clicCase()}.
@@ -70,7 +59,7 @@ class TestModeleJeu {
     @Test
     void testClicCase() {
 		
-    	int[][] plateauTest1 = {
+    	int[][] plateauInitial = {
     		      /* 0  1  2  3  4  5  6  7 */
     		/* 0 */ {0, 0, 0, 0, 0, 0, 0, 0},
     		/* 1 */ {0, 0, 0, 0, 0, 0, 0, 0},
@@ -82,7 +71,7 @@ class TestModeleJeu {
     		/* 7 */ {0, 0, 0, 0, 0, 0, 0, 0}
         };
     		
-    	int[][] plateauTest2 = {
+    	int[][] plateauAttenduApresClics = {
     		      /* 0  1  2  3  4  5  6  7 */
     	    /* 0 */ {0, 0, 0, 0, 0, 0, 0, 0},
     		/* 1 */ {0, 0, 0, 0, 0, 0, 0, 0},
@@ -94,71 +83,70 @@ class TestModeleJeu {
     		/* 7 */ {0, 0, 0, 0, 0, 0, 0, 0}
         };
     		
-    	int[][] listeCoordonnees1 = {{4, 4}};
-    	int[][] listeCoordonnees2 = {{4, 3}};
-    	int[][] listeCoordonnees3 = {{5, 3}, {4, 3}};
-    	int[][] listeCoordonnees4 = {{5, 3}, {4, 3}};
-    	int[][] listeCoordonnees5 = {{6, 3}};
-    	int[][] listeCoordonnees6 = {{4, 4}};
-    	int[][] listeCoordonnees7 = {{3, 3}, {4, 3}, {5, 3}};
-    	int[][] listeCoordonnees8 = {{5, 4}};
-    	int[][] listeCoordonnees9 = {{5, 4}, {4, 4}};
+    	int[][] listeCoordonnees1 =  {{4, 4}};
+    	int[][] listeCoordonnees2 =  {{4, 3}};
+    	int[][] listeCoordonnees3 =  {{5, 3}, {4, 3}};
+    	int[][] listeCoordonnees4 =  {{5, 3}, {4, 3}};
+    	int[][] listeCoordonnees5 =  {{6, 3}};
+    	int[][] listeCoordonnees6 =  {{4, 4}};
+    	int[][] listeCoordonnees7 =  {{3, 3}, {4, 3}, {5, 3}};
+    	int[][] listeCoordonnees8 =  {{5, 4}};
+    	int[][] listeCoordonnees9 =  {{5, 4}, {4, 4}};
     	int[][] listeCoordonnees10 = {{6, 3}, {5, 4}};
+    	
     	int[][] listeTest;
-    	jeuTestInitial.setPlateau(plateauTest1);
+    	
+    	jeuTestInitial.setPlateau(plateauInitial);
     	
         listeTest = jeuTestInitial.clicCase(5, 4);
         assertArrayEquals(listeTest, listeCoordonnees1);
         
-        jeuTestInitial.setTourJoueur1(false);
         listeTest = jeuTestInitial.clicCase(5, 3);
         assertArrayEquals(listeTest, listeCoordonnees2);
         
-        jeuTestInitial.setTourJoueur1(true);
         listeTest = jeuTestInitial.clicCase(5, 2);
         assertArrayEquals(listeTest, listeCoordonnees3);
         
-        jeuTestInitial.setTourJoueur1(false);
         listeTest = jeuTestInitial.clicCase(6, 3);
         assertArrayEquals(listeTest, listeCoordonnees4);
         
-        jeuTestInitial.setTourJoueur1(true);
         listeTest = jeuTestInitial.clicCase(7, 4);
         assertArrayEquals(listeTest, listeCoordonnees5);
         
-        jeuTestInitial.setTourJoueur1(false);
         listeTest = jeuTestInitial.clicCase(4, 5);
         assertArrayEquals(listeTest, listeCoordonnees6);
         
-        jeuTestInitial.setTourJoueur1(true);
         listeTest = jeuTestInitial.clicCase(2, 3);
         assertArrayEquals(listeTest, listeCoordonnees7);
         
-        jeuTestInitial.setTourJoueur1(false);
         listeTest = jeuTestInitial.clicCase(6, 4);
         assertArrayEquals(listeTest, listeCoordonnees8);
         
-        jeuTestInitial.setTourJoueur1(true);
         listeTest = jeuTestInitial.clicCase(5, 5);
         assertArrayEquals(listeTest, listeCoordonnees9);
         
-        jeuTestInitial.setTourJoueur1(false);
         listeTest = jeuTestInitial.clicCase(7, 2);
         assertArrayEquals(listeTest, listeCoordonnees10);
         
-        
-        jeuTestInitial.clicCase(5, 4);
-        jeuTestInitial.clicCase(5, 3);
-        jeuTestInitial.clicCase(5, 2);
-        jeuTestInitial.clicCase(6, 3);
-        jeuTestInitial.clicCase(7, 4);
-        jeuTestInitial.clicCase(4, 5);
-        jeuTestInitial.clicCase(2, 3);
-        jeuTestInitial.clicCase(6, 4);
-        jeuTestInitial.clicCase(5, 5);
-        jeuTestInitial.clicCase(7, 2);
-        assertArrayEquals(plateauTest1, plateauTest2);
+        /* Vérification que le plateau final soit bien
+           égal au plateau initial après tous les clics. */
+        assertArrayEquals(plateauInitial, plateauAttenduApresClics);
+	}
     
+    /**
+     * Méthode de test de {@link application.modeles.ModeleJeu#ajouterErreurPlacementJoueur1()}.
+     */
+    @Test
+    void testAjouterErreurPlacementJoueur1() {
+      		
+		assertEquals(jeuTestInitial.getNombreErreursPlacementJoueur1(), 0);
+		
+		jeuTestInitial.ajouterErreurPlacementJoueur1();
+        assertEquals(jeuTestInitial.getNombreErreursPlacementJoueur1(), 1);
+        
+        jeuTestInitial.ajouterErreurPlacementJoueur1();
+        jeuTestInitial.ajouterErreurPlacementJoueur1();
+        assertEquals(jeuTestInitial.getNombreErreursPlacementJoueur1(), 3); 
 	}
     
     /**
@@ -175,23 +163,6 @@ class TestModeleJeu {
         jeuTestInitial.ajouterErreurPlacementJoueur2();
         jeuTestInitial.ajouterErreurPlacementJoueur2();
         assertEquals(jeuTestInitial.getNombreErreursPlacementJoueur2(), 3); 
-	}
-    
-    
-    /**
-     * Méthode de test de {@link application.modeles.ModeleJeu#ajouterErreurPlacementJoueur1()}.
-     */
-    @Test
-    void testAjouterErreurPlacementJoueur1() {
-      		
-		assertEquals(jeuTestInitial.getNombreErreursPlacementJoueur1(), 0);
-		
-		jeuTestInitial.ajouterErreurPlacementJoueur1();
-        assertEquals(jeuTestInitial.getNombreErreursPlacementJoueur1(), 1);
-        
-        jeuTestInitial.ajouterErreurPlacementJoueur1();
-        jeuTestInitial.ajouterErreurPlacementJoueur1();
-        assertEquals(jeuTestInitial.getNombreErreursPlacementJoueur1(), 3); 
 	}
     
     /**
@@ -222,7 +193,7 @@ class TestModeleJeu {
      * Méthode de test de {@link application.modeles.ModeleJeu#passerTour()}.
      */
     @Test
-    void testpasserTour() {
+    void testPasserTour() {
         
     	jeuTestInitial.passerTour();
         assertEquals(jeuTestInitial.getToursPasses(), 1);
@@ -237,7 +208,6 @@ class TestModeleJeu {
         jeuTestInitial.passerTour();
         jeuTestInitial.passerTour();
         assertEquals(jeuTestInitial.getToursPasses(), 6);
- 
 	}
     
     /**
@@ -271,7 +241,6 @@ class TestModeleJeu {
         jeuTestInitial.setScoreJoueur1(0);
         assertEquals(jeuTestInitial.getScoreJoueur1(), 0);   
 	}
-    
     
     /**
      * Méthode de test de {@link application.modeles.ModeleJeu#setOrdinateurFacile()}.
@@ -453,6 +422,124 @@ class TestModeleJeu {
 		jeuTestInitial.ajouterErreurPlacementJoueur2();
 		assertEquals(jeuTestInitial.getNombreErreursPlacementJoueur2(), 2);
 	}
+		
+	/**
+	 * Méthode de test de {@link application.modeles.ModeleJeu#caseVide()}.
+	 */
+	@Test
+	void testCaseVide() {
+		ModeleJeu jeu = new ModeleJeu();
+		
+		jeu.setTourJoueur1(true);
+		
+		int[][] plateauTest1 = {
+	      /* 0  1  2  3  4  5  6  7 */
+    /* 0 */ {0, 0, 0, 0, 0, 0, 0, 0},
+    /* 1 */ {0, 0, 0, 0, 0, 0, 0, 0},
+    /* 2 */ {0, 0, 0, 0, 0, 0, 0, 0},
+    /* 3 */ {0, 0, 0, 2, 1, 0, 0, 0},
+    /* 4 */ {0, 0, 0, 1, 2, 0, 0, 0},
+    /* 5 */ {0, 0, 0, 0, 0, 0, 0, 0},
+    /* 6 */ {0, 0, 0, 0, 0, 0, 0, 0},
+    /* 7 */ {0, 0, 0, 0, 0, 0, 0, 0}
+        };
+        
+        int[][] coordonneesCasesVides = {
+			// Lignes de gauche 
+			{0, 0}, {0, 1}, {0, 2}, {0, 3}, {0, 4}, {0, 5}, {0, 6}, {0, 7},
+			{1, 0}, {1, 1}, {1, 2}, {1, 3}, {1, 4}, {1, 5}, {1, 6}, {1, 7},
+			// Lignes de droite
+			{6, 0}, {6, 1}, {6, 2}, {6, 3}, {6, 4}, {6, 5}, {6, 6}, {6, 7},
+            {7, 0}, {7, 1}, {7, 2}, {7, 3}, {7, 4}, {7, 5}, {7, 6}, {7, 7},
+			
+			// Lignes du haut
+			{2, 0}, {3, 0}, {4, 0}, {5, 0},
+			{2, 1}, {3, 1}, {4, 1}, {5, 1}, 
+			// Lignes du bas
+			{2, 6}, {3, 6}, {4, 6}, {5, 6}, 
+			{2, 7}, {3, 7}, {4, 7}, {5, 7},
+			
+			// Centre
+			{2, 2}, {2, 4}, {2, 5},
+			{3, 2}, {3, 5},
+			{4, 2}, {4, 5},
+			{5, 2}, {5, 3}, {5, 4}, {5, 5}
+		};
+        
+		jeu.setPlateau(plateauTest1);
+		
+		/* Parcours de toutes les coordonnées invalides correspondantes au
+		   joueur 1 afin de s'assurer que le résultat d'exécution soit faux. */
+		for (int[] coordonneesCourantes : coordonneesCasesVides) {
+			assertTrue(jeu.caseVide(
+				coordonneesCourantes[0], 
+				coordonneesCourantes[1]
+			));
+		}
+         
+	}
+	
+	/**
+	 * Méthode de test de {@link application.modeles.ModeleJeu#poserPion()}.
+	 */
+	@Test
+	void testPoserPion() {
+		jeuTestInitial.setTourJoueur1(true);
+		
+		int[][] plateauTest = {
+	      /* 0  1  2  3  4  5  6  7 */
+    /* 0 */ {0, 0, 0, 0, 0, 0, 0, 0},
+    /* 1 */ {0, 0, 0, 0, 0, 0, 0, 0},
+    /* 2 */ {0, 0, 0, 0, 0, 0, 0, 0},
+    /* 3 */ {0, 0, 0, 1, 1, 0, 0, 0},
+    /* 4 */ {0, 0, 0, 1, 1, 0, 0, 0},
+    /* 5 */ {0, 0, 0, 0, 0, 0, 0, 0},
+    /* 6 */ {0, 0, 0, 0, 0, 0, 0, 0},
+    /* 7 */ {0, 0, 0, 0, 0, 0, 0, 0}
+        };
+        
+        int[][] plateauRempli = {
+	      /* 0  1  2  3  4  5  6  7 */
+    /* 0 */ {1, 1, 1, 1, 1, 1, 1, 1},
+    /* 1 */ {1, 1, 1, 1, 1, 1, 1, 1},
+    /* 2 */ {1, 1, 1, 1, 1, 1, 1, 1},
+    /* 3 */ {1, 1, 1, 1, 1, 1, 1, 1},
+    /* 4 */ {1, 1, 1, 1, 1, 1, 1, 1},
+    /* 5 */ {1, 1, 1, 1, 1, 1, 1, 1},
+    /* 6 */ {1, 1, 1, 1, 1, 1, 1, 1},
+    /* 7 */ {1, 1, 1, 1, 1, 1, 1, 1}
+        };
+        
+        int[][] coordonneesCasesVides = {
+			// Lignes de gauche 
+			{0, 0}, {0, 1}, {0, 2}, {0, 3}, {0, 4}, {0, 5}, {0, 6}, {0, 7},
+			{1, 0}, {1, 1}, {1, 2}, {1, 3}, {1, 4}, {1, 5}, {1, 6}, {1, 7},
+			// Lignes de droite
+			{6, 0}, {6, 1}, {6, 2}, {6, 3}, {6, 4}, {6, 5}, {6, 6}, {6, 7},
+            {7, 0}, {7, 1}, {7, 2}, {7, 3}, {7, 4}, {7, 5}, {7, 6}, {7, 7},
+			
+			// Lignes du haut
+			{2, 0}, {3, 0}, {4, 0}, {5, 0},
+			{2, 1}, {3, 1}, {4, 1}, {5, 1}, 
+			// Lignes du bas
+			{2, 6}, {3, 6}, {4, 6}, {5, 6}, 
+			{2, 7}, {3, 7}, {4, 7}, {5, 7},
+			
+			// Centre
+			{2, 2}, {2, 3}, {2, 4}, {2, 5},
+			{3, 2}, {3, 5},
+			{4, 2}, {4, 5},
+			{5, 2}, {5, 3}, {5, 4}, {5, 5}
+		};
+		
+		jeuTestInitial.setPlateau(plateauTest);
+		
+		for (int[] coordonneesCourantes : coordonneesCasesVides) {
+			jeuTestInitial.poserPionDansPlateau(coordonneesCourantes[0], coordonneesCourantes[1]);
+		}
+		
+		assertArrayEquals(plateauTest, plateauRempli);	
+	}
 	
 	/**
 	 * Méthode de test de
@@ -461,11 +548,9 @@ class TestModeleJeu {
 	@Test
 	void testPlacementPossible() {
 		
-		ModeleJeu jeu = new ModeleJeu();
+		jeuTestInitial.setTourJoueur1(true);
 		
-		jeu.setTourJoueur1(true);
-		
-		int[][] plateauTest1 = {
+		int[][] plateauTestInitial = {
 	      /* 0  1  2  3  4  5  6  7 */
     /* 0 */ {0, 0, 0, 0, 0, 0, 0, 0},
     /* 1 */ {0, 0, 0, 0, 0, 0, 0, 0},
@@ -523,23 +608,19 @@ class TestModeleJeu {
 		};
 		
 		int[][] coordonneesValidesJoueur1 = {
-			{3, 2}, {4, 5}, {2, 3}, {5, 4}/*,
-			{3, 5}, {4, 5}, {2, 4}, {2, 3},
-			/*{5, 0}, {4, 0}, {3, 0}, {6, 1}*/
+			{3, 2}, {2, 3}, {4, 5}, {5, 4},
 		};
 		
 		int[][] coordonneesValidesJoueur2 = {
-			
-			{3, 5}, {4, 2}, {5, 3}, {2, 4}
-			// {2, 4} passe pas ce n'est pas normal
+			{4, 2}, {5, 3}, {2, 4}, {3, 5}
 		};
 		
-		jeu.setPlateau(plateauTest1);
+		jeuTestInitial.setPlateau(plateauTestInitial);
 		
 		/* Parcours de toutes les coordonnées invalides correspondantes au
 		   joueur 1 afin de s'assurer que le résultat d'exécution soit faux. */
 		for (int[] coordonneesCourantes : coordonneesInvalidesJoueur1) {
-			assertFalse(jeu.placementPossible(
+			assertFalse(jeuTestInitial.placementPossible(
 				coordonneesCourantes[0], 
 				coordonneesCourantes[1]
 			));
@@ -548,95 +629,41 @@ class TestModeleJeu {
 		/* Parcours de toutes les coordonnées valides correspondantes au
            joueur 1 afin de s'assurer que le résultat d'exécution soit vrai. */
 		for (int[] coordonneesCourantes : coordonneesValidesJoueur1) {
-			assertTrue(jeu.placementPossible(
+			assertTrue(jeuTestInitial.placementPossible(
 				coordonneesCourantes[0], 
 				coordonneesCourantes[1]
 			));
 		}
 		
-		//jeu.setPlateau(plateauTest2);
-		jeu.setTourJoueur1(false);
+		jeuTestInitial.setTourJoueur1(false);
 		
+		/* Parcours de toutes les coordonnées invalides correspondantes au
+        joueur 2 afin de s'assurer que le résultat d'exécution soit faux. */
+		for (int[] coordonneesCourantes : coordonneesInvalidesJoueur2) {
+			assertFalse(jeuTestInitial.placementPossible(
+				coordonneesCourantes[0], 
+				coordonneesCourantes[1]
+			));
+		}
 		
         /* Parcours de toutes les coordonnées valides correspondantes au
            joueur 2 afin de s'assurer que le résultat d'exécution soit vrai. */
 		for (int[] coordonneesCourantes : coordonneesValidesJoueur2) {
-			assertTrue(jeu.placementPossible(
+			assertTrue(jeuTestInitial.placementPossible(
 				coordonneesCourantes[0], 
 				coordonneesCourantes[1]
 			));
 		}
 	}
 	
+	/**
+	 * Méthode de test de
+	 * {@link application.modeles.ModeleJeu#rechercheCasesClicPossible()}.
+	 */
 	@Test
-	void testPoserPion() {
-		ModeleJeu jeu = new ModeleJeu();
+	void testRechercheCasesClicPossible() {
 		
-		jeu.setTourJoueur1(true);
-		
-		int[][] plateauTest = {
-	      /* 0  1  2  3  4  5  6  7 */
-    /* 0 */ {0, 0, 0, 0, 0, 0, 0, 0},
-    /* 1 */ {0, 0, 0, 0, 0, 0, 0, 0},
-    /* 2 */ {0, 0, 0, 0, 0, 0, 0, 0},
-    /* 3 */ {0, 0, 0, 1, 1, 0, 0, 0},
-    /* 4 */ {0, 0, 0, 1, 1, 0, 0, 0},
-    /* 5 */ {0, 0, 0, 0, 0, 0, 0, 0},
-    /* 6 */ {0, 0, 0, 0, 0, 0, 0, 0},
-    /* 7 */ {0, 0, 0, 0, 0, 0, 0, 0}
-        };
-        
-        int[][] plateauRempli = {
-	      /* 0  1  2  3  4  5  6  7 */
-    /* 0 */ {1, 1, 1, 1, 1, 1, 1, 1},
-    /* 1 */ {1, 1, 1, 1, 1, 1, 1, 1},
-    /* 2 */ {1, 1, 1, 1, 1, 1, 1, 1},
-    /* 3 */ {1, 1, 1, 1, 1, 1, 1, 1},
-    /* 4 */ {1, 1, 1, 1, 1, 1, 1, 1},
-    /* 5 */ {1, 1, 1, 1, 1, 1, 1, 1},
-    /* 6 */ {1, 1, 1, 1, 1, 1, 1, 1},
-    /* 7 */ {1, 1, 1, 1, 1, 1, 1, 1}
-        };
-        
-        int[][] coordonneesCasesVides = {
-			// Lignes de gauche 
-			{0, 0}, {0, 1}, {0, 2}, {0, 3}, {0, 4}, {0, 5}, {0, 6}, {0, 7},
-			{1, 0}, {1, 1}, {1, 2}, {1, 3}, {1, 4}, {1, 5}, {1, 6}, {1, 7},
-			// Lignes de droite
-			{6, 0}, {6, 1}, {6, 2}, {6, 3}, {6, 4}, {6, 5}, {6, 6}, {6, 7},
-            {7, 0}, {7, 1}, {7, 2}, {7, 3}, {7, 4}, {7, 5}, {7, 6}, {7, 7},
-			
-			// Lignes du haut
-			{2, 0}, {3, 0}, {4, 0}, {5, 0},
-			{2, 1}, {3, 1}, {4, 1}, {5, 1}, 
-			// Lignes du bas
-			{2, 6}, {3, 6}, {4, 6}, {5, 6}, 
-			{2, 7}, {3, 7}, {4, 7}, {5, 7},
-			
-			// Centre
-			{2, 2}, {2, 3}, {2, 4}, {2, 5},
-			{3, 2}, {3, 5},
-			{4, 2}, {4, 5},
-			{5, 2}, {5, 3}, {5, 4}, {5, 5}
-		};
-		
-		jeu.setPlateau(plateauTest);
-		
-		for (int[] coordonneesCourantes : coordonneesCasesVides) {
-			jeu.poserPion(coordonneesCourantes[0], coordonneesCourantes[1]);
-		}
-		
-		assertArrayEquals(plateauTest, plateauRempli);
-		
-	}
-	
-	@Test
-	void testCaseVide() {
-		ModeleJeu jeu = new ModeleJeu();
-		
-		jeu.setTourJoueur1(true);
-		
-		int[][] plateauTest1 = {
+		int[][] plateauTestInitial = {
 	      /* 0  1  2  3  4  5  6  7 */
     /* 0 */ {0, 0, 0, 0, 0, 0, 0, 0},
     /* 1 */ {0, 0, 0, 0, 0, 0, 0, 0},
@@ -648,39 +675,25 @@ class TestModeleJeu {
     /* 7 */ {0, 0, 0, 0, 0, 0, 0, 0}
         };
         
-        int[][] coordonneesCasesVides = {
-			// Lignes de gauche 
-			{0, 0}, {0, 1}, {0, 2}, {0, 3}, {0, 4}, {0, 5}, {0, 6}, {0, 7},
-			{1, 0}, {1, 1}, {1, 2}, {1, 3}, {1, 4}, {1, 5}, {1, 6}, {1, 7},
-			// Lignes de droite
-			{6, 0}, {6, 1}, {6, 2}, {6, 3}, {6, 4}, {6, 5}, {6, 6}, {6, 7},
-            {7, 0}, {7, 1}, {7, 2}, {7, 3}, {7, 4}, {7, 5}, {7, 6}, {7, 7},
-			
-			// Lignes du haut
-			{2, 0}, {3, 0}, {4, 0}, {5, 0},
-			{2, 1}, {3, 1}, {4, 1}, {5, 1}, 
-			// Lignes du bas
-			{2, 6}, {3, 6}, {4, 6}, {5, 6}, 
-			{2, 7}, {3, 7}, {4, 7}, {5, 7},
-			
-			// Centre
-			{2, 2}, {2, 4}, {2, 5},
-			{3, 2}, {3, 5},
-			{4, 2}, {4, 5},
-			{5, 2}, {5, 3}, {5, 4}, {5, 5}
-		};
-        
-		jeu.setPlateau(plateauTest1);
+		jeuTestInitial.setTourJoueur1(true);
 		
-		/* Parcours de toutes les coordonnées invalides correspondantes au
-		   joueur 1 afin de s'assurer que le résultat d'exécution soit faux. */
-		for (int[] coordonneesCourantes : coordonneesCasesVides) {
-			assertTrue(jeu.caseVide(
-				coordonneesCourantes[0], 
-				coordonneesCourantes[1]
-			));
-		}
-         
+		int[][] casesClicPossibleJoueur1 = {
+			{3, 2}, {2, 3}, {5, 4}, {4, 5},
+		};
+		
+		int[][] casesClicPossibleJoueur2 = {
+			{4, 2}, {5, 3}, {2, 4}, {3, 5}
+		};
+		
+		jeuTestInitial.setPlateau(plateauTestInitial);
+		
+		assertArrayEquals(casesClicPossibleJoueur1,
+						  jeuTestInitial.rechercheCasesClicPossible());
+		
+		jeuTestInitial.setTourJoueur1(false);
+		
+		assertArrayEquals(casesClicPossibleJoueur2,
+				  		  jeuTestInitial.rechercheCasesClicPossible());		
 	}
-
+	
 }

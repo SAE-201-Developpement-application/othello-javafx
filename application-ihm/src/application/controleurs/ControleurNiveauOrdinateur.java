@@ -20,88 +20,84 @@ import javafx.stage.Stage;
  */
 public class ControleurNiveauOrdinateur extends ControleurPrincipal {
 	
-	boolean facileActif = false;
-	boolean difficileActif = false;
-	
 	final String CHOISIR_DIFFICULTEE = 
-	"Pour continuer, veuillez choisir une difficultée";
+	"Pour continuer, veuillez choisir une difficulté !";
 	
 	@FXML
-	private ImageView DifficileOff;
+	private ImageView difficileOff;
 	
 	@FXML
-	private ImageView DifficileOn;
+	private ImageView difficileOn;
 	
 	@FXML
-	private ImageView FacileOff;
+	private ImageView facileOff;
 	
 	@FXML
-	private ImageView FacileOn;
+	private ImageView facileOn;
 
+	private void reinitialisationVueParDefaut() {
+		facileOn.setVisible(false);
+		facileOff.setVisible(true);
+		
+		difficileOn.setVisible(false);
+		difficileOff.setVisible(true);
+	}
+	
 	@FXML
 	private void gererClicRetourMenuPrincipal() {		
+		reinitialisationVueParDefaut();
+		
 		// échanger la vue courante avec celle du menu principal
-		facileActif = false;
-		difficileActif = false;
 		GestionVues.activerMenuPrincipal(); 
 	}
 	
 	@FXML
 	private void gererClicFacile() {
 		
+		/* Modification de l'image facile affichée :
+		   affichage de l'image + grosse pour confirmer l'action */
+		facileOff.setVisible(false);
+		facileOn.setVisible(true);
 		
-		if (!facileActif || difficileActif) {
-			facileActif = true;
-			difficileActif = false;
-		} 
+		/* Modification de l'image difficile affichée :
+		   affichage de l'image normale pour échanger le choix */
+		difficileOn.setVisible(false);
+		difficileOff.setVisible(true);
 		
-		if (facileActif) {
-			FacileOn.setVisible(true);
-			FacileOff.setVisible(false);
-			DifficileOff.setVisible(true);
-			DifficileOn.setVisible(false);
-		} else {
-			FacileOn.setVisible(false);
-			FacileOff.setVisible(true);
-		}
-		System.out.println("difficle : " + difficileActif + "facile " + facileActif);
-
+		System.out.println("\n>> ControleurNiveauOrdinateur :"
+						   + " niveau facile cliqué\n");
 	}
 	
 	@FXML
-	private void gererClicDifficile() { // TODO refractor le code, tres probable que la moitiée des if sert a rien
+	private void gererClicDifficile() {
 		
+		/* Modification de l'image difficile affichée :
+		   affichage de l'image + grosse pour confirmer l'action */
+		difficileOff.setVisible(false);
+		difficileOn.setVisible(true);
 		
-		if (!difficileActif || facileActif) {
-			difficileActif = true;
-			facileActif = false;
-		} else {
-		}
+		/* Modification de l'image facile affichée :
+		   affichage de l'image normale pour échanger le choix */
+		facileOn.setVisible(false);
+		facileOff.setVisible(true);
 		
-		if (difficileActif) {
-			DifficileOn.setVisible(true);
-			DifficileOff.setVisible(false);
-			FacileOn.setVisible(false);
-			FacileOff.setVisible(true);
-		} else {
-			DifficileOn.setVisible(false);
-			DifficileOff.setVisible(true);
-		}
+		System.out.println("\n>> ControleurNiveauOrdinateur :"
+						   + " niveau difficile cliqué\n");
 	}
 	
 	@FXML
 	private void gererClicContinuer() {
 		
+		boolean facileActif = facileOn.isVisible();
+		boolean difficileActif = difficileOn.isVisible();
+		
 		if (facileActif || difficileActif) {
+			modeleJeu.setOrdinateurFacile(facileActif ? true : false);
 			
-			if (facileActif) {
-				modeleJeu.setOrdinateurFacile(true);
-			} else {
-				modeleJeu.setOrdinateurFacile(false);
-			}
-			
-			modelePrincipal.setNomJoueur2(modeleJeu.isOrdinateurFacile()
-                    ? "Bot Facile" : "Bot Difficile");
+			modelePrincipal.setNomJoueur2("Bot "
+										  + (modeleJeu.isOrdinateurFacile()
+                    					     ? "facile" : "difficile"));
+			reinitialisationVueParDefaut();
 			GestionVues.activerChoixPseudoContreIA();
 		} else {
 			Alert difficulteeNonChoisie = new Alert(Alert.AlertType.ERROR, CHOISIR_DIFFICULTEE);
@@ -109,8 +105,8 @@ public class ControleurNiveauOrdinateur extends ControleurPrincipal {
 			Stage stage = (Stage) difficulteeNonChoisie.getDialogPane().getScene().getWindow();
 			stage.getIcons().add(new Image("application/vues/images/Annulation.png"));
 			
-			difficulteeNonChoisie.setTitle("Othello - Difficultée non choisie");
-			difficulteeNonChoisie.setHeaderText("Difficultée non choisie");
+			difficulteeNonChoisie.setTitle("Othello - Difficulté non choisie");
+			difficulteeNonChoisie.setHeaderText("Difficulté non choisie");
 			difficulteeNonChoisie.showAndWait();		
 		}
 	}
