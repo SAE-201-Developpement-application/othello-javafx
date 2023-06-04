@@ -17,10 +17,10 @@ package application.modeles;
 public class ModelePrincipal {
 	
 	/* Pseudo du premier joueur */
-	private String nomJoueur1;
+	private String pseudoJoueur1;
 	
 	/* Pseudo du deuxième joueur, si il existe*/
-	private String nomJoueur2;
+	private String pseudoJoueur2;
 	
 	/** Paramètre indiquant si une sauvegarde existe */
 	private boolean sauvegardeExiste = false;
@@ -57,13 +57,13 @@ public class ModelePrincipal {
 	}
 	
 	/** @return Nom du premier joueur. */
-	public String getNomJoueur1() {
-		return nomJoueur1;
+	public String getPseudoJoueur1() {
+		return pseudoJoueur1;
 	}
 	
 	/** @return Nom du second joueur. */
-	public String getNomJoueur2() {
-		return nomJoueur2;
+	public String getPseudoJoueur2() {
+		return pseudoJoueur2;
 	}
 	
 	/** @return Si il y a une sauvegarde d'une partie de jeu. */
@@ -93,12 +93,12 @@ public class ModelePrincipal {
 	
 	/** Modifie le nom du joueur 1 */
 	public void setNomJoueur1(String nom) {
-		nomJoueur1 = nom;
+		pseudoJoueur1 = nom;
 	}
 	
 	/** Modifie le nom du joueur 2 */
 	public void setNomJoueur2(String nom) {
-		nomJoueur2 = nom;
+		pseudoJoueur2 = nom;
 	}
 	
 	/** Modifie le statut du paramètre musique */

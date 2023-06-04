@@ -84,6 +84,7 @@ public class ControleurJeu extends ControleurPrincipal {
 	@FXML
 	private void lancerJeu() {
 		initialiserPlateauJeu();
+		System.out.println(">> ControleurJeu : Jeu lancé\n");
 	}
 	
     /**
@@ -97,8 +98,11 @@ public class ControleurJeu extends ControleurPrincipal {
         apparaitrePion("Noir", 3, 4);
         apparaitrePion("Noir", 4, 3);
                 
-        pseudoJoueur1.setText(modelePrincipal.getNomJoueur1());
-        pseudoJoueur2.setText(modelePrincipal.getNomJoueur2());
+        pseudoJoueur1.setText(modelePrincipal.getPseudoJoueur1());
+        pseudoJoueur2.setText(modelePrincipal.getPseudoJoueur2());
+        
+        scoreJoueur1.setText("" + modeleJeu.getScoreJoueur1());
+        scoreJoueur2.setText("" + modeleJeu.getScoreJoueur2());
         
         jouerMaintenant.setVisible(false);
         
@@ -164,9 +168,9 @@ public class ControleurJeu extends ControleurPrincipal {
 	 */
 	private void reinitialisationVueModeleJeu() {
 		reinitialiserPlateauJeu();
-		
-        modelePrincipal.setNomJoueur1(null);
-        modelePrincipal.setNomJoueur2(null);
+//		
+//        modelePrincipal.setNomJoueur1(null);
+//        modelePrincipal.setNomJoueur2(null);
         
         // réinitialisation du modèle jeu (des paramètres de la partie)
         modeleJeu = new ModeleJeu();
@@ -180,6 +184,9 @@ public class ControleurJeu extends ControleurPrincipal {
         imageScoreJoueur1.setVisible(false);
         imageScoreJoueur2.setVisible(false);
         
+		tourJoueur2.setVisible(false);
+		tourJoueur1.setVisible(false);
+        
         tourJoueur1.setVisible(false);
         
         jouerMaintenant.setVisible(true);
@@ -189,7 +196,6 @@ public class ControleurJeu extends ControleurPrincipal {
      * Réinitialise le plateau de jeu par défaut.
      */
     private void reinitialiserPlateauJeu() {
-        // TODO cacher les pions supplémentaires ajoutés
         for (Node nodeActuelle : this.toutesLesNodes) {
         	
         	// Récupération de l'identifiant de la node
@@ -219,7 +225,6 @@ public class ControleurJeu extends ControleurPrincipal {
 	
 	@FXML
 	private void gererClicAide() {
-		
 		String messageAide =
 		"""
 		Pour apprendre les règles d'Othello, rendez vous sur ce site internet :
@@ -242,6 +247,69 @@ public class ControleurJeu extends ControleurPrincipal {
 	}
 	
 	/**
+	 * Vérifie si la partie est finie et déclenche la pop-up correspondante.
+	 */
+	private void verifierFinPartie() {
+		// TODO : si aucune possibilité de placer un pion => fin partie
+		if (modeleJeu.partieFinie()) {
+			gererPartieFinie();
+		}
+	}
+		
+	@FXML
+	private void gererClicPasserTour() {
+		modeleJeu.passerTour();		
+		verifierFinPartie();
+		permuterFlecheTour();
+	}
+	
+	private void gererPartieFinie() {
+		String textePartieFinie = "La partie est désormais terminée.\n";
+		
+		int scoreJ1 = modeleJeu.getScoreJoueur1();
+		int scoreJ2 = modeleJeu.getScoreJoueur2();
+		
+		if (scoreJ1 == scoreJ2) {
+			textePartieFinie += "Égalité, bien joué à vous deux !";
+		} else {
+			textePartieFinie += (scoreJ1 > scoreJ2
+							    ? modelePrincipal.getPseudoJoueur1()
+							    : modelePrincipal.getPseudoJoueur2())
+								+ " a gagné, bien joué à lui !";
+		}
+		
+		/* Création d'une boîte d'alerte de type erreur. */
+		Alert boitePartieTerminee = new Alert(Alert.AlertType.INFORMATION,
+											  textePartieFinie);
+								    		  
+								    		  
+		ButtonType boutonRejouer = new ButtonType("Rejouer");
+        ButtonType boutonRetourMenuPrincipal
+        = new ButtonType("Retourner au menu principal");
+        ButtonType boutonRetourJeu = new ButtonType("Retourner à la fenêtre de jeu");
+
+                	
+        boitePartieTerminee.getButtonTypes()
+        				   .setAll(boutonRejouer, boutonRetourMenuPrincipal,
+        						   boutonRetourJeu);
+									
+		Stage stage = (Stage) boitePartieTerminee.getDialogPane()
+												 .getScene().getWindow();
+		stage.getIcons()
+		.add(new Image("application/vues/images/Jeu/FinPartie.png"));
+		
+		boitePartieTerminee.setTitle("Othello - Partie terminée");
+		boitePartieTerminee.setHeaderText("Partie terminée");
+		Optional<ButtonType> resultat = boitePartieTerminee.showAndWait();
+		
+		if (resultat.get() == boutonRejouer) {
+			reinitialisationVueModeleJeu();
+		} else if (resultat.get() == boutonRetourMenuPrincipal) {
+			gererClicRetourMenuPrincipal();
+		}
+	}
+	
+	/**
 	 * @param idCase Id de la case dont on veut retourner les coordonnées x/y.
 	 * @return un tableau d'entiers contenant les coordonnées de la case.
 	 */
@@ -257,6 +325,27 @@ public class ControleurJeu extends ControleurPrincipal {
 		resultat[1] = indexLigneY;
 		return resultat;
 	}
+	
+	/**
+	 * Récupère les nodes via les coordonnées x et y.
+	 * @param x la coordonnée x qui correspond à la colonne du pion.
+	 * @param y la coordonnée y qui correspond à la ligne du pion.
+	 */
+    private Node getNodeParCoordonnees(int x, int y) {
+        Node nodeCherchee = null;
+    	
+        for (Node nodeActuelle : this.toutesLesNodes) {
+        	
+        	// Récupération de l'identifiant de la node
+    		String idCase = nodeActuelle.toString().substring(17, 19);
+    		
+    		if (Integer.parseInt(idCase.substring(0, 1)) == x
+    			&& Integer.parseInt(idCase.substring(1)) == y) {
+    			nodeCherchee = nodeActuelle;
+    		}
+        }
+        return nodeCherchee;
+    }
 	
 	private void apparaitrePion(String couleur, int coordonneeX, int coordonneeY) {
 		ImageView pion
@@ -281,15 +370,73 @@ public class ControleurJeu extends ControleurPrincipal {
 		ajouterPion(pion);
 	}
 	
+	private void apparaitrePionGIF(String couleur, int coordonneeX, int coordonneeY) {
+		
+		ImageView gifNoirVersBlanc = new ImageView(new Image("application/vues/images/Jeu/GIF1.gif"));
+	    ImageView gifBlancVersNoir = new ImageView(new Image("application/vues/images/Jeu/GIF2.gif"));
+	    
+	   	gifNoirVersBlanc.setFitWidth(65);
+	    gifNoirVersBlanc.setFitHeight(65);
+	    
+	    gifBlancVersNoir.setFitWidth(65);
+	    gifBlancVersNoir.setFitHeight(65);
+		
+
+		gifNoirVersBlanc.setId("pionGif" + coordonneeX + coordonneeY);
+		gifBlancVersNoir.setId("pionGif" + coordonneeX + coordonneeY);
+
+		// Ajout d'un écouteur de clic au pion affiché
+		gifNoirVersBlanc.addEventFilter(MouseEvent.MOUSE_CLICKED,
+										new EventHandler<MouseEvent>() {
+		    @Override
+		    public void handle(MouseEvent mouseEvent) {
+		        gererClicCase(mouseEvent);
+		    }
+		});
+		
+		GridPane.setColumnIndex(gifNoirVersBlanc, coordonneeX);
+		GridPane.setRowIndex(gifNoirVersBlanc, coordonneeY);
+		
+		ajouterPion(gifNoirVersBlanc);
+	}
+	
 	private void ajouterPion(ImageView image) {
 		ajouterAToutesLesNodes(image);
 		plateau.getChildren().add(image);
 	}
-	
-	private void retirerPion(Node caseNode) {
-		retirerAToutesLesNodes(caseNode);
+																			
+	private void retirerPion(Node caseNode) {													
+		retirerAToutesLesNodes(caseNode);	
 		plateau.getChildren().remove(caseNode);
 	}
+	
+	/**
+	 * Alterne la position de la flèche indiquant 
+	 * qui doit jouer entre le joueur1 et le joueur2
+	 * Cette flèche est celle apparaissant devant les noms des joueurs.
+	 */
+	private void permuterFlecheTour() {
+		if (modeleJeu.isTourJoueur1()) {
+			tourJoueur2.setVisible(false);
+			tourJoueur1.setVisible(true);
+		} else {
+			tourJoueur1.setVisible(false);
+			tourJoueur2.setVisible(true);
+		}
+	}
+	
+	/**
+	 * Mise à jour des scores des 2 joueurs après clic.
+	 */
+	private void mettreScoreAJour() {
+		scoreJoueur1.setText("" + modeleJeu.getScoreJoueur1());
+		scoreJoueur2.setText("" + modeleJeu.getScoreJoueur2());
+	}
+	
+	/*private void retirerPionGIF(Node caseNode) {
+		retirerAToutesLesNodes(caseNode);
+		plateau.getChildren().remove(caseNode);
+	}*/  
 	
 	/**
 	 * Ajouter à la liste de l'attribut toutesLesNodes un élément.
@@ -332,8 +479,22 @@ public class ControleurJeu extends ControleurPrincipal {
 		this.toutesLesNodes = listeTemporaire;
 	}
 	
+	/**
+	 * Récupère la couleur correspondante au joueur actuel.
+	 * @return "Noir" ou "Blanc" selon le tour du joueur.
+	 */
+	private String getCouleurActuellePion() {
+		if (modeleJeu.isTourJoueur1()) {
+			return "Noir";
+		}
+		// else
+		return "Blanc";
+	}
+	
 	@FXML
 	private void gererClicCase(MouseEvent event) {
+		
+		String couleurActuellePion = getCouleurActuellePion();
 		
 		Node caseCliquee = (Node) event.getTarget();
 		
@@ -349,7 +510,7 @@ public class ControleurJeu extends ControleurPrincipal {
 		System.out.println("ControleurJeu >> Case cliquée :"
 						   + "\nID = "+ idCase
 						   + "\nX = " + coordonneeX
-						   + "\nY = " + coordonneeY + "\n");
+						   + "\nY = " + coordonneeY);
 		
 		// Si image cliquée == image/fond invisible
 		if (idCase.startsWith("case")) {
@@ -362,6 +523,25 @@ public class ControleurJeu extends ControleurPrincipal {
 				gererErreurClicImpossible(modeleJeu.isTourJoueur1());
 			} else {
 				modeleJeu.setPartieCommence(true);
+				modeleJeu.reinitialiserTourPasses();
+				
+//				apparaitrePionGIF(couleurActuellePion,
+//							   	  coordonneeX, coordonneeY);
+//				
+//				/* 
+//				 * Une fois que le gif est lancé, on mets en pause de 
+//				 * 100ms (la durée d'un cycle du gif) 
+//				 * et on fait apparaitre le pion
+//				 */
+//				 try {
+//					Thread.sleep(100);  // soit ca soit des timers mais on va encore importer 20000 trucs
+//				 } catch (InterruptedException e) {
+//            		e.printStackTrace();
+//       		 }
+//               retirerPionGIF()
+       			 
+				apparaitrePion(couleurActuellePion,
+							   coordonneeX, coordonneeY);
 				
 				for (int[] pionARetourner : pionsARetourner) {
 					System.out.println("\nPion à retourner :"
@@ -370,16 +550,20 @@ public class ControleurJeu extends ControleurPrincipal {
 									   + "\nY = "
 									   + pionARetourner[1]);
 					
-
-					// TODO @Tom retourne moi ce pion en fonction de la couleur
-					// (bonne change jsp encore comment faire là - méthode getCouleurParCoordonnees ds modele ?)
+					Node nodePion = getNodeParCoordonnees(pionARetourner[0],
+										  				  pionARetourner[1]);
+					retirerPion(nodePion);
+					apparaitrePion(couleurActuellePion,
+							       pionARetourner[0], pionARetourner[1]);
 				}
 				
-				apparaitrePion("Noir", coordonneeX, coordonneeY);
+				mettreScoreAJour();
+				permuterFlecheTour();
+				
+				verifierFinPartie();
 			}
-		} else {
-			retirerPion(caseCliquee);
 		}
+		
 	}
 	
 	/**
@@ -392,7 +576,7 @@ public class ControleurJeu extends ControleurPrincipal {
 	 * @param tourJoueur1 Si c'est le tour du joueur 1
 	 */
 	private void gererErreurClicImpossible(boolean tourJoueur1) {
-		System.out.println("ControleurJeu >> Impossible placer pion où clic");
+		System.out.println("ControleurJeu >> Impossible placer pion où clic\n");
 		
 		boolean clicsImpossiblesMax
 		= modeleJeu.getNombreErreursPlacementJoueur1()
@@ -402,13 +586,12 @@ public class ControleurJeu extends ControleurPrincipal {
 		
 		// Au bout de 5 clics impossibles => Affichage aide
 		if (clicsImpossiblesMax) {
-			System.out.println("NONNN TOMMMMM 5 ERRREUURS");
 			gererClicAide();
 			modeleJeu.reinitialiserNombreErreurs(modeleJeu.isTourJoueur1());
 		}
 	}
 	
-	@FXML // TODO Loic d'apres GPT c'est comme ca qu'on utilise un gif, ping moi si tu bite rien (tiens bite est un mot du dictionnaire ¯\_(ツ)_/¯) 
+	@FXML // TODO Loic d'apres "J'ai pété" c'est comme ca qu'on utilise un gif, ping moi si tu bite rien (tiens bite est un mot du dictionnaire ¯\_(ツ)_/¯) 
 	private void demarrerGIF() {
 	    ImageView gifNoirVersBlanc = new ImageView(new Image("application/vues/images/Jeu/GIF1.gif"));
 	    ImageView gifBlancVersNoir = new ImageView(new Image("application/vues/images/Jeu/GIF2.gif"));

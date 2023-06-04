@@ -75,10 +75,10 @@ public class ModeleJeu extends ModelePrincipal {
 	private boolean partieCommence;
 
 	/** Points du premier joueur. */
-	private int scoreJoueur1;
+	private int scoreJoueur1 = 2;
 	
 	/** Points du second joueur (ou du bot). */
-	private int scoreJoueur2;
+	private int scoreJoueur2 = 2;
 	
 	/** 
 	 * Commence à 0 et s'incrémente si un joueur passe le tour.
@@ -193,12 +193,33 @@ public class ModeleJeu extends ModelePrincipal {
     public void setScoreJoueur2(int score) {
         this.scoreJoueur2 = score;
     }
+    
+    /** @param score Nouveau score du joueur 1 */
+    public void augmenterScoreJoueur1(int score) {
+        this.scoreJoueur1 += score;
+    }
+    
+    /** @param score Nouveau score du joueur 1 */
+    public void reduireScoreJoueur1(int score) {
+        this.scoreJoueur1 -= score;
+    }
+    
+    /** @param score Nouveau score du joueur 2 */
+    public void augmenterScoreJoueur2(int score) {
+        this.scoreJoueur2 += score;
+    }
+    
+    /** @param score Nouveau score du joueur 2 */
+    public void reduireScoreJoueur2(int score) {
+        this.scoreJoueur2 -= score;
+    }
 
 	/**
 	 * Incrémentation du nombre de tours consécutifs passés.
 	 */
     public void passerTour() {
-        this.toursPasses++;     
+        this.toursPasses++;  
+        tourJoueur1 = tourJoueur1 ? false : true;  
     }
     
     /**
@@ -214,6 +235,11 @@ public class ModeleJeu extends ModelePrincipal {
     	this.nombreErreursPlacementJoueur1++;
     }
     
+    /** Incrémente le nombre d'erreurs de placement du joueur 2 */                        
+    public void ajouterErreurPlacementJoueur2() {
+        this.nombreErreursPlacementJoueur2++;
+    }
+    
     /**
      * Réinitialise le nombre d'erreurs du joueur 1 si tourJ1 est true
      * sinon le nombre d'erreurs du joueur 2.
@@ -225,11 +251,6 @@ public class ModeleJeu extends ModelePrincipal {
     	} else {
     		this.nombreErreursPlacementJoueur2 = 0;	
     	}
-    }
-    
-    /** Incrémente le nombre d'erreurs de placement du joueur 2 */                        
-    public void ajouterErreurPlacementJoueur2() {
-        this.nombreErreursPlacementJoueur2++;
     }
     
     /** 
@@ -303,8 +324,17 @@ public class ModeleJeu extends ModelePrincipal {
             for (int indice = 0; indice < pionsARetournerActuels.length; indice++) {
 				poserPionDansPlateau(pionsARetournerActuels[indice][0],
 									 pionsARetournerActuels[indice][1]);
-				// TODO c'est la pour le gif qui retourne les pions
 			}
+            
+            // Gestion du score
+			if (tourJoueur1) {
+				augmenterScoreJoueur1(pionsARetournerActuels.length + 1);
+				reduireScoreJoueur2(pionsARetournerActuels.length);
+			} else {
+				augmenterScoreJoueur2(pionsARetournerActuels.length + 1);
+				reduireScoreJoueur1(pionsARetournerActuels.length);
+			}
+			
 			reinitialiserPionsARetourner();
 			
 			setTourJoueur1(tourJoueur1 ? false : true);
@@ -637,7 +667,7 @@ public class ModeleJeu extends ModelePrincipal {
                && !caseVide(x, indiceY)
                && !resultat) {
             int caseCourante = plateau[indiceY][x];
-        	int[] coordonneesCaseCourante = {x, y - 1};
+        	int[] coordonneesCaseCourante = {x, indiceY};
 
             // Pion de la même couleur que la case vérifiée
             if (caseCourante == caseVerifiee) {
@@ -834,8 +864,8 @@ public class ModeleJeu extends ModelePrincipal {
         /* Parcours de la diagonale au-dessus à gauche de la case
            initiale afin de déterminer la présence d'un pion allié
            permettant un placement */
-        while (indiceX < plateau[indiceY].length
-        	   && indiceY >= 0
+        while (indiceY >= 0
+        	   && indiceX < plateau[indiceY].length
                && !caseVide(indiceX, indiceY)
                && !resultat) {
             int caseCourante = plateau[indiceY][indiceX];
@@ -948,8 +978,8 @@ public class ModeleJeu extends ModelePrincipal {
         /* Parcours de la diagonale en-dessous à droite de la case
            initiale afin de déterminer la présence d'un pion allié
            permettant un placement */
-        while (indiceX < plateau[indiceY].length
-        	   && indiceY < plateau.length
+        while (indiceY < plateau.length
+        	   && indiceX < plateau[indiceY].length
                && !caseVide(indiceX, indiceY)
                && !resultat) {
             int caseCourante = plateau[indiceY][indiceX];
@@ -1027,5 +1057,65 @@ public class ModeleJeu extends ModelePrincipal {
    			System.out.print("\n");
    		}
    	}
+   	
+   	 /** @return true si 2 tours consécutifs sont passés. */
+     public boolean deuxToursPasses() {
+		 return getToursPasses() >= 2;
+	 }
+	 
+     /** @return si le plateau est rempli. */
+	 public boolean plateauRempli() {
+		 boolean casesToutesRemplies = true;
+		 
+		 for (int i = 0;
+			  i < plateau.length && casesToutesRemplies;
+			  i++) {
+			 for (int j = 0;
+				  j < plateau[i].length && casesToutesRemplies;
+				  j++) {
+				 casesToutesRemplies = plateau[i][j] != CASE_VIDE;
+			 }
+		 }
+		 return casesToutesRemplies;
+	 }
+	 
+	 /** @return si le plateau est dominé par une couleur de pion. */
+     public boolean plateauDomine() {
+
+         boolean aucunPionNoir = true;
+         boolean aucunPionBlanc = true;
+         
+         for (int i = 0;
+              i < plateau.length && aucunPionNoir;
+              i++) {
+             for (int j = 0;
+                  j < plateau[i].length
+                  && (aucunPionNoir);
+                  j++) {
+                 aucunPionNoir = plateau[i][j] != NOIR;
+             }
+         }
+         
+         if (!aucunPionNoir) {
+        	 for (int i = 0;
+        	      i < plateau.length && aucunPionBlanc;
+                  i++) {
+                for (int j = 0;
+                     j < plateau[i].length
+                     && (aucunPionBlanc);
+                     j++) {
+                    aucunPionBlanc = plateau[i][j] != BLANC;
+                }
+            }
+        }
+        return aucunPionNoir || aucunPionBlanc;
+    }
+	 
+	/** @return true si la fin de la partie est finie. */
+	public boolean partieFinie() {
+		// TODO : si aucune possibilité de placer un pion => fin partie
+		return deuxToursPasses() || plateauRempli()
+			   || plateauDomine() /*|| aucunPlacementPossible() */;
+	}
 }
 

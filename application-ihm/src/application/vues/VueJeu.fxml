@@ -25,7 +25,7 @@
             <Image url="@images/Jeu/MenuPrincipal.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="66.0" fitWidth="213.0" layoutX="116.0" layoutY="452.0" preserveRatio="true">
+      <ImageView fitHeight="66.0" fitWidth="213.0" layoutX="116.0" layoutY="452.0" onMouseClicked="#gererClicPasserTour" preserveRatio="true">
          <image>
             <Image url="@images/Jeu/PasserTour.png" />
          </image>
@@ -404,12 +404,12 @@
             </ImageView>
          </children>
       </GridPane>
-      <Text fx:id="pseudoJoueur1" fill="WHITE" layoutX="93.0" layoutY="233.0" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" strokeWidth="3.0" text="PseudoJoueur1" visible="false" wrappingWidth="334.0">
+      <Text fx:id="pseudoJoueur1" fill="WHITE" layoutX="93.0" layoutY="233.0" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" strokeWidth="3.0" text="PseudoJoueur1" visible="false" wrappingWidth="300.0">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>
       </Text>
-      <Text fx:id="pseudoJoueur2" fill="WHITE" layoutX="94.0" layoutY="334.0" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" strokeWidth="3.0" text="PseudoJoueur2" visible="false" wrappingWidth="334.0">
+      <Text fx:id="pseudoJoueur2" fill="WHITE" layoutX="94.0" layoutY="334.0" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" strokeWidth="3.0" text="PseudoJoueur2" visible="false" wrappingWidth="300.0">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>

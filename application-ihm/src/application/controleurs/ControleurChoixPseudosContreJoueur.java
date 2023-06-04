@@ -26,15 +26,19 @@ import javafx.scene.control.TextField;
  */
 public class ControleurChoixPseudosContreJoueur extends ControleurPrincipal {
 	
-	/* Chaine de caractere pour l'erreur de pseudo */
+	/* Chaîne de caractère pour l'erreur de pseudo */
 	private final String REGLES_PSEUDO 
-	= "Veuillez entrer un nom contenant 2 à 16 caractères.";
+	= "Veuillez entrer un pseudonyme contenant 2 à 16 caractères."
+	  + "\nLes 2 pseudos doivent être différents.";
 	
-	/* Booleen pour savoir si le nom du joueur 1 est bien saisi */
-	private boolean nomOKJoueur1 = false;
+	/* Booléen pour savoir si le nom du joueur 1 est bien saisi */
+	private boolean nomOkJoueur1 = false;
 	
-	/* Booleen pour savoir si le nom du joueur 2 est bien saisi */
-	private boolean nomOKJoueur2 = false;
+	/* Booléen pour savoir si le nom du joueur 2 est bien saisi */
+	private boolean nomOkJoueur2 = false;
+	
+	private String nomJoueur1;
+	private String nomJoueur2;
 	
 	@FXML
 	private TextField pseudoJoueur;
@@ -75,48 +79,48 @@ public class ControleurChoixPseudosContreJoueur extends ControleurPrincipal {
 	@FXML
 	private void gererMiseAJourNomJoueur1() {
 		
-		String nomJoueur1 = pseudoJoueur.getText();
+		nomJoueur1 = pseudoJoueur.getText();
 		
 		if (nomJoueur1.isEmpty()) {
 			croixJoueur1.setVisible(false);
 			cocheJoueur1.setVisible(false);
 			
-			nomOKJoueur1 = false;
+			nomOkJoueur1 = false;
 		} else if (nomJoueur1.length() > 1 && nomJoueur1.length() <= 16 
 										   && contientDeuxCaracteresNonVides(nomJoueur1)) {
 			
 			croixJoueur1.setVisible(false);
 			cocheJoueur1.setVisible(true);
 			
-			modelePrincipal.setNomJoueur1(nomJoueur1);
-			nomOKJoueur1 = true;
+			nomOkJoueur1 = true;
 		} else {
 			cocheJoueur1.setVisible(false);
 			croixJoueur1.setVisible(true);
 			
-			nomOKJoueur1 = false;
+			nomOkJoueur1 = false;
 		}
 	}
 	
 	@FXML
 	private void gererMiseAJourNomJoueur2() {
 	
-		String nomJoueur2 = pseudoJoueur2.getText();
+		nomJoueur2 = pseudoJoueur2.getText();
 		
 		if (nomJoueur2.isEmpty()) {
 			croixJoueur2.setVisible(false);
 			cocheJoueur2.setVisible(false);
-			nomOKJoueur2 = false;
+			nomOkJoueur2 = false;
 		} else if (nomJoueur2.length() > 1 && nomJoueur2.length() <= 16 
 										   && contientDeuxCaracteresNonVides(nomJoueur2)) {
 			croixJoueur2.setVisible(false);
 			cocheJoueur2.setVisible(true);
-			modelePrincipal.setNomJoueur2(nomJoueur2);
-			nomOKJoueur2 = true;
+			
+			nomOkJoueur2 = true;
 		} else {
 			cocheJoueur2.setVisible(false);
 			croixJoueur2.setVisible(true);
-			nomOKJoueur2 = false;	
+			
+			nomOkJoueur2 = false;	
 		}
 	}
 	
@@ -128,16 +132,22 @@ public class ControleurChoixPseudosContreJoueur extends ControleurPrincipal {
 	
 	@FXML
 	private void gererClicJouer() {
-		if (nomOKJoueur1 && nomOKJoueur2) {			
+		if (nomOkJoueur1 && nomOkJoueur2
+			&& !nomJoueur1.equals(nomJoueur2)) {
+			
 			modeleJeu.setPartieOrdinateur(false);
+			
+			modelePrincipal.setNomJoueur1(nomJoueur1);
+			modelePrincipal.setNomJoueur2(nomJoueur2);
+			
+			modeleJeu.setPartieCommence(false);
+			
 			pseudoJoueur.setText(null);
 			pseudoJoueur2.setText(null);
 			cocheJoueur1.setVisible(false);
 			cocheJoueur2.setVisible(false);
-			nomOKJoueur1 = false;
-			nomOKJoueur2 = false;
-			
-			modeleJeu.setPartieCommence(false);
+			nomOkJoueur1 = false;
+			nomOkJoueur2 = false;
 
 			GestionVues.activerJeu();
 		} else {
