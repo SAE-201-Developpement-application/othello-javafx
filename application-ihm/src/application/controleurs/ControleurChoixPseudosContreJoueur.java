@@ -140,7 +140,7 @@ public class ControleurChoixPseudosContreJoueur extends ControleurPrincipal {
 			modelePrincipal.setNomJoueur1(nomJoueur1);
 			modelePrincipal.setNomJoueur2(nomJoueur2);
 			
-			modeleJeu.setPartieCommence(false);
+			modeleJeu.setPartieCommencee(false);
 			
 			pseudoJoueur.setText(null);
 			pseudoJoueur2.setText(null);

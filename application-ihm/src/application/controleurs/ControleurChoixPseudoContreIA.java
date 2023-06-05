@@ -90,7 +90,7 @@ public class ControleurChoixPseudoContreIA extends ControleurPrincipal {
 			modeleJeu.setPartieOrdinateur(true);;
 			pseudoJoueur1.setText(null);
 			cocheJoueur.setVisible(false);
-			modeleJeu.setPartieCommence(false);
+			modeleJeu.setPartieCommencee(false);
 			
 			nomOkJoueur1 = false;
 			

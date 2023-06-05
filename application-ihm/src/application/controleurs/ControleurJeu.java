@@ -84,7 +84,8 @@ public class ControleurJeu extends ControleurPrincipal {
 	@FXML
 	private void lancerJeu() {
 		initialiserPlateauJeu();
-		System.out.println(">> ControleurJeu : Jeu lancé\n");
+		modeleJeu.setPartieEnCours(true);
+		System.out.println(">> ControleurJeu : Jeu lancé");
 	}
 	
     /**
@@ -121,7 +122,7 @@ public class ControleurJeu extends ControleurPrincipal {
 	@FXML
 	private void gererClicRetourMenuPrincipal() {
 		// Demander une confirmation si partie commencée
-		if (modeleJeu.isPartieCommence()) {
+		if (modeleJeu.isPartieCommence() && !modeleJeu.partieFinie()) {
     		/* Création d'une boîte d'alerte de type attention. */
             Alert boiteModificationNonEnregistre
             = new Alert(Alert.AlertType.WARNING,
@@ -246,6 +247,17 @@ public class ControleurJeu extends ControleurPrincipal {
 		boiteAide.showAndWait();
 	}
 	
+	@FXML
+	private void gererClicPasserTour() {
+		if (modeleJeu.isPartieEnCours() || modeleJeu.partieFinie()) {
+			modeleJeu.passerTour();		
+			verifierFinPartie();
+			permuterFlecheTour();			
+		} else {
+			System.out.println("La partie n'est pas commencée ou est finie.\n");
+		}
+	}
+	
 	/**
 	 * Vérifie si la partie est finie et déclenche la pop-up correspondante.
 	 */
@@ -254,13 +266,6 @@ public class ControleurJeu extends ControleurPrincipal {
 		if (modeleJeu.partieFinie()) {
 			gererPartieFinie();
 		}
-	}
-		
-	@FXML
-	private void gererClicPasserTour() {
-		modeleJeu.passerTour();		
-		verifierFinPartie();
-		permuterFlecheTour();
 	}
 	
 	private void gererPartieFinie() {
@@ -494,74 +499,82 @@ public class ControleurJeu extends ControleurPrincipal {
 	@FXML
 	private void gererClicCase(MouseEvent event) {
 		
-		String couleurActuellePion = getCouleurActuellePion();
+		if (modeleJeu.isPartieEnCours()
+			&& !modeleJeu.partieFinie()) {
 		
-		Node caseCliquee = (Node) event.getTarget();
-		
-		ajouterAToutesLesNodes(caseCliquee);
-		
-		// Récupération de l'identifiant de l'image cliquée
-		String idCase = caseCliquee.toString().substring(13, 19);
-		
-		int[] coordonnees = getCoordonneesCase(idCase);
-		int coordonneeX = coordonnees[0];
-		int coordonneeY = coordonnees[1];
-
-		System.out.println("ControleurJeu >> Case cliquée :"
-						   + "\nID = "+ idCase
-						   + "\nX = " + coordonneeX
-						   + "\nY = " + coordonneeY);
-		
-		// Si image cliquée == image/fond invisible
-		if (idCase.startsWith("case")) {
+			String couleurActuellePion = getCouleurActuellePion();
 			
-			int[][] pionsARetourner = modeleJeu.clicCase(coordonneeX, coordonneeY);
+			Node caseCliquee = (Node) event.getTarget();
 			
-			/* Si pionsARetourner.length == 0
-			 * => joueur peut pas placer de pion là où il a cliqué */
-			if (pionsARetourner.length == 0) {
-				gererErreurClicImpossible(modeleJeu.isTourJoueur1());
-			} else {
-				modeleJeu.setPartieCommence(true);
-				modeleJeu.reinitialiserTourPasses();
+			ajouterAToutesLesNodes(caseCliquee);
+			
+			// Récupération de l'identifiant de l'image cliquée
+			String idCase = caseCliquee.toString().substring(13, 19);
+			
+			int[] coordonnees = getCoordonneesCase(idCase);
+			int coordonneeX = coordonnees[0];
+			int coordonneeY = coordonnees[1];
+	
+			System.out.println("\nControleurJeu >> Case cliquée :"
+							   + "\nID = "+ idCase
+							   + "\nX = " + coordonneeX
+							   + "\nY = " + coordonneeY);
+			
+			// Si image cliquée == image/fond invisible
+			if (idCase.startsWith("case")) {
 				
-//				apparaitrePionGIF(couleurActuellePion,
-//							   	  coordonneeX, coordonneeY);
-//				
-//				/* 
-//				 * Une fois que le gif est lancé, on mets en pause de 
-//				 * 100ms (la durée d'un cycle du gif) 
-//				 * et on fait apparaitre le pion
-//				 */
-//				 try {
-//					Thread.sleep(100);  // soit ca soit des timers mais on va encore importer 20000 trucs
-//				 } catch (InterruptedException e) {
-//            		e.printStackTrace();
-//       		 }
-//               retirerPionGIF()
-       			 
-				apparaitrePion(couleurActuellePion,
-							   coordonneeX, coordonneeY);
+				int[][] pionsARetourner = modeleJeu.clicCase(coordonneeX,
+														     coordonneeY);
 				
-				for (int[] pionARetourner : pionsARetourner) {
-					System.out.println("\nPion à retourner :"
-									   + "\nX = "
-									   + pionARetourner[0]
-									   + "\nY = "
-									   + pionARetourner[1]);
+				/* Si pionsARetourner.length == 0
+				 * => joueur peut pas placer de pion là où il a cliqué */
+				if (pionsARetourner.length == 0) {
+					gererErreurClicImpossible(modeleJeu.isTourJoueur1());
+				} else {
+					modeleJeu.setPartieCommencee(true);
+					modeleJeu.reinitialiserTourPasses();
 					
-					Node nodePion = getNodeParCoordonnees(pionARetourner[0],
-										  				  pionARetourner[1]);
-					retirerPion(nodePion);
+	//				apparaitrePionGIF(couleurActuellePion,
+	//							   	  coordonneeX, coordonneeY);
+	//				
+	//				/* 
+	//				 * Une fois que le gif est lancé, on mets en pause de 
+	//				 * 100ms (la durée d'un cycle du gif) 
+	//				 * et on fait apparaitre le pion
+	//				 */
+	//				 try {
+	//					Thread.sleep(100);  // soit ca soit des timers mais on va encore importer 20000 trucs
+	//				 } catch (InterruptedException e) {
+	//            		e.printStackTrace();
+	//       		 }
+	//               retirerPionGIF()
+	       			 
 					apparaitrePion(couleurActuellePion,
-							       pionARetourner[0], pionARetourner[1]);
+								   coordonneeX, coordonneeY);
+					
+					System.out.println("\nPion(s) à retourner :");
+					for (int[] pionARetourner : pionsARetourner) {
+						System.out.println("X = "
+										   + pionARetourner[0]
+										   + "\tY = "
+										   + pionARetourner[1]);
+						
+						Node nodePion = getNodeParCoordonnees(pionARetourner[0],
+											  				  pionARetourner[1]);
+						retirerPion(nodePion);
+						apparaitrePion(couleurActuellePion,
+								       pionARetourner[0], pionARetourner[1]);
+					}
+					
+					mettreScoreAJour();
+					permuterFlecheTour();
+					
+					verifierFinPartie();
 				}
-				
-				mettreScoreAJour();
-				permuterFlecheTour();
-				
-				verifierFinPartie();
 			}
+		} else {
+			System.out.println("La partie n'est pas commencée ou est finie.\n");
+			verifierFinPartie();;
 		}
 		
 	}
@@ -576,7 +589,7 @@ public class ControleurJeu extends ControleurPrincipal {
 	 * @param tourJoueur1 Si c'est le tour du joueur 1
 	 */
 	private void gererErreurClicImpossible(boolean tourJoueur1) {
-		System.out.println("ControleurJeu >> Impossible placer pion où clic\n");
+		System.out.println("\nControleurJeu >> Impossible placer pion où clic\n");
 		
 		boolean clicsImpossiblesMax
 		= modeleJeu.getNombreErreursPlacementJoueur1()

@@ -73,6 +73,9 @@ public class ModeleJeu extends ModelePrincipal {
 	
 	/** Définit si une partie est commencée */
 	private boolean partieCommence;
+	
+	/** Définit si une partie est en cours */
+	private boolean partieEnCours;
 
 	/** Points du premier joueur. */
 	private int scoreJoueur1 = 2;
@@ -124,9 +127,14 @@ public class ModeleJeu extends ModelePrincipal {
         return tourJoueur1;
     }
 	
-    /** @return si la partieCommence */
+    /** @return si la partie est commencée (avant clic sur "Play") */
     public boolean isPartieCommence() {
     	return partieCommence;
+    }
+    
+    /** @return si la partie est en cours */
+    public boolean isPartieEnCours() {
+    	return partieEnCours;
     }
     
 	/** @return le score du joueur 1. */						   
@@ -179,9 +187,14 @@ public class ModeleJeu extends ModelePrincipal {
         this.tourJoueur1 = tour;
     }
     
-    /** @param partieCommence the partieCommence to set */
-    public void setPartieCommence(boolean partieCommence) {
+    /** @param partieCommence si la partie est commencée */
+    public void setPartieCommencee(boolean partieCommence) {
     	this.partieCommence = partieCommence;
+    }
+    
+    /** @param partieEnCours si la partie est en cours */
+    public void setPartieEnCours(boolean partieEnCours) {
+    	this.partieEnCours = partieEnCours;
     }
     
     /** @param score Nouveau score du joueur 1*/
