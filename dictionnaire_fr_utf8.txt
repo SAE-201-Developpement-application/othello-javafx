@@ -22815,3 +22815,9 @@ alterne
 apparaissant
 inversés
 inverser
+clicables
+activée
+signalement
+cliquables
+redémarrer
+essaiera

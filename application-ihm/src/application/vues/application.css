@@ -1,8 +1,10 @@
+/* Affichage de l'image de fond sur l'intégralité de la fenêtre */
 .fondEcran {
 	-fx-background-image: url("images/Background.png");
 	-fx-background-size: 100% 100%;
 }
 
+/* Affichage d'un contour noir sur certains textes */
 .contourNoir {
 	-fx-fill: white;
     -fx-stroke: black;

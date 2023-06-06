@@ -5,6 +5,7 @@
 package application.modeles;
 
 import java.util.Arrays;
+import java.util.Random;
 
 /**
  * Modèle gérant le jeu d'Othello.
@@ -72,7 +73,7 @@ public class ModeleJeu extends ModelePrincipal {
 	private boolean tourJoueur1 = true;
 	
 	/** Définit si une partie est commencée */
-	private boolean partieCommence;
+	private boolean partieCommencee;
 	
 	/** Définit si une partie est en cours */
 	private boolean partieEnCours;
@@ -128,8 +129,8 @@ public class ModeleJeu extends ModelePrincipal {
     }
 	
     /** @return si la partie est commencée (avant clic sur "Play") */
-    public boolean isPartieCommence() {
-    	return partieCommence;
+    public boolean isPartieCommencee() {
+    	return partieCommencee;
     }
     
     /** @return si la partie est en cours */
@@ -189,7 +190,7 @@ public class ModeleJeu extends ModelePrincipal {
     
     /** @param partieCommence si la partie est commencée */
     public void setPartieCommencee(boolean partieCommence) {
-    	this.partieCommence = partieCommence;
+    	this.partieCommencee = partieCommence;
     }
     
     /** @param partieEnCours si la partie est en cours */
@@ -305,8 +306,10 @@ public class ModeleJeu extends ModelePrincipal {
     public int[][] ajouterPionDansListe(int[] coordonneesPion,
     								    int[][] liste) {
     	
-    	// Agrandir la taille de la liste.
-    	liste = Arrays.copyOf(liste, liste.length + 1);
+    	if (liste[liste.length - 1] != null) {
+    		// Agrandir la taille de la liste.
+    		liste = Arrays.copyOf(liste, liste.length + 1);
+    	}
 		
     	// Ajouter au dernier élément le nouveau pion.
 		liste[liste.length - 1] = coordonneesPion;
@@ -1014,6 +1017,52 @@ public class ModeleJeu extends ModelePrincipal {
 		}
         return resultat;
 	}
+	
+	/**
+	 * 
+	 * 
+	 * @return le coup choisi par le bot
+	 */
+	public int[] choixOrdinateur() {
+		
+		int[][] coupsPossibles = rechercheCasesClicPossible();
+		int[] nombrePionsRetournes = new int[coupsPossibles.length - 1];
+		
+		int[][] coupsFaciles = new int[1][];
+		int[][] coupsDifficiles = new int[1][];
+		
+		for (int indiceCoup = 0; indiceCoup < coupsPossibles.length; indiceCoup++) {
+			nombrePionsRetournes[indiceCoup] = 
+			calculResultatClicCase(coupsPossibles[indiceCoup][0], coupsPossibles[indiceCoup][1]);
+		}
+		
+		int minimum = nombrePionsRetournes[0];
+		int maximum = nombrePionsRetournes[0];
+		
+		for (int indice = 1;
+			 indice < nombrePionsRetournes.length;
+			 indice++) {
+			if (nombrePionsRetournes[indice] < minimum) {
+				minimum = nombrePionsRetournes[indice];
+				coupsFaciles = new int[1][];
+			}
+			coupsFaciles
+			= ajouterPionDansListe(coupsPossibles[indice], coupsFaciles);
+			
+			if (nombrePionsRetournes[indice] > maximum) {
+				maximum = nombrePionsRetournes[indice];
+				coupsDifficiles = new int[1][];
+			}
+			coupsDifficiles
+			= ajouterPionDansListe(coupsPossibles[indice], coupsDifficiles);
+		}
+		
+		return ordinateurFacile
+			   ? coupsFaciles[new Random()
+	                          .nextInt(coupsFaciles.length)]
+			   : coupsDifficiles[new Random()
+	                             .nextInt(coupsDifficiles.length)];
+	}
     
 	/** 
 	 * Accesseur des cases sur lesquelles l'utilisateur peut cliquer.
@@ -1022,36 +1071,57 @@ public class ModeleJeu extends ModelePrincipal {
 	 */
    	public int[][] rechercheCasesClicPossible() {
    		
-		    int[][] casesClicPossible = {};
-		    // {{x, y}, {x2, y2}, {x3, y3}, ...}
-		   
-		  	for (int indiceLigne = 0; indiceLigne < plateau.length;
-		  		 indiceLigne++) {
-			  	for (int indiceColonne = 0; indiceColonne < plateau[indiceLigne].length;
-					indiceColonne++) {
-					if (placementPossible(indiceColonne, indiceLigne)) {
-						int[] coordonneesCourantes = {indiceColonne, indiceLigne};
-						
-						casesClicPossible =
-						ajouterPionDansListe(coordonneesCourantes,
-											 casesClicPossible);
-						
-						/*
-						 * Pour chaque case, la méthode placementPossible
-						 * va mettre à jour la liste des pions qui
-						 * devraient être retournés en cas de clic sur
-						 * cette case. Étant donné que nous avons seulement
-						 * besoin de connaître les cases sur lesquelles
-						 * un clic est possible, nous réinitialisons
-						 * la liste des pions à retourner pour case vérifiée.
-						 */
-						reinitialiserPionsARetourner();
-					}
+	    int[][] casesClicPossible = {};
+	    // {{x, y}, {x2, y2}, {x3, y3}, ...}
+	   
+	  	for (int indiceLigne = 0; indiceLigne < plateau.length;
+	  		 indiceLigne++) {
+		  	for (int indiceColonne = 0; indiceColonne < plateau[indiceLigne].length;
+				indiceColonne++) {
+				if (placementPossible(indiceColonne, indiceLigne)) {
+					int[] coordonneesCourantes = {indiceColonne, indiceLigne};
+					
+					casesClicPossible =
+					ajouterPionDansListe(coordonneesCourantes,
+										 casesClicPossible);
+					
+					/*
+					 * Pour chaque case, la méthode placementPossible
+					 * va mettre à jour la liste des pions qui
+					 * devraient être retournés en cas de clic sur
+					 * cette case. Étant donné que nous avons seulement
+					 * besoin de connaître les cases sur lesquelles
+					 * un clic est possible, nous réinitialisons
+					 * la liste des pions à retourner pour la case vérifiée.
+					 */
+					reinitialiserPionsARetourner();
 				}
 			}
-			return casesClicPossible;
-   		
+		}
+		return casesClicPossible;
    	}
+   	
+   	/**
+     * Simulation du clic de l'utilisateur sur une case. 
+     * On calcule quel nombre de pions serait retourné
+     * suite à un clic afin de permettre à l'ordinateur 
+     * d'effectuer un coup différent en fonction de la difficulté.
+     * 
+     * @param x Coordonnée X (colonne) de la case où le pion serait posé.
+     * @param y Coordonnée Y (ligne) de la case où le pion serait posé.
+     * @return la liste des pions retournés après le clic hypothétique.
+     */
+    public int calculResultatClicCase(int x, int y) {
+    	
+        int nombrePionsRetournes = 0;
+        
+        if (placementPossible(x, y)) {
+            nombrePionsRetournes = getPionsARetourner().length;
+			reinitialiserPionsARetourner();
+		}
+		return nombrePionsRetournes;
+			
+    }
    	
    	/**
    	 * Méthode (non utilisée par le jeu) permettant d'afficher
@@ -1071,62 +1141,62 @@ public class ModeleJeu extends ModelePrincipal {
    		}
    	}
    	
-   	 /** @return true si 2 tours consécutifs sont passés. */
-     public boolean deuxToursPasses() {
-		 return getToursPasses() >= 2;
-	 }
+   	/** @return true si 2 tours consécutifs sont passés. */
+    public boolean deuxToursPasses() {
+		return getToursPasses() >= 2;
+	}
 	 
-     /** @return si le plateau est rempli. */
-	 public boolean plateauRempli() {
-		 boolean casesToutesRemplies = true;
-		 
-		 for (int i = 0;
-			  i < plateau.length && casesToutesRemplies;
-			  i++) {
-			 for (int j = 0;
-				  j < plateau[i].length && casesToutesRemplies;
-				  j++) {
-				 casesToutesRemplies = plateau[i][j] != CASE_VIDE;
-			 }
-		 }
-		 return casesToutesRemplies;
-	 }
-	 
-	 /** @return si le plateau est dominé par une couleur de pion. */
-     public boolean plateauDomine() {
+    /** @return si le plateau est rempli. */
+	public boolean plateauRempli() {
+		boolean casesToutesRemplies = true;
+		
+		for (int i = 0;
+			 i < plateau.length && casesToutesRemplies;
+			 i++) {
+			for (int j = 0;
+				 j < plateau[i].length && casesToutesRemplies;
+				 j++) {
+				casesToutesRemplies = plateau[i][j] != CASE_VIDE;
+			}
+		}
+		return casesToutesRemplies;
+	}
+	
+	/** @return si le plateau est dominé par une couleur de pion. */
+    public boolean plateauDomine() {
 
-         boolean aucunPionNoir = true;
-         boolean aucunPionBlanc = true;
-         
-         for (int i = 0;
-              i < plateau.length && aucunPionNoir;
-              i++) {
-             for (int j = 0;
-                  j < plateau[i].length
-                  && (aucunPionNoir);
-                  j++) {
-                 aucunPionNoir = plateau[i][j] != NOIR;
-             }
-         }
-         
-         if (!aucunPionNoir) {
-        	 for (int i = 0;
-        	      i < plateau.length && aucunPionBlanc;
-                  i++) {
-                for (int j = 0;
-                     j < plateau[i].length
-                     && (aucunPionBlanc);
-                     j++) {
-                    aucunPionBlanc = plateau[i][j] != BLANC;
-                }
+    	boolean aucunPionNoir = true;
+        boolean aucunPionBlanc = true;
+        
+        for (int i = 0;
+             i < plateau.length && aucunPionNoir;
+             i++) {
+            for (int j = 0;
+                 j < plateau[i].length
+                 && (aucunPionNoir);
+                 j++) {
+                aucunPionNoir = plateau[i][j] != NOIR;
             }
         }
-        return aucunPionNoir || aucunPionBlanc;
+        
+        if (!aucunPionNoir) {
+       	 for (int i = 0;
+       	      i < plateau.length && aucunPionBlanc;
+                 i++) {
+               for (int j = 0;
+                    j < plateau[i].length
+                    && (aucunPionBlanc);
+                    j++) {
+                   aucunPionBlanc = plateau[i][j] != BLANC;
+               }
+           }
+       }
+       return aucunPionNoir || aucunPionBlanc;
     }
+    
 	 
-	/** @return true si la fin de la partie est finie. */
+	/** @return true si la partie est finie. */
 	public boolean partieFinie() {
-		// TODO : si aucune possibilité de placer un pion => fin partie
 		return deuxToursPasses() || plateauRempli()
 			   || plateauDomine() /*|| aucunPlacementPossible() */;
 	}

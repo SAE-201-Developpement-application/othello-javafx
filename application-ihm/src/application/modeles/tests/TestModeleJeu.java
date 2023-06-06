@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach; 
 import org.junit.jupiter.api.Test;
+import java.util.Arrays;
 
 import application.modeles.ModeleJeu;
 
@@ -689,11 +690,17 @@ class TestModeleJeu {
 		
 		assertArrayEquals(casesClicPossibleJoueur1,
 						  jeuTestInitial.rechercheCasesClicPossible());
+						 
+		assertFalse(Arrays.equals(casesClicPossibleJoueur2,
+						  jeuTestInitial.rechercheCasesClicPossible()));
 		
 		jeuTestInitial.setTourJoueur1(false);
 		
 		assertArrayEquals(casesClicPossibleJoueur2,
-				  		  jeuTestInitial.rechercheCasesClicPossible());		
+				  		  jeuTestInitial.rechercheCasesClicPossible());
+				  		  
+		assertFalse(Arrays.equals(casesClicPossibleJoueur1,
+						  jeuTestInitial.rechercheCasesClicPossible()));		
 	}
 	
 }
