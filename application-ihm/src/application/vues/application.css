@@ -11,21 +11,37 @@
     -fx-stroke-width: 2;
 }
 
-/*
-.boiteDialogue {
-	-fx-background-color: #7AA95C;
-	/* -fx-font-family: "Courier New"; 
-} 
-*/
+.alert {
+    -fx-background-color: #BDE038;
+    -fx-background-radius: 10px;
+}
 
-.dialog-pane {
-    -fx-background-color: 
-        #707070,
-        linear-gradient(#fcfcfc, #f3f3f3),
-        linear-gradient(#f2f2f2 0%, #ebebeb 49%, #dddddd 50%, #cfcfcf 100%);
-    -fx-background-insets: 0,1,2;
-    -fx-background-radius: 3,2,1;
-    -fx-padding: 3 30 3 30;
-    -fx-text-fill: black;
-    -fx-font-size: 14px;
+.alert .dialog-pane {
+    -fx-background-color: #ff0000;
+}
+
+.alert .header-panel {
+    -fx-background-color: #BDE038;
+}
+
+.alert *.header-panel *.label {
+	-fx-font-size: 20px;
+	-fx-text-fill: #042940;
+	-fx-font-weight: bold;
+
+
+}
+
+.alert .content-text {
+    -fx-text-fill: #333333;
+    -fx-font-size: 14px;
+}
+
+.alert .button-bar .button {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 5px;
+}
+
+.alert .button-bar .button:hover {
+    -fx-background-color: #D6D58E;
 }

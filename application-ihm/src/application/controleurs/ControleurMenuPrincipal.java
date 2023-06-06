@@ -76,7 +76,10 @@ public class ControleurMenuPrincipal extends ControleurPrincipal {
 		""";
 		
 		Alert boiteAlerte = new Alert(Alert.AlertType.CONFIRMATION,
-		  MESSAGE_EN_COURS_DEV);
+								      MESSAGE_EN_COURS_DEV);
+		
+		boiteAlerte.getDialogPane().getStylesheets().add(getClass()
+	               .getResource("../vues/application.css").toExternalForm());
 
 		Stage stage = (Stage) boiteAlerte.getDialogPane().getScene().getWindow();
 		stage.getIcons().add(new Image("application/vues/images/EnConstruction.png"));

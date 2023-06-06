@@ -71,6 +71,9 @@ public class ControleurParametres extends ControleurPrincipal {
 			
 			Alert boiteModificationNonEnregistre
 			= new Alert(Alert.AlertType.WARNING, MODIFICATION_NON_ENREGISTRE);
+			
+			boiteModificationNonEnregistre.getDialogPane().getStylesheets().add(getClass()
+          			 					  .getResource("../vues/application.css").toExternalForm());
 												   
 			ButtonType boutonQuitter = new ButtonType("Quitter sans sauvegarder");
         	ButtonType boutonRetourParametres = new ButtonType("Retour aux paramètres");
@@ -171,6 +174,9 @@ public class ControleurParametres extends ControleurPrincipal {
 		Alert boiteAlerte = new Alert(Alert.AlertType.INFORMATION,
 						 			  MESSAGE_BOITE);
 		
+		boiteAlerte.getDialogPane().getStylesheets().add(getClass()
+				   .getResource("../vues/application.css").toExternalForm());
+		
 		Stage stage = (Stage) boiteAlerte.getDialogPane().getScene().getWindow();
 		stage.getIcons().add(new Image("application/vues/images/Parametres/IconeCredits.png"));
 		
@@ -202,11 +208,20 @@ public class ControleurParametres extends ControleurPrincipal {
 		Alert boiteAlerte = new Alert(Alert.AlertType.WARNING,
 									  VALIDATION_PARAMETRES);
 		
+		boiteAlerte.getDialogPane().getStylesheets().add(getClass()
+				   .getResource("../vues/application.css").toExternalForm());
+		
 		Alert boiteAnnulation = new Alert(Alert.AlertType.INFORMATION,
 										  ANNULATION_VALIDATION);
 		
+		boiteAnnulation.getDialogPane().getStylesheets().add(getClass()
+				       .getResource("../vues/application.css").toExternalForm());
+		
 		Alert boiteAucuneModification = new Alert(Alert.AlertType.ERROR,
 											      AUCUNE_MODIFICATION);
+		
+		boiteAucuneModification.getDialogPane().getStylesheets().add(getClass()
+			       			   .getResource("../vues/application.css").toExternalForm());
 		
 		ButtonType boutonConfirmer = new ButtonType("Appliquer");
         ButtonType boutonAnnuler = new ButtonType("Annuler");

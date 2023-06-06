@@ -152,7 +152,8 @@ public class ControleurChoixPseudosContreJoueur extends ControleurPrincipal {
 			GestionVues.activerJeu();
 		} else {
 			Alert boitePseudoIncompatible = new Alert(Alert.AlertType.ERROR);
-			
+			boitePseudoIncompatible.getDialogPane().getStylesheets()
+								   .add(getClass().getResource("../vues/application.css").toExternalForm());
 			Stage stage = (Stage) boitePseudoIncompatible.getDialogPane().getScene().getWindow();
 			stage.getIcons().add(new Image("application/vues/images/Annulation.png"));
 			

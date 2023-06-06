@@ -132,6 +132,8 @@ public class ControleurJeu extends ControleurPrincipal {
             Alert boiteModificationNonEnregistre
             = new Alert(Alert.AlertType.WARNING,
                         QUITTER_SANS_SAUVEGARDER);
+            boiteModificationNonEnregistre.getDialogPane().getStylesheets().add(getClass()
+            			                  .getResource("../vues/application.css").toExternalForm());
             
             ButtonType boutonQuitter = new ButtonType("Quitter sans sauvegarder");
             ButtonType boutonRetourJeu = new ButtonType("Retour au jeu");
@@ -219,6 +221,8 @@ public class ControleurJeu extends ControleurPrincipal {
 		/* Création d'une boîte d'alerte de type attention. */
 		Alert boiteAlerte = new Alert(Alert.AlertType.WARNING,
 									  MESSAGE_EN_COURS_DEV);
+		boiteAlerte.getDialogPane().getStylesheets().add(getClass()
+				   .getResource("../vues/application.css").toExternalForm());
 		
 		Stage stage = (Stage) boiteAlerte.getDialogPane().getScene().getWindow();
 		stage.getIcons().add(new Image("application/vues/images/EnConstruction.png"));
@@ -242,6 +246,9 @@ public class ControleurJeu extends ControleurPrincipal {
 		/* Création d'une boîte d'alerte de type attention. */
 		Alert boiteAide = new Alert(Alert.AlertType.INFORMATION,
 								    messageAide);
+		
+		boiteAide.getDialogPane().getStylesheets().add(getClass()
+				 .getResource("../vues/application.css").toExternalForm());
 									
 		Stage stage = (Stage) boiteAide.getDialogPane().getScene().getWindow();
 		stage.getIcons().add(new Image("application/vues/images/Jeu/IconeAide.png"));
@@ -267,7 +274,6 @@ public class ControleurJeu extends ControleurPrincipal {
 			
 			if (modeleJeu.isPartieOrdinateur()
 				&& !modeleJeu.isTourJoueur1()) {
-				// TODO faire jouer l'ordi
 				if (modeleJeu.rechercheCasesClicPossible().length > 0) {
 					jouerOrdinateur();							
 				} else {
@@ -327,7 +333,9 @@ public class ControleurJeu extends ControleurPrincipal {
 		/* Création d'une boîte d'alerte de type erreur. */
 		Alert boitePartieTerminee = new Alert(Alert.AlertType.INFORMATION,
 											  textePartieFinie);
-								    		  
+		
+		boitePartieTerminee.getDialogPane().getStylesheets().add(getClass()
+				           .getResource("../vues/application.css").toExternalForm());
 								    		  
 		ButtonType boutonRejouer = new ButtonType("Rejouer");
         ButtonType boutonRetourMenuPrincipal
@@ -633,6 +641,9 @@ public class ControleurJeu extends ControleurPrincipal {
 			/* Création d'une boîte d'alerte de type attention. */
 			Alert boitePasserTour = new Alert(Alert.AlertType.WARNING,
 										      PASSER_TOUR);
+			
+			boitePasserTour.getDialogPane().getStylesheets().add(getClass()
+			               .getResource("../vues/application.css").toExternalForm());
 									    		    
 			ButtonType boutonPasserTour = new ButtonType("Passer le tour");
 	
