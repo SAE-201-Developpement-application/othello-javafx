@@ -66,8 +66,8 @@ public class ControleurChoixPseudosContreJoueur extends ControleurPrincipal {
 		/* Remise à zéro des valeurs pour éviter les bugs quand on change de mode de jeu */
 		pseudoJoueur.setText("");
 		pseudoJoueur2.setText("");
-		modelePrincipal.setNomJoueur1("");
-		modelePrincipal.setNomJoueur2("");
+		modelePrincipal.setPseudoJoueur1(modelePrincipal.PSEUDO_PAR_DEFAUT);
+		modelePrincipal.setPseudoJoueur2("");
 		
 		cocheJoueur1.setVisible(false);
 		croixJoueur1.setVisible(false);
@@ -137,8 +137,8 @@ public class ControleurChoixPseudosContreJoueur extends ControleurPrincipal {
 			
 			modeleJeu.setPartieOrdinateur(false);
 			
-			modelePrincipal.setNomJoueur1(nomJoueur1);
-			modelePrincipal.setNomJoueur2(nomJoueur2);
+			modelePrincipal.setPseudoJoueur1(nomJoueur1);
+			modelePrincipal.setPseudoJoueur2(nomJoueur2);
 			
 			modeleJeu.setPartieCommencee(false);
 			

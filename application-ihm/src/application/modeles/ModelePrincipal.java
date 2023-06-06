@@ -16,8 +16,10 @@ package application.modeles;
  */
 public class ModelePrincipal {
 	
+	public final String PSEUDO_PAR_DEFAUT = "Joueur humain";
+	
 	/* Pseudo du premier joueur */
-	private String pseudoJoueur1;
+	private String pseudoJoueur1 = PSEUDO_PAR_DEFAUT;
 	
 	/* Pseudo du deuxième joueur, si il existe*/
 	private String pseudoJoueur2;
@@ -56,12 +58,12 @@ public class ModelePrincipal {
 			   || voirPionsEnlevables != this.voirPionsEnlevables;
 	}
 	
-	/** @return Nom du premier joueur. */
+	/** @return Pseudo du premier joueur. */
 	public String getPseudoJoueur1() {
 		return pseudoJoueur1;
 	}
 	
-	/** @return Nom du second joueur. */
+	/** @return Pseudo du second joueur. */
 	public String getPseudoJoueur2() {
 		return pseudoJoueur2;
 	}
@@ -91,13 +93,13 @@ public class ModelePrincipal {
 		return voirPionsEnlevables;
 	}
 	
-	/** Modifie le nom du joueur 1 */
-	public void setNomJoueur1(String nom) {
+	/** Modifie le pseudo du joueur 1 */
+	public void setPseudoJoueur1(String nom) {
 		pseudoJoueur1 = nom;
 	}
 	
-	/** Modifie le nom du joueur 2 */
-	public void setNomJoueur2(String nom) {
+	/** Modifie le pseudo du joueur 2 */
+	public void setPseudoJoueur2(String nom) {
 		pseudoJoueur2 = nom;
 	}
 	

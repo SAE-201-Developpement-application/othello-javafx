@@ -94,8 +94,8 @@ public class ControleurNiveauOrdinateur extends ControleurPrincipal {
 		if (facileActif || difficileActif) {
 			modeleJeu.setOrdinateurFacile(facileActif ? true : false);
 			
-			modelePrincipal.setNomJoueur2("Bot "
-										  + (modeleJeu.isOrdinateurFacile()
+			modelePrincipal.setPseudoJoueur2("Bot "
+										     + (modeleJeu.isOrdinateurFacile()
                     					     ? "facile" : "difficile"));
 			reinitialisationVueParDefaut();
 			GestionVues.activerChoixPseudoContreIA();

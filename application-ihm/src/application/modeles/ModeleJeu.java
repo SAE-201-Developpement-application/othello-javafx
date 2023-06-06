@@ -306,10 +306,11 @@ public class ModeleJeu extends ModelePrincipal {
     public int[][] ajouterPionDansListe(int[] coordonneesPion,
     								    int[][] liste) {
     	
-    	if (liste[liste.length - 1] != null) {
+		if (liste.length == 0
+			|| liste[liste.length - 1] != null) {
     		// Agrandir la taille de la liste.
     		liste = Arrays.copyOf(liste, liste.length + 1);
-    	}
+		}
 		
     	// Ajouter au dernier élément le nouveau pion.
 		liste[liste.length - 1] = coordonneesPion;
@@ -1019,14 +1020,15 @@ public class ModeleJeu extends ModelePrincipal {
 	}
 	
 	/**
+	 * Algorithme de calcul du choix de l'ordinateur en fonction
+	 * de sa difficulté.
 	 * 
-	 * 
-	 * @return le coup choisi par le bot
+	 * @return Le coup choisi par l'ordinateur.
 	 */
 	public int[] choixOrdinateur() {
 		
 		int[][] coupsPossibles = rechercheCasesClicPossible();
-		int[] nombrePionsRetournes = new int[coupsPossibles.length - 1];
+		int[] nombrePionsRetournes = new int[coupsPossibles.length];
 		
 		int[][] coupsFaciles = new int[1][];
 		int[][] coupsDifficiles = new int[1][];
@@ -1039,7 +1041,7 @@ public class ModeleJeu extends ModelePrincipal {
 		int minimum = nombrePionsRetournes[0];
 		int maximum = nombrePionsRetournes[0];
 		
-		for (int indice = 1;
+		for (int indice = 0;
 			 indice < nombrePionsRetournes.length;
 			 indice++) {
 			if (nombrePionsRetournes[indice] < minimum) {
@@ -1056,7 +1058,6 @@ public class ModeleJeu extends ModelePrincipal {
 			coupsDifficiles
 			= ajouterPionDansListe(coupsPossibles[indice], coupsDifficiles);
 		}
-		
 		return ordinateurFacile
 			   ? coupsFaciles[new Random()
 	                          .nextInt(coupsFaciles.length)]
@@ -1072,6 +1073,7 @@ public class ModeleJeu extends ModelePrincipal {
    	public int[][] rechercheCasesClicPossible() {
    		
 	    int[][] casesClicPossible = {};
+	    
 	    // {{x, y}, {x2, y2}, {x3, y3}, ...}
 	   
 	  	for (int indiceLigne = 0; indiceLigne < plateau.length;
@@ -1119,8 +1121,7 @@ public class ModeleJeu extends ModelePrincipal {
             nombrePionsRetournes = getPionsARetourner().length;
 			reinitialiserPionsARetourner();
 		}
-		return nombrePionsRetournes;
-			
+		return nombrePionsRetournes;		
     }
    	
    	/**

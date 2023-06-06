@@ -32,7 +32,6 @@ class TestModeleJeu {
 		jeuTestInitial = new ModeleJeu();
 	}
 	
-	
 	/**
      * Méthode de test de {@link application.modeles.ModeleJeu#getPlateau()}.
      */
@@ -53,7 +52,7 @@ class TestModeleJeu {
         
         assertArrayEquals(plateauTest, jeuTestInitial.getPlateau());
 	}
-    
+	 
     /**
      * Méthode de test de {@link application.modeles.ModeleJeu#clicCase()}.
      */
@@ -692,7 +691,7 @@ class TestModeleJeu {
 						  jeuTestInitial.rechercheCasesClicPossible());
 						 
 		assertFalse(Arrays.equals(casesClicPossibleJoueur2,
-						  jeuTestInitial.rechercheCasesClicPossible()));
+						          jeuTestInitial.rechercheCasesClicPossible()));
 		
 		jeuTestInitial.setTourJoueur1(false);
 		
@@ -700,7 +699,60 @@ class TestModeleJeu {
 				  		  jeuTestInitial.rechercheCasesClicPossible());
 				  		  
 		assertFalse(Arrays.equals(casesClicPossibleJoueur1,
-						  jeuTestInitial.rechercheCasesClicPossible()));		
+						          jeuTestInitial.rechercheCasesClicPossible()));
 	}
 	
+	
+	 /**
+	  *
+	  *
+	  */
+	 @Test
+	 void testCalculResultatClicCase() {
+		 
+		 int[][] plateauTestInitial = {
+	      /* 0  1  2  3  4  5  6  7 */
+    /* 0 */ {0, 0, 0, 0, 0, 0, 0, 0},
+    /* 1 */ {2, 0, 0, 0, 0, 0, 0, 0},
+    /* 2 */ {2, 2, 2, 0, 0, 0, 0, 0},
+    /* 3 */ {2, 1, 1, 1, 1, 1, 1, 0},
+    /* 4 */ {1, 1, 1, 1, 1, 1, 1, 1},
+    /* 5 */ {1, 1, 1, 2, 2, 2, 2, 2},
+    /* 6 */ {1, 1, 1, 2, 2, 2, 2, 2},
+    /* 7 */ {0, 1, 1, 1, 2, 2, 2, 2}
+        };
+        
+        jeuTestInitial.setTourJoueur1(false);
+		
+		int calculClicCaseJoueur1 = 7;
+		
+		int[][] calculClicCaseJoueur2 = {
+			{4, 2}, {5, 3}, {2, 4}, {3, 5}
+		};
+		
+		//assertEquals(jeuTestInitial.calculResultatClicCase(7, 3), calculClicCaseJoueur1);
+	 }
+	 
+	 @Test
+	 void testChoixOrdinateur() {
+		 int[][] plateauTestBug = {
+	      /* 0  1  2  3  4  5  6  7 */
+    /* 0 */ {0, 0, 0, 0, 0, 0, 0, 0},
+    /* 1 */ {0, 0, 0, 0, 0, 0, 0, 0},
+    /* 2 */ {0, 2, 2, 2, 2, 2, 2, 0},
+    /* 3 */ {0, 2, 2, 2, 2, 2, 2, 0},
+    /* 4 */ {1, 2, 2, 2, 2, 2, 2, 0},
+    /* 5 */ {0, 2, 2, 2, 2, 2, 2, 2},
+    /* 6 */ {0, 0, 2, 1, 2, 2, 2, 0},
+    /* 7 */ {0, 2, 1, 0, 1, 2, 2, 0}
+        };
+        
+        jeuTestInitial.setTourJoueur1(false);
+    	
+    	jeuTestInitial.setPlateau(plateauTestBug);
+    	
+    	int[] caseChoisie = jeuTestInitial.choixOrdinateur();
+    	
+    	assertFalse(caseChoisie == null);
+	 }
 }

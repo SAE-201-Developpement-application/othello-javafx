@@ -172,7 +172,7 @@ public class ControleurJeu extends ControleurPrincipal {
 	/**
 	 * Change la vue et réinitialise la vue du jeu par défaut.
 	 */
-	private void reinitialisationVueModeleJeu() {
+	private ModeleJeu reinitialisationVueModeleJeu() {
 		reinitialiserPlateauJeu();
         
         // réinitialisation du modèle jeu (des paramètres de la partie)
@@ -193,6 +193,8 @@ public class ControleurJeu extends ControleurPrincipal {
         tourJoueur1.setVisible(false);
         
         jouerMaintenant.setVisible(true);
+        
+        return modeleJeu;
 	}
 	
 	/**
@@ -262,6 +264,16 @@ public class ControleurJeu extends ControleurPrincipal {
 			permuterFlecheTour();
 			retirerPositionsPossibles();
 			verifierFinPartie();
+			
+			if (modeleJeu.isPartieOrdinateur()
+				&& !modeleJeu.isTourJoueur1()) {
+				// TODO faire jouer l'ordi
+				if (modeleJeu.rechercheCasesClicPossible().length > 0) {
+					jouerOrdinateur();							
+				} else {
+					gererClicPasserTour();
+				}
+			}
 		} else {
 			System.out.println(LOG_FICHIER
 							   + "La partie n'est pas commencée ou est finie.\n");
@@ -276,8 +288,14 @@ public class ControleurJeu extends ControleurPrincipal {
 	private void verifierFinPartie() {
 		if (modeleJeu.partieFinie()) {
 			gererPartieFinie();
-		} else {
+			
+		} else if (modeleJeu.isTourJoueur1()) {
 			afficherPositionsPossibles();
+			
+		} else if (!modeleJeu.isTourJoueur1()) {
+			if (modeleJeu.rechercheCasesClicPossible().length == 0) {
+			    gererClicPasserTour();
+			}
 		}
 	}
 	
@@ -331,7 +349,14 @@ public class ControleurJeu extends ControleurPrincipal {
 		Optional<ButtonType> resultat = boitePartieTerminee.showAndWait();
 		
 		if (resultat.get() == boutonRejouer) {
-			reinitialisationVueModeleJeu();
+			boolean partieOrdinateur = modeleJeu.isPartieOrdinateur();
+			boolean ordinateurFacile = modeleJeu.isOrdinateurFacile();
+			
+			modeleJeu = reinitialisationVueModeleJeu();
+			
+			modeleJeu.setPartieOrdinateur(partieOrdinateur);
+			modeleJeu.setOrdinateurFacile(ordinateurFacile);
+			
 		} else if (resultat.get() == boutonRetourMenuPrincipal) {
 			gererClicRetourMenuPrincipal();
 		}
@@ -588,37 +613,42 @@ public class ControleurJeu extends ControleurPrincipal {
 	 * du tour suivant.
 	 */
 	private void afficherPositionsPossibles() {
-		if (modelePrincipal.getVoirPositionsPossibles()) {
-			int[][] getPositionsPossibles = modeleJeu.rechercheCasesClicPossible();
+				
+		int[][] getPositionsPossibles = modeleJeu.rechercheCasesClicPossible();
+		
+		boolean positionsPossiblesExistent = getPositionsPossibles.length > 0;
+		
+		if (modelePrincipal.getVoirPositionsPossibles()
+			&& positionsPossiblesExistent) {
+				
+			for (int[] position : getPositionsPossibles) {
+				apparaitrePosition(position[0], position[1]);
+			}
+		}
+		
+		if (!positionsPossiblesExistent) {
+			final String PASSER_TOUR = "Vous ne pouvez pas poser de pion.\n"
+									   + "Veuillez passer votre tour.";
 			
-			if (getPositionsPossibles.length > 0) {
-				for (int[] position : getPositionsPossibles) {
-					apparaitrePosition(position[0], position[1]);
-				}
-			} else {
-				final String PASSER_TOUR = "Vous ne pouvez pas poser de pion.\n"
-										   + "Veuillez passer votre tour.";
-				
-				/* Création d'une boîte d'alerte de type attention. */
-				Alert boitePasserTour = new Alert(Alert.AlertType.WARNING,
-											      PASSER_TOUR);
-										    		    
-				ButtonType boutonPasserTour = new ButtonType("Passer le tour");
-
-		        boitePasserTour.getButtonTypes().setAll(boutonPasserTour);
-											
-				Stage stage = (Stage) boitePasserTour.getDialogPane()
-													 .getScene().getWindow();
-				stage.getIcons()
-				.add(new Image("application/vues/images/Attention.png"));
-				
-				boitePasserTour.setTitle("Othello - Passer le tour");
-				boitePasserTour.setHeaderText("Impossible de placer un pion");
-				Optional<ButtonType> resultat = boitePasserTour.showAndWait();
-				
-				if (resultat.get() == boutonPasserTour) {
-					gererClicPasserTour();
-				}
+			/* Création d'une boîte d'alerte de type attention. */
+			Alert boitePasserTour = new Alert(Alert.AlertType.WARNING,
+										      PASSER_TOUR);
+									    		    
+			ButtonType boutonPasserTour = new ButtonType("Passer le tour");
+	
+	        boitePasserTour.getButtonTypes().setAll(boutonPasserTour);
+										
+			Stage stage = (Stage) boitePasserTour.getDialogPane()
+												 .getScene().getWindow();
+			stage.getIcons()
+			.add(new Image("application/vues/images/Attention.png"));
+			
+			boitePasserTour.setTitle("Othello - Passer le tour");
+			boitePasserTour.setHeaderText("Impossible de placer un pion");
+			Optional<ButtonType> resultat = boitePasserTour.showAndWait();
+			
+			if (resultat.get() == boutonPasserTour) {
+				gererClicPasserTour();
 			}
 		}
 	}
@@ -685,16 +715,21 @@ public class ControleurJeu extends ControleurPrincipal {
 					
 					System.out.println("\nPion(s) à retourner :");
 					for (int[] pionARetourner : pionsARetourner) {
-						System.out.println("X = "
-										   + pionARetourner[0]
-										   + "\tY = "
-										   + pionARetourner[1]);
+						int coordonneeXPionCourant = pionARetourner[0];
+						int coordonneeYPionCourant = pionARetourner[1];
 						
-						Node nodePion = getNodeParCoordonnees(pionARetourner[0],
-											  				  pionARetourner[1]);
+						System.out.println("X = "
+										   + coordonneeXPionCourant
+										   + "\tY = "
+										   + coordonneeYPionCourant);
+						
+						Node nodePion
+						= getNodeParCoordonnees(coordonneeXPionCourant,
+											    coordonneeYPionCourant);
 						retirerImage(nodePion);
 						apparaitrePion(couleurActuellePion,
-								       pionARetourner[0], pionARetourner[1]);
+									   coordonneeXPionCourant,
+									   coordonneeYPionCourant);
 					}
 					
 					mettreScoreAJour();
@@ -702,8 +737,13 @@ public class ControleurJeu extends ControleurPrincipal {
 					
 					verifierFinPartie();
 					
-					if (modeleJeu.isPartieOrdinateur()) {
-						// TODO faire jouer l'ordi
+					if (modeleJeu.isPartieOrdinateur()
+						&& !modeleJeu.isTourJoueur1()) {
+						if (modeleJeu.rechercheCasesClicPossible().length > 0) {
+							jouerOrdinateur();							
+						} else {
+							gererClicPasserTour();
+						}
 					}
 				}
 			}
@@ -712,7 +752,56 @@ public class ControleurJeu extends ControleurPrincipal {
 							   + "La partie n'est pas commencée ou est finie.\n");
 			verifierFinPartie();
 		}
+	}
+	
+	/**
+	 * Jeu de l'ordinateur si la partie a été lancée contre un ordinateur.
+	 * En fonction de sa difficulté l'ordinateur va jouer un coup plus
+	 * ou moins efficace.
+	 */
+	private void jouerOrdinateur() {
 		
+		int[] caseChoisie = modeleJeu.choixOrdinateur();
+		
+		if (caseChoisie == null) {
+			System.out.println("jouerOrdinateur caseChoisie = null");
+			gererClicPasserTour();
+		}
+		
+		int coordonneeX = caseChoisie[0];
+		int coordonneeY = caseChoisie[1];
+		
+		int[][] pionsARetourner = modeleJeu.clicCase(coordonneeX,
+													 coordonneeY);
+		
+		modeleJeu.setPartieEnCours(true);
+		modeleJeu.reinitialiserTourPasses();
+		
+		apparaitrePion("Blanc", coordonneeX, coordonneeY);
+		
+		System.out.println("\nPion(s) à retourner :");
+		for (int[] pionARetourner : pionsARetourner) {
+			int coordonneeXPionCourant = pionARetourner[0];
+			int coordonneeYPionCourant = pionARetourner[1];
+			
+			System.out.println("X = "
+			+ coordonneeXPionCourant
+			+ "\tY = "
+			+ coordonneeYPionCourant);
+			
+			Node nodePion
+			= getNodeParCoordonnees(coordonneeXPionCourant,
+								    coordonneeYPionCourant);
+			retirerImage(nodePion);
+			apparaitrePion("Blanc",
+						   coordonneeXPionCourant,
+						   coordonneeYPionCourant);
+		}
+		
+		mettreScoreAJour();
+		permuterFlecheTour();
+		
+		verifierFinPartie();
 	}
 	
 	/**

@@ -1,5 +1,5 @@
 /*
- * ControleurChoixPseudosContreJoueur .java                      				            25 mai 2023
+ * ControleurChoixPseudosContreJoueur.java                      				            25 mai 2023
  * IUT de Rodez, pas de copyright ni de "copyleft"
  */
 package application.controleurs;
@@ -26,12 +26,14 @@ import java.util.regex.Matcher;
 public class ControleurChoixPseudoContreIA extends ControleurPrincipal {
 	
 	/* Chaîne de caractères pour l'erreur de pseudo */
-	private final String REGLES_PSEUDO 
+	private static final String REGLES_PSEUDO 
 	= "Veuillez entrer un nom contenant 2 à 16 caractères.";
 	
 	/* Booléen pour savoir si le nom du joueur 1 est bien saisi */
-	private boolean nomOkJoueur1 = false;
+	private static boolean nomOkJoueur1 = false;
 	
+	private static final String NOM_PAR_DEFAUT = "Joueur humain";
+		
 	@FXML
 	private TextField pseudoJoueur1;
 	
@@ -40,6 +42,12 @@ public class ControleurChoixPseudoContreIA extends ControleurPrincipal {
 	
 	@FXML
 	private ImageView croixJoueur;
+	
+	private String getPseudoJoueur1() {
+		return !pseudoJoueur1.getText().isEmpty()
+			   ? pseudoJoueur1.getText()
+			   : NOM_PAR_DEFAUT;
+	}
 
 	@FXML
 	private void gererClicRetourNiveauOrdinateur() {		
@@ -48,64 +56,75 @@ public class ControleurChoixPseudoContreIA extends ControleurPrincipal {
 		
 		/* Remise à zéro des valeurs pour éviter les bugs quand on change de mode de jeu */
 		pseudoJoueur1.setText("");
-		modelePrincipal.setNomJoueur1("");
-		modelePrincipal.setNomJoueur2("");
+		
+		modelePrincipal.setPseudoJoueur1(NOM_PAR_DEFAUT);
+		modelePrincipal.setPseudoJoueur2("");
+		
 		cocheJoueur.setVisible(false);
 		croixJoueur.setVisible(false);
 	}
 	
 	@FXML
 	private void gererMiseAJourNomJoueur1() {
-		
-		String nomJoueur1 = pseudoJoueur1.getText();
-		
-		if (nomJoueur1.isEmpty()) {
-			croixJoueur.setVisible(false);
-			cocheJoueur.setVisible(false);
-			nomOkJoueur1 = false;
-		} else if (nomJoueur1.length() > 1 && nomJoueur1.length() <= 16 
-				                           && contientDeuxCaracteresNonVides(nomJoueur1)) {
-			
-			croixJoueur.setVisible(false);
-			cocheJoueur.setVisible(true);
-			modelePrincipal.setNomJoueur1(nomJoueur1);
-			nomOkJoueur1 = true;
-		} else {
-			cocheJoueur.setVisible(false);
-			croixJoueur.setVisible(true);
-			nomOkJoueur1 = false;
-		}
+		verifierNom(getPseudoJoueur1());		
 	}
 	
-	public boolean contientDeuxCaracteresNonVides(String str) {
+	private boolean contientDeuxCaracteresNonVides(String str) {
 	    Pattern patternARespecter = Pattern.compile(".*\\S.*\\S.*");
 	    Matcher matcher = patternARespecter.matcher(str);
 	    return matcher.matches();
 	}
 	
-	@FXML
-	private void gererClicJouer() {	
-				
-		if (nomOkJoueur1) {			
-			modeleJeu.setPartieOrdinateur(true);;
-			pseudoJoueur1.setText(null);
+	private boolean verifierNom(String nom) {
+		
+		boolean resultat = false;
+		
+		if (nom.isEmpty()) {
+			croixJoueur.setVisible(false);
 			cocheJoueur.setVisible(false);
+			
+			resultat = true;
+		} else if (nom.length() > 1
+				 && nom.length() <= 16 
+				 && contientDeuxCaracteresNonVides(nom)) {
+			
+			croixJoueur.setVisible(false);
+			cocheJoueur.setVisible(true);
+			
+			resultat = true;
+		} else {
+			cocheJoueur.setVisible(false);
+			croixJoueur.setVisible(true);
+			resultat = false;
+		}
+		return resultat;
+	}
+	
+	@FXML
+	private void gererClicJouer() {
+		nomOkJoueur1 = verifierNom(getPseudoJoueur1());
+		
+		if (nomOkJoueur1) {
+			modeleJeu.setPartieOrdinateur(true);
 			modeleJeu.setPartieCommencee(false);
+			modelePrincipal.setPseudoJoueur1(getPseudoJoueur1());
+			
+			pseudoJoueur1.setText("");
+			cocheJoueur.setVisible(false);
 			
 			nomOkJoueur1 = false;
 			
 			GestionVues.activerJeu();
 		} else {
 			Alert boitePseudoIncompatible = new Alert(Alert.AlertType.ERROR);
-			
+			boitePseudoIncompatible.getDialogPane().getStylesheets().add(getClass().getResource("application/vues/application.css").toExternalForm());
 			Stage stage = (Stage) boitePseudoIncompatible.getDialogPane().getScene().getWindow();
 			stage.getIcons().add(new Image("application/vues/images/Annulation.png"));
 			
 			boitePseudoIncompatible.setTitle("Othello - Pseudonyme invalide");
 			boitePseudoIncompatible.setHeaderText(REGLES_PSEUDO);
-			boitePseudoIncompatible.showAndWait();		
-		}
-		
+			boitePseudoIncompatible.showAndWait();
 
+		}
 	}
 }
