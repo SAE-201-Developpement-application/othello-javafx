@@ -563,11 +563,6 @@ public class ControleurJeu extends ControleurPrincipal {
 		scoreJoueur2.setText("" + modeleJeu.getScoreJoueur2());
 	}
 	
-	/*private void retirerPionGIF(Node caseNode) {
-		retirerAToutesLesNodes(caseNode);
-		plateau.getChildren().remove(caseNode);
-	}*/  
-	
 	/**
 	 * Ajouter à la liste de l'attribut toutesLesNodes un élément.
 	 * 
