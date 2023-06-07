@@ -11,37 +11,37 @@
     -fx-stroke-width: 2;
 }
 
+/* Background de l'alerte (partie basse) */
 .alert {
-    -fx-background-color: #BDE038;
+    -fx-background-color: #82FA58;
     -fx-background-radius: 10px;
 }
 
-.alert .dialog-pane {
-    -fx-background-color: #ff0000;
-}
-
+/* Background de l'alerte (partie haute) */
 .alert .header-panel {
-    -fx-background-color: #BDE038;
+    -fx-background-color: #82FA58;
 }
 
+/* Texte de la partie haute de l'alerte */
 .alert *.header-panel *.label {
 	-fx-font-size: 20px;
 	-fx-text-fill: #042940;
 	-fx-font-weight: bold;
-
-
 }
 
-.alert .content-text {
-    -fx-text-fill: #333333;
-    -fx-font-size: 14px;
+/* Texte de la partie basse de l'alerte */
+.alert *.label {
+    -fx-text-fill: #042940;
+    -fx-font-size: 16px;
 }
 
+/* Bouton de l'alerte */
 .alert .button-bar .button {
     -fx-background-color: #ffffff;
     -fx-background-radius: 5px;
 }
 
+/* Bouton de l'alerte quand on hover */
 .alert .button-bar .button:hover {
-    -fx-background-color: #D6D58E;
+    -fx-background-color: #9b9b9b;
 }

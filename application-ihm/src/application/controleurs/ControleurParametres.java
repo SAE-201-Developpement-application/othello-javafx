@@ -23,6 +23,14 @@ import java.util.Optional;
  */
 public class ControleurParametres extends ControleurPrincipal {
 
+    final static String EN_COURS_DEV =
+    """
+    Cette fonctionnalité est toujours en cours de développement.
+    
+    Elle sera développée très prochainement par notre équipe d'experts
+    si cette dernière reçoit une bonne notation.
+    """;
+
 	@FXML
 	private ImageView iconeMusique;
 	
@@ -50,7 +58,6 @@ public class ControleurParametres extends ControleurPrincipal {
 	@FXML
 	private ImageView parametresSauvegardes;
 	
-	// échanger la vue courante avec celle du menu principal
 	@FXML
 	private void gererClicRetourMenuPrincipal() {
 		boolean musique = iconeMusique.isVisible();
@@ -116,6 +123,25 @@ public class ControleurParametres extends ControleurPrincipal {
 		} 	
 	}
 	
+    /**
+     * Affichage d'une boîte d'alerte information l'utilisateur que la
+     * fonctionnalité sélectionnée est en cours de développement.
+     */
+    private void afficherFenetreEnCoursDev() {
+        /* Création d'une boîte d'alerte de type attention. */
+        Alert boiteAlerte = new Alert(Alert.AlertType.WARNING,
+                                      EN_COURS_DEV);
+        boiteAlerte.getDialogPane().getStylesheets().add(getClass()
+                   .getResource("../vues/application.css").toExternalForm());
+        
+        Stage stage = (Stage) boiteAlerte.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new Image("application/vues/images/EnConstruction.png"));
+        
+        boiteAlerte.setTitle("Othello - En cours de développement");
+        boiteAlerte.setHeaderText("Fonctionnalité en cours de développement...");
+        boiteAlerte.showAndWait();
+    }
+	
 	/**
 	 * Échanger les visibilités de l'image 1 et 2.
 	 * 
@@ -127,12 +153,16 @@ public class ControleurParametres extends ControleurPrincipal {
 		image2.setVisible(image2.isVisible() == true ? false : true);
 	}
 	
-	@FXML
-	private void gererClicMusique() {
-		// Ajouter ou retirer une croix rouge pour confirmer l'action
-		// et l'état du paramètre
-		echangerVisibilite(iconeMusique, iconeMusiqueDesactivee);
-	}
+    @FXML
+    private void gererClicMusique() {
+        // Ajouter ou retirer une croix rouge pour confirmer l'action
+        // et l'état du paramètre
+        
+        /* En cours de développement.
+        echangerVisibilite(iconeMusique, iconeMusiqueDesactivee); */
+        
+        afficherFenetreEnCoursDev();
+    }
 	
 	@FXML
 	private void gererClicSon() {
@@ -148,12 +178,16 @@ public class ControleurParametres extends ControleurPrincipal {
 		echangerVisibilite(iconePositionsPossibles, iconePositionsPossiblesActivee);
 	}
 	
-	@FXML
-	private void gererClicPionsEnlevables() {
-		// Ajouter ou retirer un contour vert pour confirmer l'action
-		// et l'état du paramètre
-		echangerVisibilite(iconePionsEnlevables, iconePionsEnlevablesActivee);
-	}
+    @FXML
+    private void gererClicPionsEnlevables() {
+        // Ajouter ou retirer un contour vert pour confirmer l'action
+        // et l'état du paramètre
+        
+        /* Fonctionnalité en cours de développement
+        echangerVisibilite(iconePionsEnlevables, iconePionsEnlevablesActivee); */
+        
+        afficherFenetreEnCoursDev();
+    }
 	
 	@FXML
 	private void gererClicCredits() {
@@ -168,6 +202,8 @@ public class ControleurParametres extends ControleurPrincipal {
 		
 		Application réalisée dans le cadre de la SAÉ 2.01
 		Développement d'une application.
+		
+		Nous remercions les services réseaux de la commune de Brion en Lozère pour leur viabilitée
 		""";
 		
 		/* Création d'une boîte d'alerte de type information. */
