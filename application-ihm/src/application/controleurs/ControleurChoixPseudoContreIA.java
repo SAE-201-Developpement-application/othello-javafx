@@ -43,6 +43,7 @@ public class ControleurChoixPseudoContreIA extends ControleurPrincipal {
 	@FXML
 	private ImageView croixJoueur;
 	
+	/** @return Le pseudo entré ou celui par défaut. */
 	private String getPseudoJoueur1() {
 		return !pseudoJoueur1.getText().isEmpty()
 			   ? pseudoJoueur1.getText()
@@ -117,8 +118,12 @@ public class ControleurChoixPseudoContreIA extends ControleurPrincipal {
 			GestionVues.activerJeu();
 		} else {
 			Alert boitePseudoIncompatible = new Alert(Alert.AlertType.ERROR);
-			boitePseudoIncompatible.getDialogPane().getStylesheets().add(getClass().getResource("application/vues/application.css").toExternalForm());
+			
+			boitePseudoIncompatible.getDialogPane().getStylesheets().add(getClass()
+ 					  			   .getResource("../vues/application.css").toExternalForm());
+								   
 			Stage stage = (Stage) boitePseudoIncompatible.getDialogPane().getScene().getWindow();
+								   
 			stage.getIcons().add(new Image("application/vues/images/Annulation.png"));
 			
 			boitePseudoIncompatible.setTitle("Othello - Pseudonyme invalide");

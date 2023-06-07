@@ -59,7 +59,7 @@
             <Image url="@images/ChoixPseudos/VeuillezRenseignerVosPseudonymes.png" />
          </image>
       </ImageView>
-      <TextField fx:id="pseudoJoueur" layoutX="245.0" layoutY="279.0" onKeyTyped="#gererMiseAJourNomJoueur1" prefHeight="43.0" prefWidth="459.0" promptText="Exemple :  Galimatiasplayer">
+      <TextField fx:id="pseudoJoueur1" layoutX="245.0" layoutY="279.0" onKeyTyped="#gererMiseAJourNomJoueur1" prefHeight="43.0" prefWidth="459.0" promptText="Exemple :  Galimatiasplayer">
          <font>
             <Font size="20.0" />
          </font></TextField>

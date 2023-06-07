@@ -70,14 +70,18 @@ public class ControleurMenuPrincipal extends ControleurPrincipal {
 		final String MESSAGE_EN_COURS_DEV =
 		"""
 		Cette fonctionnalité est toujours en cours de développement.
-				
-		Elle ne sera probablement jamais développée sauf si Loïc reçoit 
-		une somme assez conséquente (paypal.me/loicfaugieres1) pour le motiver.
+		
+		N'hésitez pas à bien noter les développeurs pour qu'ils aient l'occasion
+		de finir complètement cette merveilleuse application l'année prochaine
+		ensemble à l'IUT de Rodez.
 		""";
 		
 		Alert boiteAlerte = new Alert(Alert.AlertType.CONFIRMATION,
 		  MESSAGE_EN_COURS_DEV);
 
+		boiteAlerte.getDialogPane().getStylesheets().add(getClass()
+	               .getResource("../vues/application.css").toExternalForm());
+		
 		Stage stage = (Stage) boiteAlerte.getDialogPane().getScene().getWindow();
 		stage.getIcons().add(new Image("application/vues/images/EnConstruction.png"));
 
@@ -90,7 +94,6 @@ public class ControleurMenuPrincipal extends ControleurPrincipal {
 		} else {
 			infosPartie.setText("Aucune partie sauvegardée");
 		}
-		// va chercher la partie sauvegardée dans le fichier ModeleSauvegardes
 	}
 
 }

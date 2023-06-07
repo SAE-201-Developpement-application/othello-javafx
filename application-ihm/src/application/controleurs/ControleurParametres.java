@@ -13,7 +13,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import java.util.Optional;
 
-
 /**
  * Contrôle via FXML les interactions avec la vue : les pages FXML.
  * 
@@ -22,7 +21,16 @@ import java.util.Optional;
  * @author Simon GUIRAUD
  */
 public class ControleurParametres extends ControleurPrincipal {
-
+	
+	final static String MESSAGE_EN_COURS_DEV =
+	"""
+	Cette fonctionnalité est toujours en cours de développement.
+	
+	N'hésitez pas à bien noter les développeurs pour qu'ils aient
+	l'occasion de finir complètement cette merveilleuse application
+	l'année prochaine ensemble à l'IUT de Rodez.
+	""";
+	
 	@FXML
 	private ImageView iconeMusique;
 	
@@ -50,7 +58,26 @@ public class ControleurParametres extends ControleurPrincipal {
 	@FXML
 	private ImageView parametresSauvegardes;
 	
-	// échanger la vue courante avec celle du menu principal
+	/**
+	 * Affiche une fenêtre indiquant que la fonctionnalité
+	 * est en cours de développement.
+	 */
+	private void afficherFenetreEnCoursDev() {
+		Alert boiteAlerte = new Alert(Alert.AlertType.CONFIRMATION,
+									  MESSAGE_EN_COURS_DEV);
+
+		boiteAlerte.getDialogPane().getStylesheets().add(getClass()
+	               .getResource("../vues/application.css").toExternalForm());
+		
+		Stage stage = (Stage) boiteAlerte.getDialogPane().getScene().getWindow();
+		stage.getIcons().add(new Image("application/vues/images/EnConstruction.png"));
+
+		boiteAlerte.setTitle("Othello - En cours de développement");
+		boiteAlerte.setHeaderText("Fonctionnalité en cours de développement...");
+		
+		boiteAlerte.showAndWait();
+	}
+	
 	@FXML
 	private void gererClicRetourMenuPrincipal() {
 		boolean musique = iconeMusique.isVisible();
@@ -71,7 +98,10 @@ public class ControleurParametres extends ControleurPrincipal {
 			
 			Alert boiteModificationNonEnregistre
 			= new Alert(Alert.AlertType.WARNING, MODIFICATION_NON_ENREGISTRE);
-												   
+			
+			boiteModificationNonEnregistre.getDialogPane().getStylesheets().add(getClass()
+ 					  					  .getResource("../vues/application.css").toExternalForm());
+			
 			ButtonType boutonQuitter = new ButtonType("Quitter sans sauvegarder");
         	ButtonType boutonRetourParametres = new ButtonType("Retour aux paramètres");
         	
@@ -128,7 +158,9 @@ public class ControleurParametres extends ControleurPrincipal {
 	private void gererClicMusique() {
 		// Ajouter ou retirer une croix rouge pour confirmer l'action
 		// et l'état du paramètre
-		echangerVisibilite(iconeMusique, iconeMusiqueDesactivee);
+		//echangerVisibilite(iconeMusique, iconeMusiqueDesactivee);
+	
+		afficherFenetreEnCoursDev();
 	}
 	
 	@FXML
@@ -149,7 +181,9 @@ public class ControleurParametres extends ControleurPrincipal {
 	private void gererClicPionsEnlevables() {
 		// Ajouter ou retirer un contour vert pour confirmer l'action
 		// et l'état du paramètre
-		echangerVisibilite(iconePionsEnlevables, iconePionsEnlevablesActivee);
+		//echangerVisibilite(iconePionsEnlevables, iconePionsEnlevablesActivee);
+		
+		afficherFenetreEnCoursDev();
 	}
 	
 	@FXML
@@ -163,13 +197,16 @@ public class ControleurParametres extends ControleurPrincipal {
 		
 		Étudiants en BUT Informatique 1 (promotion 2022-2023) à l'IUT de Rodez.
 		
-		Application réalisée dans le cadre de la SAÉ 2.01
-		Développement d'une application.
+		Application réalisée dans le cadre de la SAÉ
+		2.01 Développement d'une application.
 		""";
 		
 		/* Création d'une boîte d'alerte de type information. */
 		Alert boiteAlerte = new Alert(Alert.AlertType.INFORMATION,
 						 			  MESSAGE_BOITE);
+		
+		boiteAlerte.getDialogPane().getStylesheets().add(getClass()
+				   .getResource("../vues/application.css").toExternalForm());
 		
 		Stage stage = (Stage) boiteAlerte.getDialogPane().getScene().getWindow();
 		stage.getIcons().add(new Image("application/vues/images/Parametres/IconeCredits.png"));
@@ -202,11 +239,20 @@ public class ControleurParametres extends ControleurPrincipal {
 		Alert boiteAlerte = new Alert(Alert.AlertType.WARNING,
 									  VALIDATION_PARAMETRES);
 		
+		boiteAlerte.getDialogPane().getStylesheets().add(getClass()
+				   .getResource("../vues/application.css").toExternalForm());
+		
 		Alert boiteAnnulation = new Alert(Alert.AlertType.INFORMATION,
 										  ANNULATION_VALIDATION);
 		
+		boiteAnnulation.getDialogPane().getStylesheets().add(getClass()
+			       	   .getResource("../vues/application.css").toExternalForm());
+		
 		Alert boiteAucuneModification = new Alert(Alert.AlertType.ERROR,
 											      AUCUNE_MODIFICATION);
+		
+		boiteAucuneModification.getDialogPane().getStylesheets().add(getClass()
+    			               .getResource("../vues/application.css").toExternalForm());
 		
 		ButtonType boutonConfirmer = new ButtonType("Appliquer");
         ButtonType boutonAnnuler = new ButtonType("Annuler");

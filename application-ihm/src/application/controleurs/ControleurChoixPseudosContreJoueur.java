@@ -37,11 +37,8 @@ public class ControleurChoixPseudosContreJoueur extends ControleurPrincipal {
 	/* Booléen pour savoir si le nom du joueur 2 est bien saisi */
 	private boolean nomOkJoueur2 = false;
 	
-	private String nomJoueur1;
-	private String nomJoueur2;
-	
 	@FXML
-	private TextField pseudoJoueur;
+	private TextField pseudoJoueur1;
 	
 	@FXML
 	private TextField pseudoJoueur2;
@@ -57,6 +54,20 @@ public class ControleurChoixPseudosContreJoueur extends ControleurPrincipal {
 	
 	@FXML
 	private ImageView croixJoueur2;
+	
+	/** @return Le pseudo entré ou celui par défaut. */
+	private String getPseudoJoueur1() {
+		return !pseudoJoueur1.getText().isEmpty()
+			   ? pseudoJoueur1.getText()
+			   : "";
+	}
+	
+	/** @return Le pseudo entré ou celui par défaut. */
+	private String getPseudoJoueur2() {
+		return !pseudoJoueur2.getText().isEmpty()
+			   ? pseudoJoueur2.getText()
+			   : "";
+	}
 
 	@FXML
 	private void gererClicRetourMenuPrincipal() {		
@@ -64,8 +75,9 @@ public class ControleurChoixPseudosContreJoueur extends ControleurPrincipal {
 		GestionVues.activerMenuPrincipal(); 
 		
 		/* Remise à zéro des valeurs pour éviter les bugs quand on change de mode de jeu */
-		pseudoJoueur.setText("");
+		pseudoJoueur1.setText("");
 		pseudoJoueur2.setText("");
+		
 		modelePrincipal.setPseudoJoueur1(modelePrincipal.PSEUDO_PAR_DEFAUT);
 		modelePrincipal.setPseudoJoueur2("");
 		
@@ -79,15 +91,14 @@ public class ControleurChoixPseudosContreJoueur extends ControleurPrincipal {
 	@FXML
 	private void gererMiseAJourNomJoueur1() {
 		
-		nomJoueur1 = pseudoJoueur.getText();
-		
-		if (nomJoueur1.isEmpty()) {
+		if (getPseudoJoueur1().isEmpty()) {
 			croixJoueur1.setVisible(false);
 			cocheJoueur1.setVisible(false);
 			
 			nomOkJoueur1 = false;
-		} else if (nomJoueur1.length() > 1 && nomJoueur1.length() <= 16 
-										   && contientDeuxCaracteresNonVides(nomJoueur1)) {
+		} else if (getPseudoJoueur1().length() > 1
+				   && getPseudoJoueur1().length() <= 16 
+				   && contientDeuxCaracteresNonVides(getPseudoJoueur1())) {
 			
 			croixJoueur1.setVisible(false);
 			cocheJoueur1.setVisible(true);
@@ -104,14 +115,13 @@ public class ControleurChoixPseudosContreJoueur extends ControleurPrincipal {
 	@FXML
 	private void gererMiseAJourNomJoueur2() {
 	
-		nomJoueur2 = pseudoJoueur2.getText();
-		
-		if (nomJoueur2.isEmpty()) {
+		if (getPseudoJoueur2().isEmpty()) {
 			croixJoueur2.setVisible(false);
 			cocheJoueur2.setVisible(false);
 			nomOkJoueur2 = false;
-		} else if (nomJoueur2.length() > 1 && nomJoueur2.length() <= 16 
-										   && contientDeuxCaracteresNonVides(nomJoueur2)) {
+		} else if (getPseudoJoueur2().length() > 1
+				   && getPseudoJoueur2().length() <= 16 
+				   && contientDeuxCaracteresNonVides(getPseudoJoueur2())) {
 			croixJoueur2.setVisible(false);
 			cocheJoueur2.setVisible(true);
 			
@@ -133,25 +143,29 @@ public class ControleurChoixPseudosContreJoueur extends ControleurPrincipal {
 	@FXML
 	private void gererClicJouer() {
 		if (nomOkJoueur1 && nomOkJoueur2
-			&& !nomJoueur1.equals(nomJoueur2)) {
+			&& !getPseudoJoueur1().equals(getPseudoJoueur2())) {
 			
 			modeleJeu.setPartieOrdinateur(false);
-			
-			modelePrincipal.setPseudoJoueur1(nomJoueur1);
-			modelePrincipal.setPseudoJoueur2(nomJoueur2);
-			
 			modeleJeu.setPartieCommencee(false);
 			
-			pseudoJoueur.setText(null);
+			modelePrincipal.setPseudoJoueur1(getPseudoJoueur1());
+			modelePrincipal.setPseudoJoueur2(getPseudoJoueur2());			
+			
+			pseudoJoueur1.setText(null);
 			pseudoJoueur2.setText(null);
+			
 			cocheJoueur1.setVisible(false);
 			cocheJoueur2.setVisible(false);
+			
 			nomOkJoueur1 = false;
 			nomOkJoueur2 = false;
 
 			GestionVues.activerJeu();
 		} else {
 			Alert boitePseudoIncompatible = new Alert(Alert.AlertType.ERROR);
+			
+			boitePseudoIncompatible.getDialogPane().getStylesheets()
+			.add(getClass().getResource("../vues/application.css").toExternalForm());
 			
 			Stage stage = (Stage) boitePseudoIncompatible.getDialogPane().getScene().getWindow();
 			stage.getIcons().add(new Image("application/vues/images/Annulation.png"));

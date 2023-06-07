@@ -310,12 +310,11 @@ class TestModeleJeu {
   	    /* 6 */ {0, 2, 0, 0, 0, 0, 2, 0},
   	    /* 7 */ {0, 0, 0, 0, 0, 0, 0, 0}
   		};
-    	
-		ModeleJeu jeu = new ModeleJeu();
-		jeu.setPlateau(plateauTest1);
-		jeu.setPlateau(plateauTest2);
+  		
+		jeuTestInitial.setPlateau(plateauTest1);
+		jeuTestInitial.setPlateau(plateauTest2);
 		
-        assertArrayEquals(plateauTest2, jeu.getPlateau());
+        assertArrayEquals(plateauTest2, jeuTestInitial.getPlateau());
 	}
     
 	/**
@@ -422,15 +421,30 @@ class TestModeleJeu {
 		jeuTestInitial.ajouterErreurPlacementJoueur2();
 		assertEquals(jeuTestInitial.getNombreErreursPlacementJoueur2(), 2);
 	}
+	
+	
+	/**
+     * Méthode de test de
+     * {@link application.modeles.ModeleJeu#isPartieCommencee()}.
+     * et de 
+     * {@link application.modeles.ModeleJeu#setPartieCommencee()}.
+     */
+	void testPartieCommencee() {
+		
+		jeuTestInitial.setPartieCommencee(true);
+		assertTrue(jeuTestInitial.isPartieCommencee());
+		
+		jeuTestInitial.setPartieCommencee(false);
+		assertFalse(jeuTestInitial.isPartieCommencee());
+	}
 		
 	/**
 	 * Méthode de test de {@link application.modeles.ModeleJeu#caseVide()}.
 	 */
 	@Test
 	void testCaseVide() {
-		ModeleJeu jeu = new ModeleJeu();
 		
-		jeu.setTourJoueur1(true);
+		jeuTestInitial.setTourJoueur1(true);
 		
 		int[][] plateauTest1 = {
 	      /* 0  1  2  3  4  5  6  7 */
@@ -465,17 +479,30 @@ class TestModeleJeu {
 			{4, 2}, {4, 5},
 			{5, 2}, {5, 3}, {5, 4}, {5, 5}
 		};
-        
-		jeu.setPlateau(plateauTest1);
 		
-		/* Parcours de toutes les coordonnées invalides correspondantes au
-		   joueur 1 afin de s'assurer que le résultat d'exécution soit faux. */
+		int[][] coordonneesCasesPleines = {
+			{3, 3}, {4, 3}, {3, 4}, {4, 4}
+		};
+        
+		jeuTestInitial.setPlateau(plateauTest1);
+		
+		/* Parcours de toutes les cases vides afin de s'assurer que
+		   l'algorithme les detecte comme telles. */
 		for (int[] coordonneesCourantes : coordonneesCasesVides) {
-			assertTrue(jeu.caseVide(
+			assertTrue(jeuTestInitial.caseVide(
 				coordonneesCourantes[0], 
 				coordonneesCourantes[1]
 			));
 		}
+		
+		/* Parcours de toutes les cases pleines afin de s'assurer que
+           l'algorithme les detecte comme telles. */
+		for (int[] coordonneesCourantes : coordonneesCasesPleines) {
+            assertFalse(jeuTestInitial.caseVide(
+                coordonneesCourantes[0], 
+                coordonneesCourantes[1]
+            ));
+        }
          
 	}
 	
@@ -703,40 +730,183 @@ class TestModeleJeu {
 	}
 	
 	
-	 /**
-	  *
-	  *
-	  */
-	 @Test
-	 void testCalculResultatClicCase() {
+    /**
+     * Méthode de test de
+     * {@link application.modeles.ModeleJeu#calculResultatClicCase()}.
+     */
+	@Test
+	void testCalculResultatClicCase() {
 		 
-		 int[][] plateauTestInitial = {
+		int[][] plateauAvance = {
 	      /* 0  1  2  3  4  5  6  7 */
     /* 0 */ {0, 0, 0, 0, 0, 0, 0, 0},
     /* 1 */ {2, 0, 0, 0, 0, 0, 0, 0},
     /* 2 */ {2, 2, 2, 0, 0, 0, 0, 0},
     /* 3 */ {2, 1, 1, 1, 1, 1, 1, 0},
     /* 4 */ {1, 1, 1, 1, 1, 1, 1, 1},
-    /* 5 */ {1, 1, 1, 2, 2, 2, 2, 2},
+    /* 5 */ {1, 1, 1, 0, 2, 2, 2, 2},
     /* 6 */ {1, 1, 1, 2, 2, 2, 2, 2},
     /* 7 */ {0, 1, 1, 1, 2, 2, 2, 2}
         };
         
-        jeuTestInitial.setTourJoueur1(false);
+        jeuTestInitial.setPlateau(plateauAvance);
+        jeuTestInitial.setTourJoueur1(true);
 		
-		int calculClicCaseJoueur1 = 7;
-		
-		int[][] calculClicCaseJoueur2 = {
-			{4, 2}, {5, 3}, {2, 4}, {3, 5}
+		int[][] casesRetourneesJ1 = {
+			{0, 0}, {1, 1}, {2, 1}, {3, 5}
 		};
 		
-		//assertEquals(jeuTestInitial.calculResultatClicCase(7, 3), calculClicCaseJoueur1);
-	 }
+		int[] resultatsAttendusJ1 = {
+			3, 2, 1, 1
+		};
+		
+		int[][] casesRetourneesJ2 = {
+            {7, 3}, {6, 2}, {0, 7}, {3, 5}
+        };
+        
+        int[] resultatsAttendusJ2 = {
+            8, 2, 6, 2
+        };
+		
+		assertEquals(jeuTestInitial.calculResultatClicCase(0, 0), 3);
+        for (int indice = 0; indice < casesRetourneesJ1.length; indice++) {
+			jeuTestInitial.setTourJoueur1(true);
+			assertEquals(resultatsAttendusJ1[indice],
+			             jeuTestInitial
+			             .calculResultatClicCase(casesRetourneesJ1[indice][0],
+			                                     casesRetourneesJ1[indice][1]));
+			             
+			jeuTestInitial.setTourJoueur1(false);
+			assertEquals(resultatsAttendusJ2[indice],
+                         jeuTestInitial
+                         .calculResultatClicCase(casesRetourneesJ2[indice][0],
+                                                 casesRetourneesJ2[indice][1]));
+		}
+				
+	}
 	 
-	 @Test
-	 void testChoixOrdinateur() {
-		 int[][] plateauTestBug = {
+    /**
+     * Méthode de test de {@link application.modeles.ModeleJeu#choixOrdinateur()}.
+     */
+	@Test
+	void testChoixOrdinateur() {
+		 int[][] plateauTestBot1 = {
 	      /* 0  1  2  3  4  5  6  7 */
+    /* 0 */ {0, 0, 0, 0, 0, 0, 0, 0},
+    /* 1 */ {0, 0, 0, 0, 0, 0, 0, 0},
+    /* 2 */ {1, 2, 2, 2, 2, 2, 2, 0},
+    /* 3 */ {1, 2, 2, 2, 2, 2, 2, 0},
+    /* 4 */ {1, 2, 2, 2, 2, 2, 2, 1},
+    /* 5 */ {1, 2, 2, 2, 2, 2, 2, 2},
+    /* 6 */ {1, 0, 2, 1, 2, 2, 2, 0},
+    /* 7 */ {2, 2, 1, 1, 1, 2, 2, 0}
+        };
+        
+        int[][] plateauTestBot2 = {
+          /* 0  1  2  3  4  5  6  7 */
+    /* 0 */ {0, 0, 0, 0, 0, 0, 0, 0},
+    /* 1 */ {0, 0, 0, 0, 0, 0, 0, 0},
+    /* 2 */ {0, 2, 2, 2, 2, 2, 2, 0},
+    /* 3 */ {0, 2, 2, 2, 2, 2, 2, 0},
+    /* 4 */ {1, 2, 2, 2, 2, 2, 2, 1},
+    /* 5 */ {1, 2, 2, 2, 2, 2, 2, 2},
+    /* 6 */ {1, 0, 2, 1, 2, 2, 2, 1},
+    /* 7 */ {2, 2, 1, 1, 1, 2, 2, 1}
+        };
+        
+        int[][] plateauTestBot3 = {
+          /* 0  1  2  3  4  5  6  7 */
+    /* 0 */ {0, 0, 0, 0, 0, 0, 0, 0},
+    /* 1 */ {0, 0, 0, 0, 0, 0, 0, 0},
+    /* 2 */ {0, 2, 2, 2, 2, 2, 2, 1},
+    /* 3 */ {1, 2, 2, 2, 2, 2, 2, 1},
+    /* 4 */ {1, 2, 2, 2, 2, 2, 2, 1},
+    /* 5 */ {1, 2, 2, 2, 2, 2, 2, 1},
+    /* 6 */ {2, 0, 2, 1, 2, 2, 2, 2},
+    /* 7 */ {2, 2, 1, 1, 1, 2, 2, 0}
+        };
+        
+        int[] choixFacile1 = {7, 3};
+       
+        int[] choixFacile2 = {7, 3};
+        
+        int[] choixFacile3 = {0, 2};
+        
+        int[] choixDifficile1 = {0, 1};
+        
+        int[] choixDifficile2 = {0, 3};
+        
+        int[] choixDifficile3 = {7, 1};
+        
+        jeuTestInitial.setTourJoueur1(false);
+    	jeuTestInitial.setOrdinateurFacile(true);
+    	
+    	jeuTestInitial.setPlateau(plateauTestBot1);
+    	assertArrayEquals(jeuTestInitial.choixOrdinateur(), choixFacile1);
+    	
+    	jeuTestInitial.setPlateau(plateauTestBot2);
+    	assertArrayEquals(jeuTestInitial.choixOrdinateur(), choixFacile2);
+    	
+    	jeuTestInitial.setPlateau(plateauTestBot3);
+    	assertArrayEquals(jeuTestInitial.choixOrdinateur(), choixFacile3);
+    	
+    	jeuTestInitial.setOrdinateurFacile(false);           
+    	jeuTestInitial.setPlateau(plateauTestBot1);
+    	assertArrayEquals(jeuTestInitial.choixOrdinateur(), choixDifficile1);
+    	
+    	jeuTestInitial.setPlateau(plateauTestBot2);
+        assertArrayEquals(jeuTestInitial.choixOrdinateur(), choixDifficile2);
+                   
+        jeuTestInitial.setPlateau(plateauTestBot3);           
+        assertArrayEquals(jeuTestInitial.choixOrdinateur(), choixDifficile3);
+    	
+    	
+    	
+	}
+	
+    /**
+     * Méthode de test de {@link application.modeles.ModeleJeu#plateauRempli()}.
+     */
+    @Test
+    void testPlateauRempli() {
+        int[][] plateauRempli1 = {
+          /* 0  1  2  3  4  5  6  7 */
+    /* 0 */ {1, 1, 1, 1, 1, 1, 1, 1},
+    /* 1 */ {1, 1, 1, 1, 1, 1, 1, 1},
+    /* 2 */ {1, 1, 1, 1, 1, 1, 1, 1},
+    /* 3 */ {1, 1, 1, 1, 1, 1, 1, 1},
+    /* 4 */ {1, 1, 1, 1, 1, 1, 1, 1},
+    /* 5 */ {1, 1, 1, 1, 1, 1, 1, 1},
+    /* 6 */ {1, 1, 1, 1, 1, 1, 1, 1},
+    /* 7 */ {1, 1, 1, 1, 1, 1, 1, 1}
+        };
+        
+        int[][] plateauRempli2 = {
+          /* 0  1  2  3  4  5  6  7 */
+    /* 0 */ {2, 2, 2, 2, 2, 2, 2, 2},
+    /* 1 */ {2, 2, 2, 2, 2, 2, 2, 2},
+    /* 2 */ {2, 2, 2, 2, 2, 2, 2, 2},
+    /* 3 */ {2, 2, 2, 2, 2, 2, 2, 2},
+    /* 4 */ {2, 2, 2, 2, 2, 2, 2, 2},
+    /* 5 */ {2, 2, 2, 2, 2, 2, 2, 2},
+    /* 6 */ {2, 2, 2, 2, 2, 2, 2, 2},
+    /* 7 */ {2, 2, 2, 2, 2, 2, 2, 2}
+        };
+        
+        int[][] plateauRempli3 = {
+          /* 0  1  2  3  4  5  6  7 */
+    /* 0 */ {1, 2, 2, 2, 2, 2, 2, 2},
+    /* 1 */ {1, 2, 2, 2, 2, 2, 2, 2},
+    /* 2 */ {1, 2, 2, 2, 2, 2, 2, 1},
+    /* 3 */ {1, 2, 2, 2, 2, 2, 2, 1},
+    /* 4 */ {1, 2, 2, 2, 2, 2, 2, 1},
+    /* 5 */ {1, 2, 2, 2, 2, 2, 2, 1},
+    /* 6 */ {1, 1, 2, 1, 2, 2, 2, 1},
+    /* 7 */ {1, 2, 1, 1, 1, 2, 2, 1}
+        };
+        
+        int[][] plateauAvance = {
+          /* 0  1  2  3  4  5  6  7 */
     /* 0 */ {0, 0, 0, 0, 0, 0, 0, 0},
     /* 1 */ {0, 0, 0, 0, 0, 0, 0, 0},
     /* 2 */ {0, 2, 2, 2, 2, 2, 2, 0},
@@ -747,12 +917,154 @@ class TestModeleJeu {
     /* 7 */ {0, 2, 1, 0, 1, 2, 2, 0}
         };
         
-        jeuTestInitial.setTourJoueur1(false);
-    	
-    	jeuTestInitial.setPlateau(plateauTestBug);
-    	
-    	int[] caseChoisie = jeuTestInitial.choixOrdinateur();
-    	
-    	assertFalse(caseChoisie == null);
-	 }
+        
+        jeuTestInitial.setPlateau(plateauRempli1);
+        assertTrue(jeuTestInitial.plateauRempli());
+        
+        jeuTestInitial.setPlateau(plateauRempli2);
+        assertTrue(jeuTestInitial.plateauRempli());
+        
+        jeuTestInitial.setPlateau(plateauRempli3);
+        assertTrue(jeuTestInitial.plateauRempli());
+        
+        jeuTestInitial.setPlateau(plateauAvance);
+        assertFalse(jeuTestInitial.plateauRempli());
+    }
+    
+    /**
+     * Méthode de test de {@link application.modeles.ModeleJeu#plateauDomine()}.
+     */
+    @Test
+    void testPlateauDomine() {
+        int[][] plateauDomine1 = {
+          /* 0  1  2  3  4  5  6  7 */
+    /* 0 */ {0, 0, 0, 0, 0, 0, 0, 0},
+    /* 1 */ {0, 0, 0, 0, 0, 0, 0, 0},
+    /* 2 */ {0, 2, 2, 2, 2, 2, 2, 0},
+    /* 3 */ {0, 2, 2, 2, 2, 2, 2, 0},
+    /* 4 */ {2, 2, 2, 2, 2, 2, 2, 0},
+    /* 5 */ {0, 2, 2, 2, 2, 2, 2, 2},
+    /* 6 */ {0, 0, 2, 2, 2, 2, 2, 0},
+    /* 7 */ {0, 2, 2, 0, 2, 2, 2, 0}
+        };
+        
+        int[][] plateauDomine2 = {
+          /* 0  1  2  3  4  5  6  7 */
+    /* 0 */ {1, 1, 1, 1, 1, 1, 1, 1},
+    /* 1 */ {1, 1, 1, 1, 1, 1, 1, 1},
+    /* 2 */ {1, 1, 1, 1, 1, 1, 1, 1},
+    /* 3 */ {1, 1, 1, 1, 1, 1, 1, 1},
+    /* 4 */ {1, 1, 1, 1, 1, 1, 1, 1},
+    /* 5 */ {1, 1, 1, 1, 1, 1, 1, 1},
+    /* 6 */ {1, 1, 1, 1, 1, 1, 1, 1},
+    /* 7 */ {1, 1, 1, 1, 1, 1, 1, 1}
+        };
+        
+        int[][] plateauTestInitial = {
+          /* 0  1  2  3  4  5  6  7 */
+    /* 0 */ {0, 0, 0, 0, 0, 0, 0, 0},
+    /* 1 */ {0, 0, 0, 0, 0, 0, 0, 0},
+    /* 2 */ {0, 0, 0, 0, 0, 0, 0, 0},
+    /* 3 */ {0, 0, 0, 2, 1, 0, 0, 0},
+    /* 4 */ {0, 0, 0, 1, 2, 0, 0, 0},
+    /* 5 */ {0, 0, 0, 0, 0, 0, 0, 0},
+    /* 6 */ {0, 0, 0, 0, 0, 0, 0, 0},
+    /* 7 */ {0, 0, 0, 0, 0, 0, 0, 0}
+        };
+        
+        int[][] plateauPresqueDomine = {
+          /* 0  1  2  3  4  5  6  7 */
+    /* 0 */ {1, 1, 1, 1, 1, 1, 1, 1},
+    /* 1 */ {1, 1, 1, 1, 1, 1, 1, 1},
+    /* 2 */ {1, 1, 1, 1, 1, 1, 1, 1},
+    /* 3 */ {1, 1, 1, 1, 1, 1, 1, 1},
+    /* 4 */ {1, 2, 1, 1, 1, 1, 1, 1},
+    /* 5 */ {1, 1, 1, 1, 1, 1, 1, 1},
+    /* 6 */ {1, 1, 1, 1, 1, 1, 1, 1},
+    /* 7 */ {1, 1, 1, 1, 1, 1, 1, 1}
+        };
+        
+        jeuTestInitial.setPlateau(plateauDomine1);
+        assertTrue(jeuTestInitial.plateauDomine());
+        
+        jeuTestInitial.setPlateau(plateauDomine2);
+        assertTrue(jeuTestInitial.plateauDomine());
+        
+        jeuTestInitial.setPlateau(plateauTestInitial);
+        assertFalse(jeuTestInitial.plateauDomine());
+        
+        jeuTestInitial.setPlateau(plateauPresqueDomine);
+        assertFalse(jeuTestInitial.plateauDomine());
+        
+    }
+    
+    /**
+     * Méthode de test de {@link application.modeles.ModeleJeu#partieFinie()}.
+     */
+    @Test
+    void testPartieFinie() {
+		
+		int[][] plateauTestInitial = {
+          /* 0  1  2  3  4  5  6  7 */
+    /* 0 */ {0, 0, 0, 0, 0, 0, 0, 0},
+    /* 1 */ {0, 0, 0, 0, 0, 0, 0, 0},
+    /* 2 */ {0, 0, 0, 0, 0, 0, 0, 0},
+    /* 3 */ {0, 0, 0, 2, 1, 0, 0, 0},
+    /* 4 */ {0, 0, 0, 1, 2, 0, 0, 0},
+    /* 5 */ {0, 0, 0, 0, 0, 0, 0, 0},
+    /* 6 */ {0, 0, 0, 0, 0, 0, 0, 0},
+    /* 7 */ {0, 0, 0, 0, 0, 0, 0, 0}
+        };
+        
+          int[][] plateauDomine = {
+          /* 0  1  2  3  4  5  6  7 */
+    /* 0 */ {0, 0, 0, 0, 0, 0, 0, 0},
+    /* 1 */ {0, 0, 0, 0, 0, 0, 0, 0},
+    /* 2 */ {0, 2, 2, 2, 2, 2, 2, 0},
+    /* 3 */ {0, 2, 2, 2, 2, 2, 2, 0},
+    /* 4 */ {2, 2, 2, 2, 2, 2, 2, 0},
+    /* 5 */ {0, 2, 2, 2, 2, 2, 2, 2},
+    /* 6 */ {0, 0, 2, 2, 2, 2, 2, 0},
+    /* 7 */ {0, 2, 2, 0, 2, 2, 2, 0}
+        };
+        
+        int[][] plateauAvance = {
+          /* 0  1  2  3  4  5  6  7 */
+    /* 0 */ {0, 0, 0, 0, 0, 0, 0, 0},
+    /* 1 */ {0, 0, 0, 0, 0, 0, 0, 0},
+    /* 2 */ {0, 2, 2, 2, 2, 2, 2, 0},
+    /* 3 */ {0, 2, 2, 2, 2, 2, 2, 0},
+    /* 4 */ {1, 2, 2, 2, 2, 2, 2, 0},
+    /* 5 */ {0, 2, 2, 2, 2, 2, 2, 2},
+    /* 6 */ {0, 0, 2, 1, 2, 2, 2, 0},
+    /* 7 */ {0, 2, 1, 0, 1, 2, 2, 0}
+        };
+        
+        int[][] plateauRempli = {
+          /* 0  1  2  3  4  5  6  7 */
+    /* 0 */ {1, 2, 2, 2, 2, 2, 2, 2},
+    /* 1 */ {1, 2, 2, 2, 2, 2, 2, 2},
+    /* 2 */ {1, 2, 2, 2, 2, 2, 2, 1},
+    /* 3 */ {1, 2, 2, 2, 2, 2, 2, 1},
+    /* 4 */ {1, 2, 2, 2, 2, 2, 2, 1},
+    /* 5 */ {1, 2, 2, 2, 2, 2, 2, 1},
+    /* 6 */ {1, 1, 2, 1, 2, 2, 2, 1},
+    /* 7 */ {1, 2, 1, 1, 1, 2, 2, 1}
+        };
+        
+        jeuTestInitial.setPlateau(plateauDomine);
+        assertTrue(jeuTestInitial.partieFinie());
+        
+        jeuTestInitial.setPlateau(plateauRempli);
+        assertTrue(jeuTestInitial.partieFinie());
+        
+        jeuTestInitial.setPlateau(plateauTestInitial);
+        assertFalse(jeuTestInitial.partieFinie());
+        
+        jeuTestInitial.setPlateau(plateauAvance);
+        assertFalse(jeuTestInitial.partieFinie());
+        
+        
+    }
+	
 }

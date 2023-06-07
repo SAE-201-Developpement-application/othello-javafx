@@ -1025,44 +1025,50 @@ public class ModeleJeu extends ModelePrincipal {
 	 * 
 	 * @return Le coup choisi par l'ordinateur.
 	 */
-	public int[] choixOrdinateur() {
+    public int[] choixOrdinateur() {
 		
-		int[][] coupsPossibles = rechercheCasesClicPossible();
-		int[] nombrePionsRetournes = new int[coupsPossibles.length];
+	   int[][] coupsPossibles = rechercheCasesClicPossible();
+	   int[] nombrePionsRetournes = new int[coupsPossibles.length];
 		
-		int[][] coupsFaciles = new int[1][];
-		int[][] coupsDifficiles = new int[1][];
+	   int[][] coupsFaciles = new int[1][];
+	   int[][] coupsDifficiles = new int[1][];
 		
-		for (int indiceCoup = 0; indiceCoup < coupsPossibles.length; indiceCoup++) {
+	   for (int indiceCoup = 0; indiceCoup < coupsPossibles.length; indiceCoup++) {
 			nombrePionsRetournes[indiceCoup] = 
-			calculResultatClicCase(coupsPossibles[indiceCoup][0], coupsPossibles[indiceCoup][1]);
-		}
+	       calculResultatClicCase(coupsPossibles[indiceCoup][0], coupsPossibles[indiceCoup][1]);
+	   }
 		
-		int minimum = nombrePionsRetournes[0];
-		int maximum = nombrePionsRetournes[0];
+	   int minimum = nombrePionsRetournes[0];
+	   int maximum = nombrePionsRetournes[0];
 		
-		for (int indice = 0;
-			 indice < nombrePionsRetournes.length;
-			 indice++) {
-			if (nombrePionsRetournes[indice] < minimum) {
-				minimum = nombrePionsRetournes[indice];
-				coupsFaciles = new int[1][];
-			}
-			coupsFaciles
-			= ajouterPionDansListe(coupsPossibles[indice], coupsFaciles);
+	   for (int indice = 0;
+			indice < nombrePionsRetournes.length;
+			indice++) {
 			
-			if (nombrePionsRetournes[indice] > maximum) {
-				maximum = nombrePionsRetournes[indice];
-				coupsDifficiles = new int[1][];
-			}
-			coupsDifficiles
-			= ajouterPionDansListe(coupsPossibles[indice], coupsDifficiles);
-		}
-		return ordinateurFacile
-			   ? coupsFaciles[new Random()
-	                          .nextInt(coupsFaciles.length)]
-			   : coupsDifficiles[new Random()
-	                             .nextInt(coupsDifficiles.length)];
+	       if (nombrePionsRetournes[indice] <= minimum) {
+			   if (nombrePionsRetournes[indice] < minimum) {
+				   minimum = nombrePionsRetournes[indice];
+				   coupsFaciles = new int[1][];
+			   }
+			   
+			   coupsFaciles
+               = ajouterPionDansListe(coupsPossibles[indice], coupsFaciles);
+		   }
+		  
+		   if (nombrePionsRetournes[indice] >= maximum) {
+		      if (nombrePionsRetournes[indice] > maximum) {
+			     maximum = nombrePionsRetournes[indice];
+			     coupsDifficiles = new int[1][];
+		      }
+		      coupsDifficiles
+		      = ajouterPionDansListe(coupsPossibles[indice], coupsDifficiles);
+		   }
+	   }
+	   return ordinateurFacile
+			  ? coupsFaciles[new Random()
+	                         .nextInt(coupsFaciles.length)]
+			  : coupsDifficiles[new Random()
+	                            .nextInt(coupsDifficiles.length)];
 	}
     
 	/** 

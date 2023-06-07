@@ -102,6 +102,9 @@ public class ControleurNiveauOrdinateur extends ControleurPrincipal {
 		} else {
 			Alert difficulteeNonChoisie = new Alert(Alert.AlertType.ERROR, CHOISIR_DIFFICULTEE);
 			
+			difficulteeNonChoisie.getDialogPane().getStylesheets().add(getClass()
+          			 			 .getResource("../vues/application.css").toExternalForm());
+			
 			Stage stage = (Stage) difficulteeNonChoisie.getDialogPane().getScene().getWindow();
 			stage.getIcons().add(new Image("application/vues/images/Annulation.png"));
 			
