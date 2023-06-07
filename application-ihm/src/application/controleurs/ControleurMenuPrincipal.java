@@ -61,7 +61,7 @@ public class ControleurMenuPrincipal extends ControleurPrincipal {
 	private void gererClicCorbeille() {
 		
 		infosPartie.setText("Aucune partie sauvegardée");
-		// TODO  active la corbeille pour supprimer la partie sauvegardée dans ModeleSauvegardes
+		// TODO : Activer la corbeille pour supprimer la partie sauvegardée dans ModeleSauvegardes
 	}
 	
 	@FXML
