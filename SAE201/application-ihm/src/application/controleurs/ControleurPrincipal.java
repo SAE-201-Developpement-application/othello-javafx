@@ -8,7 +8,7 @@ import application.modeles.*;
 
 /**
  * Contrôleur principal de l'application Othello.
- * Celui-ci instancie les modèles et permet aux contrôleurs enfants 
+ * Celui-ci instancie les modèles et permet aux contrôleurs enfants
  * d'y avoir accès.
  * 
  * @author Loïc FAUGIERES
