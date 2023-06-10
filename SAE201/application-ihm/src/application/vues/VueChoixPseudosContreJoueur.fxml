@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="540.0" maxWidth="960.0" minHeight="540.0" minWidth="960.0" prefHeight="540.0" prefWidth="960.0" styleClass="fondEcran" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.ControleurChoixPseudosContreJoueur">
+   <children>
+      <ImageView fitHeight="116.0" fitWidth="84.0" layoutX="30.0" layoutY="30.0" onMouseClicked="#gererClicRetourMenuPrincipal" preserveRatio="true">
+         <image>
+            <Image url="@images/MenuPrincipal.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="58.0" fitWidth="504.0" layoutX="232.0" layoutY="276.0" preserveRatio="true">
+         <image>
+            <Image url="@images/ChoixPseudos/ZoneEntree.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="96.0" fitWidth="99.0" layoutX="848.0" layoutY="414.0" onMouseClicked="#gererClicJouer" preserveRatio="true">
+         <image>
+            <Image url="@images/ChoixPseudos/Jouer.png" />
+         </image>
+      </ImageView>
+      <Text fx:id="Joueur1" layoutX="245.0" layoutY="310.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Exemple : Galimatiasplayer" wrappingWidth="469.9007978845448">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="58.0" fitWidth="504.0" layoutX="232.0" layoutY="416.0" preserveRatio="true">
+         <image>
+            <Image url="@images/ChoixPseudos/ZoneEntree.png" />
+         </image>
+      </ImageView>
+      <Text fx:id="Joueur2" layoutX="245.0" layoutY="443.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Exemple : Syber Sim" wrappingWidth="469.9007978845448">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="26.0" fitWidth="153.0" layoutX="405.0" layoutY="234.0" preserveRatio="true">
+         <image>
+            <Image url="@images/ChoixPseudos/Joueur1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="26.0" fitWidth="153.0" layoutX="407.0" layoutY="374.0" preserveRatio="true">
+         <image>
+            <Image url="@images/ChoixPseudos/Joueur2%20.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="88.0" fitWidth="441.0" layoutX="277.0" layoutY="102.0" preserveRatio="true">
+         <image>
+            <Image url="@images/ChoixPseudos/VeuillezRenseignerVosPseudonymes.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="pseudoJoueur1" layoutX="245.0" layoutY="279.0" onKeyTyped="#gererMiseAJourNomJoueur1" prefHeight="43.0" prefWidth="459.0" promptText="Exemple :  Galimatiasplayer">
+         <font>
+            <Font size="20.0" />
+         </font></TextField>
+      <TextField fx:id="pseudoJoueur2" layoutX="245.0" layoutY="419.0" onKeyTyped="#gererMiseAJourNomJoueur2" prefHeight="44.0" prefWidth="459.0" promptText="Exemple :  SyberSim">
+         <font>
+            <Font size="20.0" />
+         </font></TextField>
+      <ImageView fx:id="croixJoueur1" fitHeight="26.0" fitWidth="26.0" layoutX="670.0" layoutY="288.0" visible="false">
+         <image>
+            <Image url="@images/ChoixPseudos/CroixRouge.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="croixJoueur2" fitHeight="26.0" fitWidth="26.0" layoutX="670.0" layoutY="427.0" visible="false">
+         <image>
+            <Image url="@images/ChoixPseudos/CroixRouge.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="cocheJoueur1" fitHeight="26.0" fitWidth="26.0" layoutX="670.0" layoutY="288.0" visible="false">
+         <image>
+            <Image url="@images/ChoixPseudos/Check.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="cocheJoueur2" fitHeight="26.0" fitWidth="26.0" layoutX="670.0" layoutY="427.0" visible="false">
+         <image>
+            <Image url="@images/ChoixPseudos/Check.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="540.0" maxWidth="960.0" minHeight="540.0" minWidth="960.0" prefHeight="540.0" prefWidth="960.0" styleClass="fondEcran" stylesheets="@application.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.ControleurParametres">
+   <children>
+      <ImageView fitHeight="110.0" fitWidth="90.0" layoutX="1369.0" layoutY="71.0" onMouseClicked="#gererClicCredits" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="30.0">
+         <image>
+            <Image url="@images/Parametres/Credits.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="290.0" layoutX="654.0" layoutY="420.0" nodeOrientation="INHERIT" onMouseClicked="#gererClicValiderParametres" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="30.0">
+         <image>
+            <Image url="@images/Parametres/ValiderParametres.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="110.0" fitWidth="90.0" layoutX="680.0" layoutY="86.0" onMouseClicked="#gererClicRetourMenuPrincipal" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="30.0">
+         <image>
+            <Image url="@images/MenuPrincipal.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="iconePositionsPossibles" fitHeight="110.0" fitWidth="113.0" layoutX="566.0" layoutY="168.0" onMouseClicked="#gererClicPositionsPossibles" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@images/Parametres/ImagePosition.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="iconePositionsPossiblesActivee" fitHeight="120.0" fitWidth="121.0" layoutX="561.0" layoutY="163.0" onMouseClicked="#gererClicPositionsPossibles" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/Parametres/ImagePositionActivee.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="iconePionsEnlevables" fitHeight="110.0" fitWidth="113.0" layoutX="565.0" layoutY="327.0" onMouseClicked="#gererClicPionsEnlevables" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/Parametres/ImagePions.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="iconePionsEnlevablesActivee" fitHeight="86.0" fitWidth="126.0" layoutX="559.0" layoutY="321.0" onMouseClicked="#gererClicPionsEnlevables" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@images/Parametres/ImagePionsActivee.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="iconeSon" fitHeight="70.0" fitWidth="69.0" layoutX="235.0" layoutY="440.0" onMouseClicked="#gererClicSon" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@images/Parametres/Son.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="iconeSonDesactivee" fitHeight="70.0" fitWidth="69.0" layoutX="235.0" layoutY="440.0" onMouseClicked="#gererClicSon" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/Parametres/SonDesactive.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="iconeMusique" fitHeight="63.0" fitWidth="69.0" layoutX="114.0" layoutY="443.0" onMouseClicked="#gererClicMusique" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@images/Parametres/Musique.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="iconeMusiqueDesactivee" fitHeight="63.0" fitWidth="69.0" layoutX="114.0" layoutY="443.0" onMouseClicked="#gererClicMusique" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/Parametres/MusiqueDesactivee.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="42.0" fitWidth="290.0" layoutX="218.0" layoutY="212.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/Parametres/TextePositionsPossibles.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="22.0" fitWidth="281.0" layoutX="245.0" layoutY="353.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/Parametres/TextePionsEnlevables.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="84.0" fitWidth="228.0" layoutX="356.0" layoutY="50.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="30.0">
+         <image>
+            <Image url="@images/Parametres/TitreParametres.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="parametresSauvegardes" fitHeight="22.0" fitWidth="271.0" layoutX="685.0" layoutY="410.0" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@images/Parametres/ParamètresSauvegardes.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

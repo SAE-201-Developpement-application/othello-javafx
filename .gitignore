@@ -1,6 +1,8 @@
-# Ignorer le dossier bin avec les .class
-bin/
-
-# Ignorer toutes les metadata et classpath
+# Fichiers de configuration spécifiques à Eclipse
 .metadata
 .classpath
+.project
+.settings/
+
+# Dossier de la librairie de javafx (sdk20)
+javafx-sdk-20/
