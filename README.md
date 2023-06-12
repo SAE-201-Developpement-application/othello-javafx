@@ -5,7 +5,7 @@ Bienvenue dans ce projet de labyrinthe !
 ## Installation du JDK
 
 Ce projet nécessite JDK-20 pour être compilé et exécuté correctement. Assurez-vous d'avoir JDK-20 installé sur votre système. Si vous ne l'avez pas encore, vous pouvez le télécharger à partir du site officiel d'Oracle et l'installer avant de poursuivre la configuration du projet.
-N'oubliez pas de configurer votre build path sous Eclipse afin d'y ajouter jdk-20 si vous souhaitez modifier le code.
+N'oubliez pas de configurer votre Build Path sous Eclipse afin d'y ajouter jdk-20 si vous souhaitez modifier le code.
 
 ## Configuration de la bibliothèque JavaFX
 
@@ -33,7 +33,7 @@ Une fois que vous avez configuré le dictionnaire français, votre IDE utilisera
 Si vous souhaitez contribuer à ce projet, vous pouvez suivre ces étapes :
 
 1. Fork (Bifurquer) ce référentiel et clonez-le sur votre machine locale.
-2. Assurez-vous de configurer correctement votre environnement de développement avec JDK-20 et les bibliothèques Gson.
+2. Assurez-vous de configurer correctement votre environnement de développement avec JDK-20 et JavaFX.
 3. Effectuez les modifications souhaitées.
 4. Testez votre code pour vous assurer qu'il fonctionne correctement.
 5. Soumettez une demande d'extraction (Pull Request) en expliquant les modifications que vous avez apportées.
