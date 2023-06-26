@@ -55,7 +55,7 @@
             <Image url="@images/Jeu/Noir.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="522.0" fitWidth="517.0" layoutX="437.0" layoutY="14.0" preserveRatio="true">
+      <ImageView fitHeight="522.0" fitWidth="517.0" layoutX="435.0" layoutY="14.0" preserveRatio="true">
          <image>
             <Image url="@images/Jeu/Plateau.png" />
          </image>
