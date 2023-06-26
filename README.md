@@ -1,6 +1,16 @@
-# application-ihm
+<p align="center">
+  <img src="./SAE201/application-ihm/src/application/vues/images/Othello.png" alt="logOthello" width="100" />
+</p>
 
-Bienvenue dans ce projet de labyrinthe !
+# application-ihm - jeu d'Othello
+
+Bienvenue sur cette version Javafx du célèbre jeu d'Othello
+
+<p align="center">
+  <img src="./SAE201/application-ihm/src/application/vues/images/Animation.gif" alt="logOthello" width="500" />
+</p>
+
+Jeu totalement fonctionnel avec différentes options, modes de jeu et difficultées de bot
 
 ## Installation du JDK
 
