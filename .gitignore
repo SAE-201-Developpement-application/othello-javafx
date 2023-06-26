@@ -6,3 +6,9 @@
 
 # Dossier de la librairie de javafx (sdk20)
 javafx-sdk-20/
+
+# Dossier contenant jdk-20
+jdk-20/
+
+# Dossier d'exemple de fichiers ignorés par gitignore
+exempleFichiersGitignore/

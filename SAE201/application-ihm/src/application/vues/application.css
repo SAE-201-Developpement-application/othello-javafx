@@ -24,7 +24,7 @@
 
 /* Texte de la partie haute de l'alerte */
 .alert *.header-panel *.label {
-    -fx-font-size: 20px;
+    -fx-font-size: 18px;
     -fx-text-fill: #042940;
     -fx-font-weight: bold;
 }
@@ -32,7 +32,7 @@
 /* Texte de la partie basse de l'alerte */
 .alert *.label {
     -fx-text-fill: #042940;
-    -fx-font-size: 16px;
+    -fx-font-size: 14px;
 }
 
 /* Bouton de l'alerte */

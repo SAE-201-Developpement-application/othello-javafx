@@ -13,12 +13,12 @@
 
 <AnchorPane maxHeight="540.0" maxWidth="960.0" minHeight="540.0" minWidth="960.0" prefHeight="540.0" prefWidth="960.0" styleClass="fondEcran" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controleurs.ControleurChoixPseudoContreIA">
    <children>
-      <ImageView fitHeight="131.0" fitWidth="96.0" layoutX="30.0" layoutY="30.0" onMouseClicked="#gererClicRetourNiveauOrdinateur" preserveRatio="true" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="30.0">
+      <ImageView fitHeight="131.0" fitWidth="96.0" layoutX="25.0" layoutY="30.0" onMouseClicked="#gererClicRetourNiveauOrdinateur" preserveRatio="true">
          <image>
             <Image url="@images/ChoixPseudos/MenuPrecedent.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="106.0" fitWidth="126.0" layoutX="827.0" layoutY="404.0" onMouseClicked="#gererClicJouer" preserveRatio="true" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="30.0">
+      <ImageView fitHeight="106.0" fitWidth="126.0" layoutX="834.0" layoutY="404.0" onMouseClicked="#gererClicJouer" preserveRatio="true">
          <image>
             <Image url="@images/ChoixPseudos/Jouer.png" />
          </image>
